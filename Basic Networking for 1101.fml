@@ -1,1 +1,217 @@
+<#if far.isRunningIos()>
+<#-- Enable periodic inventory notification every 30 mins to report metrics. -->
+    cgna profile cg-nms-periodic
+      add-command show inventory | format flash:/managed/odm/cg-nms.odm
+      no active
+      interval 15
+      active
+    exit
+<#-- Enable periodic configuration (heartbeat) notification every 10 mins. -->
+   cgna heart-beat interval 10
 
+<#-- Begin eCVD template -->
+
+<#-- Default BootStrap Configuration -->
+    <#assign model = "IR1101">
+    <#assign ether_if = "GigabitEthernet0/0/0">
+    <#assign cell_if = "Cellular0/1/0">
+
+<#assign FastEthernet1 = "${far.FastEthernet1}">
+<#assign FastEthernet2 = "${far.FastEthernet2}">
+<#assign FastEthernet3 = "${far.FastEthernet3}">
+<#assign FastEthernet4 = "${far.FastEthernet4}">
+<#assign EthernetPriority = "${far.
+<#assign Cell0Priority = "$(far.
+<#assign Cell1Priority = 
+<#assign WGBPriority = 
+
+
+<#assign AP = $${far.AP}">
+
+<#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
+<#assign lanNet 	= "${far.lanNetmask}"?split(".")>
+<#assign lanNtwk	= "${lanIP[0]}.${lanIP[1]}.${lanIP[2]}.0">
+<#assign lanWild 	= "${(255 - (lanNet[0])?number)?abs}.${(255 - (lanNet[1])?number)?abs}.${(255 - (lanNet[2])?number)?abs}.${(255 - (lanNet[3])?number)?abs}">
+
+<#assign HomeName	= "{far.$HostName}">
+<#assign Users 		= "${far.Users}">
+<#assign clockTZ 	= "${far.clockTZ}">
+<#assign clockDST	= "${far.clockDST}"> 
+<#assign ntpIP 		= "${far.ntpIP}">
+<#assign DNSIP 		= "${far.DNSIP}">
+<#assign domainName = "${far.domainName}">
+  
+   service tcp-keepalives-in
+   service tcp-keepalives-out
+   service timestamps debug datetime msec
+   service timestamps log datetime msec
+   service password-encryption
+   service call-home
+   platform qfp utilization monitor load 80
+   no platform punt-keepalive disable-kernel-core
+   !
+   !
+   !
+   no logging console
+   !
+   !
+   !
+   !
+   !
+   clock timezone ${clockTZ}
+   clock summer-time ${clockDST} recurring
+   ntp server ${ntpIP}
+   !
+   !
+   ip name-server ${DNSIP}
+   ip domain name ${domainName}
+
+   ip dhcp excluded-address ${far.lanIPAddress}
+   !
+   !
+   ip dhcp pool subtended
+    network ${lanNtwk} ${far.lanNetmask}
+    default-router ${far.lanIPAddress} 
+    dns-server ${DNSIP}
+    lease 0 0 10
+   !
+   !
+   !
+  	<#list Users as USERS>
+		username ${USERS[1]} privilege ${USERS[3]} algorithm-type scrypt secret ${USERS[2]}
+	</#list> 
+	
+   !
+   ip sla 30
+    icmp-echo 208.67.222.222 source-interface ${ether_if}
+    frequency 10
+   ip sla schedule 30 life forever start-time now
+   !
+   ip sla 40
+    icmp-echo 208.67.220.220 source-interface ${cell_if}
+    frequency 30
+   ip sla schedule 40 life forever start-time now
+   !
+   track 5 interface ${ether_if} line-protocol
+   !
+   track 7 interface ${cell_if} line-protocol
+   !
+   track 30 ip sla 30 reachability
+   !
+   track 40 ip sla 40 reachability
+   !
+   interface ${ether_if}
+    ip address dhcp
+    no shutdown
+    ip nat outside
+   !
+   !
+   interface ${cell_if}
+    ip address negotiated
+    ip nat outside
+    dialer in-band
+    dialer idle-timeout 0
+    dialer-group 1
+    pulse-time 1
+   !
+   !
+   interface Vlan1
+    ip address ${far.lanIPAddress} ${far.lanNetmask}
+    ip nbar protocol-discovery
+    ip nat inside
+    ip verify unicast source reachable-via rx
+   !
+   !
+! enabling/disabling of ethernet ports
+
+      interface FastEthernet0/0/1
+<#if FastEthernet1 == 0>
+    shutdown
+<#else>
+	no shutdown
+</#if>
+   !
+   interface FastEthernet0/0/2
+<#if FastEthernet == 0>
+    shutdown
+<#else>
+	no shutdown
+</#if>   
+   !
+   interface FastEthernet0/0/3
+<#if FastEthernet3 == 0>
+    shutdown
+<#else>
+	no shutdown
+</#if>    
+   !
+   interface FastEthernet0/0/4
+<#if FastEthernet4 == 0>
+    shutdown
+<#else>
+	no shutdown
+</#if>
+
+   interface Async0/2/0
+    no ip address
+    encapsulation scada
+   !
+   iox
+   ip forward-protocol nd
+   !
+   ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
+   ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
+   !   
+   ip route 34.208.182.252 255.255.255.255 ${cell_if}
+   ip route 208.67.222.222 255.255.255.255 ${ether_if} dhcp
+   ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
+   ip route 0.0.0.0 0.0.0.0 192.168.1.254 90 track 30
+   ip route 0.0.0.0 0.0.0.0 ${cell_if} 150 track 40
+   ip route 208.67.220.220 255.255.255.255 Null0 3
+   ip route 208.67.222.222 255.255.255.255 Null0 3
+   ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp 90
+   !
+   !
+   ip ssh rsa keypair-name SSHKEY
+   ip ssh version 2
+   ip scp server enable
+   !
+   !
+   !
+   !
+   !
+   ip access-list extended NAT_ACL
+    permit ip ${lanNtwk} ${lanWild} any
+   !
+   dialer-list 1 protocol ip permit
+   !
+   !
+   route-map RM_WAN_ACL permit 10 
+    match ip address NAT_ACL
+    match interface ${cell_if}
+   !
+   route-map RM_WAN_ACL2 permit 10 
+    match ip address NAT_ACL
+    match interface ${ether_if}
+   !
+   line vty 0 4
+    exec-timeout 5 0
+    length 0
+    transport input ssh
+   !
+
+
+
+
+<#-- End eCVD template -->
+
+
+
+
+
+<#elseif far.isRunningCgOs()>
+
+<#else>
+  ${provisioningFailed("FAR is not running CG-OS or IOS")}
+</#if>
+                         
