@@ -16,30 +16,90 @@
     <#assign ether_if = "GigabitEthernet0/0/0">
     <#assign cell_if = "Cellular0/1/0">
 
+<#-- Interface Menu -->
 <#assign FastEthernet1 = "${far.FastEthernet1}">
 <#assign FastEthernet2 = "${far.FastEthernet2}">
 <#assign FastEthernet3 = "${far.FastEthernet3}">
 <#assign FastEthernet4 = "${far.FastEthernet4}">
-<#assign EthernetPriority = "${far.
-<#assign Cell0Priority = "$(far.
-<#assign Cell1Priority = 
-<#assign WGBPriority = 
 
+<#-- WAN Menu -->
+<#assign AP = "${far.AP}">
+<#assign EthernetPriority = "${far.EthernetPriority}" + 100>
+<#assign Cell0Priority = "${far.Cell0Priority}" + 100>
+<#assign Cell1Priority = "${far.Cell1Priority}" + 100>
+<#assign WGBPriority   = "${far.WBGPriority}" + 100>
 
-<#assign AP = $${far.AP}">
-
+<#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
-<#assign lanNtwk	= "${lanIP[0]}.${lanIP[1]}.${lanIP[2]}.0">
-<#assign lanWild 	= "${(255 - (lanNet[0])?number)?abs}.${(255 - (lanNet[1])?number)?abs}.${(255 - (lanNet[2])?number)?abs}.${(255 - (lanNet[3])?number)?abs}">
 
-<#assign HomeName	= "{far.$HostName}">
+<#-- Network Menu -->
+<#assign PATRules	= "${far.PATRules}">
+
+<#-- Device Settings Menu -->
+<#assign HomeName	= "${far.HostName}">
 <#assign Users 		= "${far.Users}">
 <#assign clockTZ 	= "${far.clockTZ}">
 <#assign clockDST	= "${far.clockDST}"> 
 <#assign ntpIP 		= "${far.ntpIP}">
 <#assign DNSIP 		= "${far.DNSIP}">
 <#assign domainName = "${far.domainName}">
+  
+<#-- Calculate Netmasks -->
+
+<#assign  lan_ip=[]  lan_netmask=[]>
+
+<#-- Binary Conversion of LAN IP-->
+
+<#list lanIP as lann> 
+<#assign lan=lann?number>
+<#list 1..100 as y>
+<#if lan < 1> 
+<#if lan == 0>
+<#list 1..8 as s> <#assign lan_ip=lan_ip+["0"]> </#list> </#if>
+<#if lan_ip?size % 8 != 0> <#list 1..8 as s> <#assign lan_ip=lan_ip+["0"]> <#if lan_ip?size % 8 == 0> <#break> </#if> </#list> </#if>
+<#assign ip_bit = lan_ip?reverse> <#break> </#if>
+
+<#assign x=lan%2 st=x?string lan_ip=lan_ip+[st] lan=lan/2> </#list></#list>
+
+<#-- Binary Conversion of NetMask-->
+
+<#list lanNet as lann> 
+<#assign lan=lann?number>
+<#list 1..100 as y>
+<#if lan < 1 >
+<#if lan == 0>
+<#list 1..8 as s> <#assign lan_netmask=lan_netmask+["0"]> </#list> </#if>
+<#if lan_netmask?size % 8 != 0>
+<#list 1..8 as s> <#assign lan_netmask=lan_netmask+["0"]> <#if lan_netmask?size % 8 == 0> <#break>
+</#if> </#list> </#if>
+<#assign subnet_bit= lan_netmask?reverse> <#break> </#if>
+
+<#assign x=lan%2 st=x?string lan_netmask=lan_netmask+[st] lan=lan/2> </#list> </#list>
+
+<#-- Logical AND operation between IP and NetMask-->
+
+<#assign lan_netID=[]>
+<#list ip_bit as rev_index>
+<#if rev_index?string == "1" && subnet_bit[rev_index?index] == "1"><#assign lan_netID=lan_netID+["1"]></#if>
+<#if rev_index?string == "1" && subnet_bit[rev_index?index] == "0"><#assign lan_netID=lan_netID+["0"]></#if>
+<#if rev_index?string == "0" && subnet_bit[rev_index?index] == "1"><#assign lan_netID=lan_netID+["0"]></#if>
+<#if rev_index?string == "0" && subnet_bit[rev_index?index] == "0"><#assign lan_netID=lan_netID+["0"]></#if>
+</#list>
+<#assign netid_bit=lan_netID?reverse>
+
+<#--Binary to Decimal conversion of Logical AND product-->
+
+<#assign netid=[]>
+<#list netid_bit?chunk(8) as row> <#assign num=0 pow=1> <#list row as bit> <#assign num=num+pow*bit?number pow=pow*2> </#list>
+<#assign netid=netid+[num]>
+</#list>
+
+<#--Network Address-->
+
+<#assign lanNtwk = netid?join(".")?string>
+<#assign lanWild = "${(255 - (lanNet[0])?number)?abs}.${(255 - (lanNet[1])?number)?abs}.${(255 - (lanNet[2])?number)?abs}.${(255 - (lanNet[3])?number)?abs}">
+
   
    service tcp-keepalives-in
    service tcp-keepalives-out
@@ -66,12 +126,12 @@
    ip name-server ${DNSIP}
    ip domain name ${domainName}
 
-   ip dhcp excluded-address ${far.lanIPAddress}
+   ip dhcp excluded-address ${lanIPAddress}
    !
    !
    ip dhcp pool subtended
     network ${lanNtwk} ${far.lanNetmask}
-    default-router ${far.lanIPAddress} 
+    default-router ${lanIPAddress} 
     dns-server ${DNSIP}
     lease 0 0 10
    !
@@ -116,7 +176,7 @@
    !
    !
    interface Vlan1
-    ip address ${far.lanIPAddress} ${far.lanNetmask}
+    ip address ${lanIPAddress} ${lanNetmask}
     ip nbar protocol-discovery
     ip nat inside
     ip verify unicast source reachable-via rx
@@ -161,15 +221,21 @@
    !
    ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
    ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
+   
+   <list $PATRules as PAT>
+   
+       ip nat inside source static $PAT[3] $PAT[2] $PAT[4] interface ${cell_if} $PAT[5]
+   
+   </list>
    !   
    ip route 34.208.182.252 255.255.255.255 ${cell_if}
    ip route 208.67.222.222 255.255.255.255 ${ether_if} dhcp
    ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
    ip route 0.0.0.0 0.0.0.0 192.168.1.254 90 track 30
-   ip route 0.0.0.0 0.0.0.0 ${cell_if} 150 track 40
+   ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 40
    ip route 208.67.220.220 255.255.255.255 Null0 3
    ip route 208.67.222.222 255.255.255.255 Null0 3
-   ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp 90
+   ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp ${EthernetPriority}
    !
    !
    ip ssh rsa keypair-name SSHKEY

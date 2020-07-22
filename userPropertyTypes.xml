@@ -24,66 +24,6 @@
       <description>FND Service SNMP Port specified in gateway for SNMP Traps</description>
     </propertyType>
     <propertyType>
-      <name>lanNetwork</name>
-      <displayName>LAN Network</displayName>
-      <description>IPv4 Address of the LAN Network</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>LAN</section>
-      <required>1</required>
-      <validationType>ipv4</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanNetwork'", "value": "${far.lanNetwork}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>lanWildcard</name>
-      <displayName>LAN Wildcard</displayName>
-      <description>Wildcard used for LAN network</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>LAN</section>
-      <required>1</required>
-      <validationType>ipv4</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanWildcard'", "value": "${far.lanWildcard}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>lanIPAddress</name>
-      <displayName>LAN IP Address</displayName>
-      <description>LAN IPv4 Address</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>LAN</section>
-      <required>1</required>
-      <validationType>ipv4</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanIPAddress'", "value": "${far.lanIPAddress}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>lanDNSIPAddress</name>
-      <displayName>LAN DNS IP Address</displayName>
-      <description>LAN DNS IPv4 Address</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Device Settings</section>
-      <required>1</required>
-      <validationType>ipv4</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanDNSIPAddress'", "value": "${far.lanDNSIPAddress}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>lanNetmask</name>
-      <displayName>LAN Subnet mask</displayName>
-      <description>LAN IPv4 Subnet mask</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>LAN</section>
-      <required>1</required>
-      <validationType>ipv4</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanNetmask'", "value": "${far.lanNetmask}" }]</seedValues>
-    </propertyType>
-    <propertyType>
       <name>dhcpHelperAddress</name>
       <displayName>DHCP Helper IP Address</displayName>
       <description>IPv4 Address of the DHCP Helper</description>
@@ -493,6 +433,144 @@
 	</propertyType>
 
 	<propertyType>
+       <name>APN</name>
+       <displayName>Cellular Access Point Name</displayName>
+       <description>Enter the Cellular Access Point Name</description>
+       <exportAsTemplateKeys>1</exportAsTemplateKeys>
+       <section>Device Settings</section>
+       <required>1</required>
+       <validationType>non-empty</validationType>
+       <dataType>string</dataType>
+       <deviceSpecific>1</deviceSpecific>
+       <seedValues>[{ "key": "Use property 'APN'", "value": "${far.APN}" }]</seedValues>
+    </propertyType>
+
+	<propertyType>
+       <name>EthernetPriority</name>
+       <displayName>Default WAN priority of Gigabit Ethernet</displayName>
+       <description>Enter priority of the Gigabit Ethernet Port</description>
+       <exportAsTemplateKeys>1</exportAsTemplateKeys>
+       <section>Device Settings</section>
+       <required>1</required>
+       <validationType>non-empty</validationType>
+       <dataType>array</dataType>
+       <deviceSpecific>1</deviceSpecific>
+       <min>1></min>
+       <max>3></max>
+       <seedValues>[{ "key": "EthernetPriority", "value": 1 }]</seedValues>
+    </propertyType>
+    
+	<propertyType>
+       <name>Cell0Priority</name>
+       <displayName>Default WAN priority of Cellular Modem 0</displayName>
+       <description>Enter priority of the Cellular Modem 0</description>
+       <exportAsTemplateKeys>1</exportAsTemplateKeys>
+       <section>Device Settings</section>
+       <required>1</required>
+       <validationType>non-empty</validationType>
+       <dataType>array</dataType>
+       <deviceSpecific>1</deviceSpecific>
+       <min>1></min>
+       <max>3></max>
+       <seedValues>[{ "key": "Cell0Priority", "value": 2 }]</seedValues>
+   	</propertyType>	
+	
+	<propertyType>
+       <name>Cell1Priority</name>
+       <displayName>Default WAN priority of Cellular Modem 1</displayName>
+       <description>Enter priority of the Cellular Modem 1</description>
+       <exportAsTemplateKeys>1</exportAsTemplateKeys>
+       <section>Device Settings</section>
+       <required>1</required>
+       <validationType>non-empty</validationType>
+       <dataType>array</dataType>
+       <deviceSpecific>1</deviceSpecific>
+       <min>1></min>
+       <max>3></max>
+       <seedValues>[{ "key": "Cell1Priority", "value": 3 }]</seedValues>
+    </propertyType>
+
+	<propertyType>
+       <name>WGBPriority</name>
+       <displayName>Default WAN priority of WiFi Uplink</displayName>
+       <description>Enter priority of WiFi Uplink</description>
+       <exportAsTemplateKeys>1</exportAsTemplateKeys>
+       <section>Device Settings</section>
+       <required>1</required>
+       <validationType>non-empty</validationType>
+       <dataType>integer</dataType>
+       <deviceSpecific>1</deviceSpecific>
+       <min>1></min>
+       <max>4></max>
+       <seedValues>[{ "key": "WGBPriority", "value": 4 }]</seedValues>
+    </propertyType>    
+
+	<propertyType>
+      <name>lanNetwork</name>
+      <displayName>LAN Network</displayName>
+      <description>IPv4 Address of the LAN Network</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>1</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'lanNetwork'", "value": "${far.lanNetwork}" }]</seedValues>
+    </propertyType>
+   
+	<propertyType>
+      <name>lanWildcard</name>
+      <displayName>LAN Wildcard</displayName>
+      <description>Wildcard used for LAN network</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>1</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'lanWildcard'", "value": "${far.lanWildcard}" }]</seedValues>
+    </propertyType>
+   
+    <propertyType>
+      <name>lanIPAddress</name>
+      <displayName>LAN IP Address</displayName>
+      <description>LAN IPv4 Address</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>1</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'lanIPAddress'", "value": "${far.lanIPAddress}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
+      <name>lanDNSIPAddress</name>
+      <displayName>LAN DNS IP Address</displayName>
+      <description>LAN DNS IPv4 Address</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>1</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'lanDNSIPAddress'", "value": "${far.lanDNSIPAddress}" }]</seedValues>
+    </propertyType>
+   
+    <propertyType>
+      <name>lanNetmask</name>
+      <displayName>LAN Subnet mask</displayName>
+      <description>LAN IPv4 Subnet mask</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>1</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'lanNetmask'", "value": "${far.lanNetmask}" }]</seedValues>
+    </propertyType>	    
+    
+    <propertyType>
        <name>ntpIP</name>
        <displayName>Network Time Server IP</displayName>
        <description>Enter the NTP address to sync time</description>
@@ -515,7 +593,7 @@
   	  <validationType>non-empty</validationType>
  	  <dataType>array</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "Use property 'ntpIP'", "value": "${far.ntpIP}" }]</seedValues>
+  	  <seedValues>[{ "key": "clockTZ", "value": "${far.ntpIP}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
@@ -528,7 +606,6 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Use property 'ntpIP'", "value": "${far.ntpIP}" }]</seedValues>
 	</propertyType>
 
     <propertyType>
@@ -541,12 +618,12 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>table</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <tableClumns>
-   	  <tableNumRows>
+   	  <tableColumns>[{ "colKey": "UserName", "colLabel": "User Name" }, {"colKey": "UserPassword", "colLabel": "UserPriv"}, {"colKey": "Privilege Level"}]</tableColumns>
+   	  <tableNumRows>6</tableNumRows>
    	</propertyType>  
     
 	<propertyType>
-  	  <name>Username</name>
+  	  <name>UserName</name>
   	  <displayName>User Name</displayName>
   	  <description>User Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
@@ -557,7 +634,6 @@
   	  <min>4</min>
   	  <max>8</max>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Use property 'ntpIP'", "value": "${far.ntpIP}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
@@ -573,7 +649,6 @@
   	  <max>8</max>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Use property 'ntpIP'", "value": "${far.ntpIP}" }]</seedValues>
 	</propertyType>
 	
 	<propertyType>
@@ -586,7 +661,9 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>integer</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Admin'", "value": "15" }]</seedValues>
+  	  <min>1</min>
+  	  <max>15</max>
+   	  <seedValues>[{ "key": "UserPriv'", "value": "15" }]</seedValues>
 	</propertyType>
 	
 	<propertyType>
@@ -599,7 +676,7 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Admin'", "value": "15" }]</seedValues>
+   	  <seedValues>[{ "key": "DNSIP'", "value": "0.0.0.0" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
@@ -612,8 +689,9 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Ok'", "value": "15" }]</seedValues>
+   	  <seedValues>[{ "key": "DomainName'", "value": "local" }]</seedValues>
 	</propertyType>
-		
+	
+ 
   </propertyTypes>
 </cgms>
