@@ -142,24 +142,48 @@
 	</#list> 
 	
    !
-   ip sla 30
-    icmp-echo 208.67.222.222 source-interface ${ether_if}
-    frequency 10
-   ip sla schedule 30 life forever start-time now
-   !
-   ip sla 40
-    icmp-echo 208.67.220.220 source-interface ${cell_if}
-    frequency 30
-   ip sla schedule 40 life forever start-time now
-   !
-   track 5 interface ${ether_if} line-protocol
-   !
-   track 7 interface ${cell_if} line-protocol
-   !
-   track 30 ip sla 30 reachability
-   !
-   track 40 ip sla 40 reachability
-   !
+ip sla 10
+ icmp-echo 8.8.8.8
+ frequency 30
+!
+ip sla schedule 10 life forever start-time now
+ip sla 20
+ icmp-echo 9.9.9.9
+ frequency 30
+ !
+ip sla schedule 20 life forever start-time now
+
+ip sla 30
+ icmp-echo 208.67.222.222 source-interface GigabitEthernet0/0/0
+ frequency ${custom.gigtime}
+!
+ip sla schedule 30 life forever start-time now
+
+ip sla 40
+ icmp-echo 208.67.220.220 source-interface Cellular0/1/0
+ frequency ${custom.celltime}
+!
+ip sla schedule 40 life forever start-time now
+
+
+track 5 interface GigabitEthernet0/0/0 line-protocol
+!
+track 7 interface Cellular0/1/0 line-protocol
+!
+track 10 ip sla 10 reachability
+ delay down 32 up 32
+!
+track 20 ip sla 20 reachability
+ delay down 32 up 32
+!
+track 30 ip sla 30 reachability
+!
+track 40 ip sla 40 reachability
+!
+track 50 stub-object
+!
+track 60 stub-object
+!
    interface ${ether_if}
     ip address dhcp
     no shutdown
@@ -267,7 +291,172 @@
    !
 
 
+event manager applet RTP_EEM
+ event timer watchdog time 140 maxrun 720
+ action 0010 cli command "enable"
+ action 0020 set w_rssi "1"
+ action 0030 set w_rsrp "2"
+ action 0040 set w_rsrq "3"
+ action 0050 set w_priority "6"
+ action 0060 set p_cell1 "1"
+ action 0070 set p_cell0 "0"
+ action 0080 set s_cell0 "0"
+ action 0090 set s_cell1 "0"
+ action 0100 set c_cell "0"
+ action 0105 set one "1"
+ action 0110 set is_cell1_attached "0"
+ action 0120 set is_cell0_attached "0"
+ action 0130 set do_set_cell0 "0"
+ action 0140 set do_set_cell1 "0"
+ action 0149 cli command "show cellular 0/1/0 network | inc Packet switch domain"
+ action 0150 regexp "Attached" "$_cli_result"
+ action 0155 if $_regexp_result eq "1"
+ action 0156  cli command "enable"
+ action 0157  cli command "show track 10 | include Reachability"
+ action 0158  regexp "Reachability is Up" "$_cli_result"
+ action 0159  if $_regexp_result eq "1"
+ action 0160   set is_cell0_attached "1"
+ action 0170   add $c_cell $is_cell0_attached
+ action 0180   set c_cell "$_result"
+ action 0190   puts "Cell 0/1/0 is Attached and Cell Count is $c_cell"
+ action 0200  end
+ action 0201 end
+ action 0210 cli command "show cellular 0/3/0 network | inc Packet switch domain"
+ action 0220 regexp "Attached" "$_cli_result"
+ action 0230 if $_regexp_result eq "1"
+ action 0231  cli command "enable"
+ action 0232  cli command "show track 20 | include Reachability"
+ action 0233  regexp "Reachability is Up" "$_cli_result"
+ action 0234  if $_regexp_result eq "1"
+ action 0240   set is_cell1_attached "1"
+ action 0250   add $c_cell $is_cell1_attached
+ action 0260   set c_cell "$_result"
+ action 0270   puts "Cell 0/3/0 is Attached and Cell Count is $c_cell"
+ action 0280  end
+ action 0281 end
+ action 0290 if $is_cell1_attached eq "1"
+ action 0300  cli command "show cellular 0/3/0 all | inc Current RSSI"
+ action 0310  regexp "Current RSSI = (-[0-9]+) dBm" "$_cli_result" match cell1_rssi
+ action 0320  puts "Cellular0/3/0 Current RSSI is $cell1_rssi"
+ action 0330  cli command "show cellular 0/3/0 all | inc Current RSRP"
+ action 0340  regexp "Current RSRP = (-[0-9]+) dBm" "$_cli_result" match cell1_rsrp
+ action 0350  puts "Cellular0/3/0 Current RSRP is $cell1_rsrp"
+ action 0360  cli command "show cellular 0/3/0 all | inc Current RSRQ"
+ action 0370  regexp "Current RSRQ = (-[0-9]+) dB" "$_cli_result" match cell1_rsrq
+ action 0380  puts "Cellular0/3/0 Current RSRQ is $cell1_rsrq"
+ action 0390 end
+ action 0400 if $is_cell0_attached eq "1"
+ action 0410  cli command "show cellular 0/1/0 all | inc Current RSSI"
+ action 0420  regexp "Current RSSI = (-[0-9]+) dBm" "$_cli_result" match cell0_rssi
+ action 0430  puts "Cellular0/1/0 Current RSSI is $cell0_rssi"
+ action 0440  cli command "show cellular 0/1/0 all | inc Current RSRP"
+ action 0450  regexp "Current RSRP = (-[0-9]+) dBm" "$_cli_result" match cell0_rsrp
+ action 0460  puts "Cellular0/1/0 Current RSRP is $cell0_rsrp"
+ action 0470  cli command "show cellular 0/1/0 all | inc Current RSRQ"
+ action 0480  regexp "Current RSRQ = (-[0-9]+) dB" "$_cli_result" match cell0_rsrq
+ action 0490  puts "Cellular0/1/0 Current RSRQ is $cell0_rsrq"
+ action 0500 end
+ action 0510 if $c_cell eq "2"
+ action 0520  if $cell1_rssi ge "$cell0_rssi"
+ action 0530   add $s_cell1 $w_rssi
+ action 0540   set s_cell1 "$_result"
+ action 0550  else
+ action 0560   add $s_cell0 $w_rssi
+ action 0570   set s_cell0 "$_result"
+ action 0580  end
+ action 0590  if $cell1_rsrq ge "$cell0_rsrq"
+ action 0600   add $s_cell1 $w_rsrq
+ action 0610   set s_cell1 "$_result"
+ action 0620  else
+ action 0630   add $s_cell0 $w_rsrq
+ action 0640   set s_cell0 "$_result"
+ action 0650  end
+ action 0660  if $cell1_rsrp ge "$cell0_rsrp"
+ action 0670   add $s_cell1 $w_rsrp
+ action 0680   set s_cell1 "$_result"
+ action 0700  else
+ action 0710   add $s_cell0 $w_rsrp
+ action 0720   set s_cell0 "$_result"
+ action 0730  end
+ action 0740  if $p_cell1 gt "$p_cell0"
+ action 0750   add $s_cell1 $w_priority
+ action 0760   set s_cell1 "$_result"
+ action 0770  elseif $p_cell0 gt $p_cell1
+ action 0780   add $s_cell0 $w_rsrp
+ action 0790   set s_cell0 "$_result"
+ action 0800  end
+ action 0810 end
+ action 1040 if $c_cell eq "2"
+ action 1050  puts "Both Cellular connections are up, Need to Select One"
+ action 1060  if $s_cell0 eq "$s_cell1"
+ action 1070   if $p_cell1 gt "$p_cell0"
+ action 1080    puts "Switching to Cellular 0/1/0"
+ action 1090    add $do_set_cell0 $one
+ action 1100    set do_set_cell0 "$_result"
+ action 1110   elseif $p_cell0 gt $p_cell1
+ action 1120    puts "Switching to Cellular0/3/0"
+ action 1130    add $do_set_cell1 $one
+ action 1140    set do_set_cell1 "$_result"
+ action 1150   elseif $p_cell0 eq $p_cell1
+ action 1160    puts "Use TIE breaker"
+ action 1170    if $cell0_rsrq gt "$cell1_rsrq"
+ action 1180     puts "Switching to Cellular 0/1/0"
+ action 1190     add $do_set_cell0 $one
+ action 1200     set do_set_cell0 "$_result"
+ action 1210    else
+ action 1220     puts "Switching to Cellular0/3/0"
+ action 1230     add $do_set_cell1 $one
+ action 1240     set do_set_cell1 "$_result"
+ action 1250    end
+ action 1260   end
+ action 1270  elseif $s_cell0 gt $s_cell1
+ action 1280   puts "Switching to Cellular 0/1/0"
+ action 1290   add $do_set_cell0 $one
+ action 1300   set do_set_cell0 "$_result"
+ action 1310  elseif $s_cell1 gt $s_cell0
+ action 1320   puts "Switching to Cellular0/3/0"
+ action 1330   add $do_set_cell1 $one
+ action 1340   set do_set_cell1 "$_result"
+ action 1350  end
+ action 1360 else
+ action 1370  if $is_cell0_attached eq "1"
+ action 1380   puts "Switching to Cellular 0/1/0"
+ action 1390   add $do_set_cell0 $one
+ action 1400   set do_set_cell0 "$_result"
+ action 1410  elseif $is_cell1_attached eq 1
+ action 1420   puts "Switching to Cellular0/3/0"
+ action 1430   add $do_set_cell1 $one
+ action 1440   set do_set_cell1 "$_result"
+ action 1450  else
+ action 1460   puts "Both cellular down!!"
+ action 1470  end
+ action 1480 end
+ action 2125 puts "do_set_cell0 is $do_set_cell0"
+ action 2126 puts "do_set_cell1 is $do_set_cell1"
+ action 2130 if $do_set_cell0 eq "1"
+ action 2140  puts "Updating tunnel track object-numbers"
+ action 2150  puts "Switching to Cellular 0/1/0"
+ action 2160  cli command "conf t"
+ action 2210  cli command "track 60 stub-object"
+ action 2220  cli command "default-state down"
+ action 2230  cli command "exit"
+ action 2240  cli command "track 50 stub-object"
+ action 2250  cli command "default-state up"
+ action 2260  cli command "exit"
+ action 2280 elseif $do_set_cell1 eq 1
+ action 2290  puts "Updating tunnel track object-numbers"
+ action 2300  puts "Switching to Cellular0/3/0"
+ action 2310  cli command "conf t"
+ action 2370  cli command "track 50 stub-object"
+ action 2380  cli command "default-state down"
+ action 2390  cli command "exit"
+ action 2400  cli command "track 60 stub-object"
+ action 2410  cli command "default-state up"
+ action 2420  cli command "exit"
 
+ action 2470 end
+!
+!
 
 <#-- End eCVD template -->
 
