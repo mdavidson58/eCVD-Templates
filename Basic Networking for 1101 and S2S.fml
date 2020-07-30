@@ -185,7 +185,14 @@ crypto ikev2 client flexvpn Tunnel2
 <#if isBackupHer == "true">
   peer 2 ${backupHerIpAddress}
 </#if>
-  source 1 Vlan10 track 2
+<#if EthernetPriority == 101>
+  source 1 ${ether_if} track 5
+  source 2 ${cell_if}  track 7
+<#else>
+  source 1 ${cell_if} track 7
+  source 2 ${ether_if}  track 5
+</#if>  
+  source 3 Vlan10 track 2 
   client connect Tunnel2
 !
 !
