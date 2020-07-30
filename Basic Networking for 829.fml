@@ -117,17 +117,17 @@
    !
    !
   !
-   clock timezone ${clockTZ}
-   ntp server ${ntpIP}
+clock timezone ${clockTZ}
+ntp server ${ntpIP}
    !
    !
-   ip name-server ${DNSIP}
-   ip domain name ${domainName}
+ip name-server ${DNSIP}
+ip domain name ${domainName}
 
-   ip dhcp excluded-address ${far.lanIPAddress}
+ip dhcp excluded-address ${far.lanIPAddress}
    !
    !
-   ip dhcp pool subtended
+ip dhcp pool subtended
     network ${lanNtwk} ${far.lanNetmask}
     default-router ${far.lanIPAddress} 
     dns-server ${DNSIP}
@@ -136,9 +136,9 @@
    !
    !
    
-  	<#list far.Users as user >
+<#list far.Users as user >
 		username ${user.UserName} privilege ${user.UserPriv} algorithm-type scrypt secret ${user.UserPassword}
-	</#list> 
+</#list> 
 	
    !
 
@@ -166,14 +166,14 @@ track 30 ip sla 30 reachability
 track 40 ip sla 40 reachability
 !
 
-   interface ${ether_if}
+interface ${ether_if}
    	ip dhcp client route track 30
     ip address dhcp
     no shutdown
     ip nat outside
    !
    !
-   interface ${cell_if}
+interface ${cell_if}
     ip address negotiated
     ip nat outside
     dialer in-band
@@ -183,7 +183,7 @@ track 40 ip sla 40 reachability
     dialer-group 1
    !
    !
-   interface Vlan1
+interface Vlan1
     ip address ${far.lanIPAddress} ${far.lanNetmask}
     ip nbar protocol-discovery
     ip nat inside
@@ -191,46 +191,46 @@ track 40 ip sla 40 reachability
    !
    <#-- enabling/disabling of ethernet ports -->
 
-      interface GigabitEthernet0
+interface GigabitEthernet0
 <#if GigEthernet1 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>
    !
-   interface GigabitEthernet1
+interface GigabitEthernet1
 <#if GigEthernet2 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>   
    !
-   interface GigabitEthernet2
+interface GigabitEthernet2
 <#if GigEthernet3 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>    
    !
-   interface GigEthernet3
+interface GigEthernet3
 <#if GigEthernet4 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>
    !
-   interface Async0
+interface Async0
     no ip address
     encapsulation scada
    !
-   ip forward-protocol nd
+ip forward-protocol nd
    !
-   ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
-   ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
+ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
+ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
-   <#list far.portForwarding as PAT>
+<#list far.portForwarding as PAT>
           ip nat inside source static ${PAT.privateIP} ${PAT.protocol} ${PAT.localPort} interface ${cell_if} ${PAT.publicPort}
-      </#list>
+</#list>
    
 ip route 0.0.0.0 0.0.0.0 ${ether_if} DHCP ${EthernetPriority}
 ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 40
@@ -250,29 +250,29 @@ ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
 
    !
    !
-   ip ssh rsa keypair-name SSHKEY
-   ip ssh version 2
-   ip scp server enable
+ip ssh rsa keypair-name SSHKEY
+ip ssh version 2
+ip scp server enable
    !
    !
    !
    !
    !
-   ip access-list extended NAT_ACL
+ip access-list extended NAT_ACL
     permit ip ${lanNtwk} ${lanWild} any
    !
-   dialer-list 1 protocol ip permit
+dialer-list 1 protocol ip permit
    !
    !
-   route-map RM_WAN_ACL permit 10 
+route-map RM_WAN_ACL permit 10 
     match ip address NAT_ACL
     match interface ${cell_if}
    !
-   route-map RM_WAN_ACL2 permit 10 
+route-map RM_WAN_ACL2 permit 10 
     match ip address NAT_ACL
     match interface ${ether_if}
    !
-   line vty 0 4
+line vty 0 4
     exec-timeout 5 0
     length 0
     transport input ssh
