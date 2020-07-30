@@ -72,68 +72,8 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'busId'", "value": "${far.busId}" }]</seedValues>
     </propertyType>
-    <propertyType>
-      <name>ignition</name>
-      <displayName>Ignition</displayName>
-      <description>Ignition</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Site-2-Site VPN</section>
-      <required>1</required>
-      <validationType>non-empty</validationType>
-      <dataType>boolean</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'ignition'", "value": "${far.ignition}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>herIpAddress</name>
-      <displayName>HER IP Address</displayName>
-      <description>IPv4 address of the HER</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Site-2-Site VPN</section>
-      <required>1</required>
-      <validationType>ipv4</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'herIpAddress'", "value": "${far.herIpAddress}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>backupHerIpAddress</name>
-      <displayName>Backup HER IP Address</displayName>
-      <description>IPv4 Address of the Backup HER</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Site-2-Site VPN</section>
-      <required>1</required>
-      <validationType>ipv4</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'backupHerIpAddress'", "value": "${far.backupHerIpAddress}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>herPsk</name>
-      <displayName>HER Pre-shared key</displayName>
-      <description>Pre-shared key of the HER</description>
-      <issecure>1</issecure>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Site-2-Site VPN</section>
-      <required>1</required>
-      <validationType>non-empty</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'herPsk'", "value": "${far.herPsk}" }]</seedValues>
-    </propertyType>
-    <propertyType>
-      <name>backupHerPsk</name>
-      <displayName>Backup HER Pre-shared key</displayName>
-      <description>Pre-shared key of the Backup HER</description>
-      <issecure>1</issecure>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Site-2-Site VPN</section>
-      <required>1</required>
-      <validationType>non-empty</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'backupHerPsk'", "value": "${far.backupHerPsk}" }]</seedValues>
-    </propertyType>
+   
+ 
     <propertyType>
       <name>boolProperty1</name>
       <displayName>Boolean Property 1</displayName>
@@ -379,6 +319,58 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'secProperty5'", "value": "${far.secProperty5}" }]</seedValues>
     </propertyType>
+    
+	<propertyType>
+	  <name>GigEthernet1</name>
+	  <displayName>Gigabit Ethernet1</displayName>
+	  <description>Enable/Disable Gigabit Ethernet Port 1</description>
+ 	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Interface</section>
+  	  <required>1</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>boolean</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+  	  <seedValues>[{ "key": "Use property 'FastEthernet1'", "value": "${far.FastEthernet1}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>GigEthernet2</name>
+  	  <displayName>Gigabit Ethernet2</displayName>
+  	  <description>Enable/Disable Gigabit Ethernet Port 2</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Interface</section>
+  	  <required>1</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>boolean</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	  <seedValues>[{ "key": "Use property 'FastEthernet2'", "value": "${far.FastEthernet2}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>GigEthernet3</name>
+  	  <displayName>Gigabit Ethernet3</displayName>
+  	  <description>Enable/Disable Gigabit Ethernet Port 3</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Interface</section>
+  	  <required>1</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>boolean</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+  	  <seedValues>[{ "key": "Use property 'FastThernet3'", "value": "${far.FastEthernet3}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>GigEthernet4</name>
+  	  <displayName>Gigabit Ethernet4</displayName>
+  	  <description>Enable/Disable Gigabit Ethernet Port 4</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Interface</section>
+  	  <required>1</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>boolean</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+  	  <seedValues>[{ "key": "Use property 'FastEthernet4'", "value": "${far.FastEthernet4}" }]</seedValues>
+	</propertyType>
 
 	<propertyType>
 	  <name>FastEthernet1</name>
@@ -437,7 +429,7 @@
        <displayName>Cellular Access Point Name</displayName>
        <description>Enter the Cellular Access Point Name</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>Device Settings</section>
+       <section>WAN</section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
@@ -447,17 +439,18 @@
 
 	<propertyType>
        <name>EthernetPriority</name>
-       <displayName>Default WAN priority of Gigabit Ethernet</displayName>
-       <description>Enter priority of the Gigabit Ethernet Port</description>
+       <displayName>Default WAN priority of Ethernet</displayName>
+       <description>Enter priority of the Ethernet Port</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>Device Settings</section>
+       <section>WAN</section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <min>1></min>
-       <max>3></max>
-       <seedValues>[{ "key": "EthernetPriority", "value": 1 }]</seedValues>
+       <seedValues>[{ "key": "Use property 'EthernetPriority'", "value": "${far.EthernetPriority} },
+       				{ "key": "First", "value": "1" },
+       				{ "key": "Second", "value": "2" }
+       ]</seedValues>
     </propertyType>
     
 	<propertyType>
@@ -465,14 +458,15 @@
        <displayName>Default WAN priority of Cellular Modem 0</displayName>
        <description>Enter priority of the Cellular Modem 0</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>Device Settings</section>
+       <section>WAN</section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <min>1></min>
-       <max>3></max>
-       <seedValues>[{ "key": "Cell0Priority", "value": 2 }]</seedValues>
+       <seedValues>[{ "key": "Use property 'Cell0Priority'", "value": "${far.Cell0Priority} },
+       				{ "key": "First", "value": "1" },
+       				{ "key": "Second", "value": "2" }
+       ]</seedValues>
    	</propertyType>	
 	
 	<propertyType>
@@ -480,14 +474,17 @@
        <displayName>Default WAN priority of Cellular Modem 1</displayName>
        <description>Enter priority of the Cellular Modem 1</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>Device Settings</section>
+       <section>WAN</section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <min>1></min>
-       <max>3></max>
-       <seedValues>[{ "key": "Cell1Priority", "value": 3 }]</seedValues>
+       <seedValues>[{ "key": "Use property 'Cell0Priority'", "value": "${far.Cell1Priority} },
+       				{ "key": "First", "value": "1" },
+       				{ "key": "Second", "value": "2" },
+       				{ "key": "Third", "value": "3" },
+       				{ "key": "Fourth", "value": "4" }
+       ]</seedValues>    
     </propertyType>
 
 	<propertyType>
@@ -495,14 +492,17 @@
        <displayName>Default WAN priority of WiFi Uplink</displayName>
        <description>Enter priority of WiFi Uplink</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>Device Settings</section>
+       <section>WAN</section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>integer</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <min>1></min>
-       <max>4></max>
-       <seedValues>[{ "key": "WGBPriority", "value": 4 }]</seedValues>
+       <seedValues>[{ "key": "Use property 'Cell0Priority'", "value": "${far.Cell1Priority} },
+       				{ "key": "First", "value": "1" },
+       				{ "key": "Second", "value": "2" },
+       				{ "key": "Third", "value": "3" },
+       				{ "key": "Fourth", "value": "4" }
+       ]</seedValues>   
     </propertyType>    
 
 	<propertyType>
@@ -575,7 +575,7 @@
        <displayName>Network Time Server IP</displayName>
        <description>Enter the NTP address to sync time</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>Device Settings</section>
+       <section>Device Settings>Time Settings</section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
@@ -588,12 +588,38 @@
   	  <displayName>Router Local Timezone</displayName>
   	  <description>Router Local Timezone</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Time Settings</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
  	  <dataType>array</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "clockTZ", "value": "${far.ntpIP}" }]</seedValues>
+  	  <seedValues>[ { "key": "clockTZ", "value": "${far.clockTZ}" },
+  	  				{ "key": "UTC+12 ANAT", "value": "anat" },
+  	  				{ "key": "UTC+11 SBT", "value": "sbt" },
+  	  				{ "key": "UTC+10 AEST", "value": "aest" },
+  	  				{ "key": "UTC+9 JST", "value": "jst" },
+  	  				{ "key": "UTC+8 CST", "value": "cst" },
+  	  				{ "key": "UTC+7 WIB", "value": "wib" },
+  	  				{ "key": "UTC+6 BST", "value": "bst" },
+  	  				{ "key": "UTC+5 UZT", "value": "uzt" },
+  	  				{ "key": "UTC+4 GST", "value": "gst" },
+  	  				{ "key": "UTC+3 MSK", "value": "msk" },
+  	  				{ "key": "UTC+2 CEST", "value": "cest" },
+  	  				{ "key": "UTC+1 BST", "value": "bst" },
+  	  				{ "key": "UTC+0 GMT", "value": "gmt" },
+  	  				{ "key": "UTC-1 CVT", "value": "cvt" },
+  	  				{ "key": "UTC-2 WGST", "value": "wgst" },
+  	  				{ "key": "UTC-3 ART", "value": "art" },
+  	  				{ "key": "UTC-4 EDT", "value": "edt" },
+  	  				{ "key": "UTC-5 CDT", "value": "cdt" },
+  	  				{ "key": "UTC-6 MST", "value": "mst" },
+  	  				{ "key": "UTC-7 PDT", "value": "pdt" },
+  	  				{ "key": "UTC-8 AKDT", "value": "akdt" },
+  	  				{ "key": "UTC-9 HDT", "value": "hdt" },
+  	  				{ "key": "UTC-10 HST", "value": "hst" },
+  	  				{ "key": "UTC-11 NUT", "value": "nut" },
+  	  				{ "key": "UTC-12 AoE", "value": "aoe" }
+  	  ]</seedValues>
 	</propertyType>
 
 	<propertyType>
@@ -601,7 +627,7 @@
   	  <displayName>Daylight Savings Time</displayName>
   	  <description>Enable Daylight Savings Time</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Time Settings</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -663,7 +689,7 @@
   	  <deviceSpecific>1</deviceSpecific>
   	  <min>1</min>
   	  <max>15</max>
-   	  <seedValues>[{ "key": "UserPriv'", "value": "15" }]</seedValues>
+   	  <seedValues>[{ "key": "UserPriv'", "value": 15 }]</seedValues>
 	</propertyType>
 	
 	<propertyType>
@@ -692,6 +718,178 @@
    	  <seedValues>[{ "key": "DomainName'", "value": "local" }]</seedValues>
 	</propertyType>
 	
+  <propertyType>
+     <name>portForwarding</name>
+     <displayName>Port Forwarding</displayName>
+     <description>Port Forwarding</description>
+     <exportAsTemplateKeys>1</exportAsTemplateKeys>
+     <section>Network>Port Forwarding</section>
+     <required>1</required>
+     <validationType>non-empty</validationType>
+     <dataType>table</dataType>
+     <deviceSpecific>1</deviceSpecific>
+     <tableColumns>[{ "colKey": "description", "colLabel": "Description" }, {"colKey": "protocol", "colLabel": "Protocol"}, {"colKey": "privateIP", "colLabel": "Private IP"}, {"colKey": "localPort", "colLabel": "Local Port"}, {"colKey": "publicIP", "colLabel": "Public IP"}, {"colKey": "publicPort", "colLabel": "Public Port"}]</tableColumns>
+     <tableNumRows>8</tableNumRows>
+   </propertyType>
  
+  <propertyType>
+     <name>description</name>
+     <displayName>Description</displayName>
+     <description>Port Forwarding Description</description>
+     <exportAsTemplateKeys>1</exportAsTemplateKeys>
+     <section>Network>Port Forwarding</section>
+     <required>1</required>
+     <validationType>non-empty</validationType>
+     <dataType>string</dataType>
+     <deviceSpecific>1</deviceSpecific>
+     <seedValues>[{ "key": "Use property 'description'", "value": "${far.description}" }]</seedValues>
+   </propertyType>
+ 
+  <propertyType>
+     <name>protocol</name>
+     <displayName>Protocol</displayName>
+     <description>Port Forwarding Protocol</description>
+     <exportAsTemplateKeys>1</exportAsTemplateKeys>
+     <section>Network>Port Forwarding</section>
+     <required>1</required>
+     <validationType>non-empty</validationType>
+     <dataType>string</dataType>
+     <deviceSpecific>1</deviceSpecific>
+     <seedValues>[{ "key": "Use property 'protocol'", "value": "${far.protocol}" }]</seedValues>
+   </propertyType>
+ 
+ 
+  <propertyType>
+     <name>privateIP</name>
+     <displayName>Private IP</displayName>
+     <description>Port Forwarding Private IP</description>
+     <exportAsTemplateKeys>1</exportAsTemplateKeys>
+     <section>Network>Port Forwarding</section>
+     <required>1</required>
+     <validationType>ipv4</validationType>
+     <dataType>string</dataType>
+     <deviceSpecific>1</deviceSpecific>
+     <seedValues>[{ "key": "Use property 'privateIP'", "value": "${far.privateIP}" }]</seedValues>
+   </propertyType>
+ 
+   <propertyType>
+     <name>localPort</name>
+     <displayName>Local Port</displayName>
+     <description>Port Forwarding Local Port</description>
+     <exportAsTemplateKeys>1</exportAsTemplateKeys>
+     <section>Network>Port Forwarding</section>
+     <required>1</required>
+     <validationType>non-empty</validationType>
+     <dataType>string</dataType>
+     <deviceSpecific>1</deviceSpecific>
+     <seedValues>[{ "key": "Use property 'localPort'", "value": "${far.localPort}" }]</seedValues>
+  </propertyType>
+ 
+   <propertyType>
+     <name>publicIP</name>
+     <displayName>Public IP</displayName>
+     <description>Port Forwarding Public IP</description>
+     <exportAsTemplateKeys>1</exportAsTemplateKeys>
+     <section>Network>Port Forwarding</section>
+     <required>1</required>
+     <validationType>ipv4</validationType>
+     <dataType>string</dataType>
+     <deviceSpecific>1</deviceSpecific>
+     <seedValues>[{ "key": "Use property 'publicIP'", "value": "${far.publicIP}" }]</seedValues>
+   </propertyType>
+ 
+   <propertyType>
+     <name>publicPort</name>
+     <displayName>Public Port</displayName>
+     <description>Port Forwarding Public Port</description>
+     <exportAsTemplateKeys>1</exportAsTemplateKeys>
+     <section>Network>Port Forwarding</section>
+     <required>1</required>
+     <validationType>non-empty</validationType>
+     <dataType>string</dataType>
+     <deviceSpecific>1</deviceSpecific>
+     <seedValues>[{ "key": "Use property 'publicPort'", "value": "${far.publicPort}" }]</seedValues>
+   </propertyType>
+	
+   <propertyType>
+      <name>ignition</name>
+      <displayName>Ignition</displayName>
+      <description>Ignition</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Device Settings</section>
+      <required>1</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'ignition'", "value": "${far.ignition}" }]</seedValues>
+    </propertyType>
+	
+	   <propertyType>
+      <name>herIpAddress</name>
+      <displayName>HeadEnd IP Address</displayName>
+      <description>IPv4 address of the HeadEnd</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>VPN</section>
+      <required>1</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'herIpAddress'", "value": "${far.herIpAddress}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
+      <name>backupHerIpAddress</name>
+      <displayName>Backup HeadEnd IP Address</displayName>
+      <description>IPv4 Address of the Backup HeadEnd</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>VPN>Backup HeadEnd</section>
+      <required>0</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'backupHerIpAddress'", "value": "${far.backupHerIpAddress}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
+      <name>herPsk</name>
+      <displayName>HeadEnd Pre-shared key</displayName>
+      <description>Pre-shared key of the HeadEnd</description>
+      <issecure>1</issecure>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>VPN</section>
+      <required>1</required>
+      <validationType>non-empty</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'herPsk'", "value": "${far.herPsk}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
+      <name>backupHerPsk</name>
+      <displayName>Backup HeadEnd Pre-shared key</displayName>
+      <description>Pre-shared key of the Backup HeadEnd</description>
+      <issecure>1</issecure>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>VPN>Backup HeadEnd</section>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'backupHerPsk'", "value": "${far.backupHerPsk}" }]</seedValues>
+    </propertyType>
+    
+     <propertyType>
+      <name>isBackupHer</name>
+      <displayName>Enable Backup HeadEnd</displayName>
+      <description>Enable Backup HeadEnd</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>VPN>Backup HeadEnd</section>
+      <required>1</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Use property 'boolProperty1'", "value": "${far.boolProperty1}" }]</seedValues>
+    </propertyType>
+    
   </propertyTypes>
 </cgms>

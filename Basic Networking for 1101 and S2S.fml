@@ -35,6 +35,23 @@
 <#-- Network Menu -->
 <#assign PatProtocol = "${far.portForwarding[0].protocol}">
 
+<#-- VPN Settings Menu -->
+<#assign herIpAdress 	= "${far.herIpAddress}">
+<#assign herPsk			= "${far.herPsk}">
+<#assign isBackupHer	= "${far.isBackupHer}">
+<#assign backupHerIpAddress = "${far.backupHerIpAddress}">
+<#assign backupHerPsk	= "${far.backupHerPsk}">
+
+<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]>
+<#-- assign pid = sublist[0]>
+<#-- assign model = pid[0..4]>
+<#-- assign sn = sublist[1]>
+<#--assign gwips = far.ip?split(".")>
+<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
+<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
+
+
+
 <#-- Device Settings Menu -->
 <#assign HostName	= "${far.HostName}">
 <#assign domainName = "${far.domainName}">
@@ -101,7 +118,8 @@
 <#assign lanNtwk = netid?join(".")?string>
 <#assign lanWild = "${(255 - (lanNet[0])?number)?abs}.${(255 - (lanNet[1])?number)?abs}.${(255 - (lanNet[2])?number)?abs}.${(255 - (lanNet[3])?number)?abs}">
 
-  
+<#-- Configure Device Settings -->
+
    service tcp-keepalives-in
    service tcp-keepalives-out
    service timestamps debug datetime msec
@@ -142,7 +160,72 @@
   	<#list far.Users as user >
 		username ${user.UserName} privilege ${user.UserPriv} algorithm-type scrypt secret ${user.UserPassword}
 	</#list> 
-	   !
+	!
+	   
+<# -- S2S VPN Configuration -->   
+<!-- Need to make all statements that refer to the 2nd HER optional, so that a user can choose to only use a single HER -->
+
+!
+crypto ikev2 authorization policy CVPN 
+ route set interface
+ route accept any distance 70
+!
+crypto ikev2 keyring Flex_key
+ !
+ peer ${herIpAddress}   <!-- make this a variable for S2SVPN-HER #1
+  address ${herIpAddress} 
+  identity key-id ${herIpAddress}
+  pre-shared-key ${herPsk}   <!-- make this a variable for VPN PSK #1
+ !
+<#if isBackupHer == "true">
+ peer ${backupHerIpAddress}   <!-- make this a variable for S2SVPN-HER #2
+  address ${backupHerIpAddress}
+  identity key-id ${backupHerIpAddress}
+  pre-shared-key ${backupHerPsk}   <!-- make this a variable for VPN PSK #2
+ !
+</#if>
+!
+!
+crypto ikev2 profile CVPN_I2PF
+ match identity remote key-id ${herIpAddress} 
+ <#if isBackupHer == "true">
+  match identity remote key-id ${backupHerIpAddress}
+</#if>
+ identity local email ${sn}@iotspdev.io  <!-- update dynamically for each GW
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local Flex_key
+ dpd 29 2 periodic
+ aaa authorization group psk list CVPN CVPN
+!
+crypto ikev2 client flexvpn Tunnel2
+  peer 1 ${herIpAddress} 
+<#if isBackupHer == "true">
+  peer 2 ${backupHerPsk}
+</#if>
+  source 1 Vlan10 track 2
+  client connect Tunnel2
+!
+!
+!
+crypto ipsec profile CVPN_IPS_PF
+ set ikev2-profile CVPN_I2PF
+!
+interface Tunnel2
+ ip address negotiated
+ ip mtu 1358
+ ip nat outside
+ ip virtual-reassembly in
+ ip tcp adjust-mss 1318
+ tunnel source dynamic
+ tunnel mode ipsec ipv4
+ tunnel destination dynamic
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile CVPN_IPS_PF
+!
+
+
+<#-- interface priorities -->
 
 ip sla 30
  icmp-echo 208.67.222.222 source-interface ${ether_if}
@@ -189,6 +272,7 @@ track 40 ip sla 40 reachability
     ip verify unicast source reachable-via rx
    !
    !
+   
 <#-- enabling/disabling of ethernet ports -->
 
       interface FastEthernet0/0/1
@@ -224,6 +308,9 @@ track 40 ip sla 40 reachability
     encapsulation scada
    !
    iox
+   
+<#-- Configure NAT and routing -->
+
    ip forward-protocol nd
    !
    ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
@@ -257,8 +344,32 @@ ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
    !
    !
    !
+ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
+!
+ip route ${herIpAddress}  255.255.255.255 Vlan10 dhcp   
+ip route ${backupHerIpAddress} 255.255.255.255 Vlan10 dhcp
+</#if>
+!
+ip access-list extended filter-internet
+ permit icmp any any echo
+ permit icmp any any echo-reply
+ permit icmp any any unreachable
+ permit icmp any any packet-too-big
+ permit icmp any any ttl-exceeded
+ permit udp any eq bootps host 255.255.255.255 eq bootpc
+ permit esp host $herIpAddress any
+<#if isBackupHer == "true">
+ permit esp host ${backupHerIpAddress} any
+</#if>
+!
+   !
    ip access-list extended NAT_ACL
-    permit ip ${lanNtwk} ${lanWild} any
+     permit ip ${lanNtwk} ${lanWild} any
+     permit ip ${nwk_addr} 0.0.0.31 any
+   !
+   route-map RM_Tu2 permit 10
+     match ip address NAT_ACL
+     match interface Tunnel2
    !
    dialer-list 1 protocol ip permit
    !
@@ -277,6 +388,8 @@ ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
     transport input ssh
    !
 
+<#-- Configure APN -->
+
 event manager applet change_apn
 event timer countdown 10
 action 10 cli command "enable"
@@ -286,6 +399,7 @@ action 25 cli command "end"
 action 30 end
 !
 !
+
 
 <#-- End eCVD template -->
 
