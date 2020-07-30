@@ -12,9 +12,9 @@
 <#-- Begin eCVD template -->
 
 <#-- Default BootStrap Configuration -->
-    <#assign model = "IR1101">
-    <#assign ether_if = "GigabitEthernet0/0/0">
-    <#assign cell_if = "Cellular0/1/0">
+<#assign model = "IR1101">
+<#assign ether_if = "GigabitEthernet0/0/0">
+<#assign cell_if = "Cellular0/1/0">
 
 <#-- Interface Menu -->
 <#assign FastEthernet1 = "${far.FastEthernet1}">
@@ -27,7 +27,6 @@
 <#assign EthernetPriority = "${far.EthernetPriority}"?number + 100>
 <#assign Cell0Priority 	= "${far.Cell0Priority}"?number + 100>
 
-
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
@@ -36,7 +35,7 @@
 <#assign PatProtocol = "${far.portForwarding[0].protocol}">
 
 <#-- VPN Settings Menu -->
-<#assign herIpAdress 	= "${far.herIpAddress}">
+<#assign herIpAddress 	= "${far.herIpAddress}">
 <#assign herPsk			= "${far.herPsk}">
 <#assign isBackupHer	= "${far.isBackupHer}">
 <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
@@ -50,8 +49,6 @@
 <#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
 <#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
 
-
-
 <#-- Device Settings Menu -->
 <#assign HostName	= "${far.HostName}">
 <#assign domainName = "${far.domainName}">
@@ -62,7 +59,6 @@
 <#-- assign clockDST	= "${far.clockDST}"--> 
 <#assign ntpIP 		= "${far.ntpIP}">
 
-  
 <#-- Calculate Netmasks -->
 
 <#assign  lan_ip=[]  lan_netmask=[]>
@@ -120,68 +116,55 @@
 
 <#-- Configure Device Settings -->
 
-   service tcp-keepalives-in
-   service tcp-keepalives-out
-   service timestamps debug datetime msec
-   service timestamps log datetime msec
-   service password-encryption
-   service call-home
-   platform qfp utilization monitor load 80
-   no platform punt-keepalive disable-kernel-core
-   !
-   !
-   !
-   no logging console
-   !
-   !
-   !
-   !
-   !
-   clock timezone ${clockTZ}
-   ntp server ${ntpIP}
-   !
-   !
-   
-   ip name-server ${DNSIP}
-   ip domain name ${domainName}
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service call-home
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+!
+no logging console
+!
+clock timezone ${clockTZ}
+ntp server ${ntpIP}
+!
+ip name-server ${DNSIP}
+ip domain name ${domainName}
 
-   ip dhcp excluded-address ${far.lanIPAddress}
-   !
-   !
-   ip dhcp pool subtended
+ip dhcp excluded-address ${far.lanIPAddress}
+!
+ip dhcp pool subtended
     network ${lanNtwk} ${far.lanNetmask}
     default-router ${far.lanIPAddress} 
     dns-server ${DNSIP}
     lease 0 0 10
-   !
-   !
-   !
-   
-  	<#list far.Users as user >
-		username ${user.UserName} privilege ${user.UserPriv} algorithm-type scrypt secret ${user.UserPassword}
-	</#list> 
-	!
-	   
-<# -- S2S VPN Configuration -->   
-
+!
+!
+<#list far.Users as user >
+	username ${user.UserName} privilege ${user.UserPriv} algorithm-type scrypt secret ${user.UserPassword}
+</#list> 
+!
+<#-- S2S VPN Configuration -->   
 !
 crypto ikev2 authorization policy CVPN 
- route set interface
- route accept any distance 70
+ 	route set interface
+ 	route accept any distance 70
 !
 crypto ikev2 keyring Flex_key
- !
+!
  peer ${herIpAddress}   
   address ${herIpAddress} 
   identity key-id ${herIpAddress}
   pre-shared-key ${herPsk}   
- !
+!
 <#if isBackupHer == "true">
  peer ${backupHerIpAddress}   
   address ${backupHerIpAddress}
   identity key-id ${backupHerIpAddress}
   pre-shared-key ${backupHerPsk}   
- !
+!
 </#if>
 !
 !
@@ -238,7 +221,6 @@ ip sla 40
 !
 ip sla schedule 40 life forever start-time now
 
-
 track 5 interface ${ether_if} line-protocol
 !
 track 7 interface ${cell_if} line-protocol
@@ -253,8 +235,8 @@ interface ${ether_if}
     ip address dhcp
     no shutdown
     ip nat outside
-   !
-   !
+!
+!
 interface ${cell_if}
     ip address negotiated
     ip nat outside
@@ -262,15 +244,15 @@ interface ${cell_if}
     dialer idle-timeout 0
     dialer-group 1
     pulse-time 1
-   !
-   !
+!
+!
 interface Vlan1
     ip address ${far.lanIPAddress} ${far.lanNetmask}
     ip nbar protocol-discovery
     ip nat inside
     ip verify unicast source reachable-via rx
-   !
-   !
+!
+!
    
 <#-- enabling/disabling of ethernet ports -->
 
@@ -280,21 +262,21 @@ interface FastEthernet0/0/1
 <#else>
 	no shutdown
 </#if>
-   !
+!
 interface FastEthernet0/0/2
 <#if FastEthernet2 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>   
-   !
+!
 interface FastEthernet0/0/3
 <#if FastEthernet3 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>    
-   !
+!
 interface FastEthernet0/0/4
 <#if FastEthernet4 != "true">
     shutdown
@@ -305,18 +287,20 @@ interface FastEthernet0/0/4
 interface Async0/2/0
     no ip address
     encapsulation scada
-   !
-   iox
+!
+   
+<-- Enable IOX -->
+iox
    
 <#-- Configure NAT and routing -->
 
 ip forward-protocol nd
-   !
+!
 ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
 ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
 <#list far.portForwarding as PAT>
-          ip nat inside source static ${PAT.privateIP} ${PAT.protocol} ${PAT.localPort} interface ${cell_if} ${PAT.publicPort}
+      ip nat inside source static ${PAT.privateIP} ${PAT.protocol} ${PAT.localPort} interface ${cell_if} ${PAT.publicPort}
 </#list>
    
 ip route 0.0.0.0 0.0.0.0 ${ether_if} DHCP ${EthernetPriority}
@@ -327,27 +311,22 @@ ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
-
 ip route 1.1.1.1 255.255.255.255 ${cell_if} 99 track 10
 
 ip route 8.8.8.8 255.255.255.255 ${cell_if} tag 786
 ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
 
-   !
-   !
+ip route ${herIpAddress}  255.255.255.255 Vlan10 dhcp   
+<#if isBackupHer == "true">
+ip route ${backupHerIpAddress} 255.255.255.255 Vlan10 dhcp
+</#if>
+
+!
+ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
+!
 ip ssh rsa keypair-name SSHKEY
 ip ssh version 2
 ip scp server enable
-   !
-   !
-   !
-   !
-   !
-ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
-!
-ip route ${herIpAddress}  255.255.255.255 Vlan10 dhcp   
-ip route ${backupHerIpAddress} 255.255.255.255 Vlan10 dhcp
-</#if>
 !
 ip access-list extended filter-internet
  permit icmp any any echo
@@ -356,36 +335,36 @@ ip access-list extended filter-internet
  permit icmp any any packet-too-big
  permit icmp any any ttl-exceeded
  permit udp any eq bootps host 255.255.255.255 eq bootpc
- permit esp host $herIpAddress any
+ permit esp host ${herIpAddress} any
 <#if isBackupHer == "true">
  permit esp host ${backupHerIpAddress} any
 </#if>
 !
-   !
+   
 ip access-list extended NAT_ACL
      permit ip ${lanNtwk} ${lanWild} any
      permit ip ${nwk_addr} 0.0.0.31 any
-   !
+!
 route-map RM_Tu2 permit 10
      match ip address NAT_ACL
      match interface Tunnel2
-   !
+!
 dialer-list 1 protocol ip permit
-   !
-   !
+!
+!
 route-map RM_WAN_ACL permit 10 
     match ip address NAT_ACL
     match interface ${cell_if}
-   !
+!
 route-map RM_WAN_ACL2 permit 10 
     match ip address NAT_ACL
     match interface ${ether_if}
-   !
+!
 line vty 0 4
     exec-timeout 5 0
     length 0
     transport input ssh
-   !
+!
 
 <#-- Configure APN -->
 
@@ -398,8 +377,6 @@ action 25 cli command "end"
 action 30 end
 !
 !
-
-
 <#-- End eCVD template -->
 
 

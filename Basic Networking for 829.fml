@@ -12,9 +12,9 @@
 <#-- Begin eCVD template -->
 
 <#-- Default BootStrap Configuration -->
-    <#assign model = "IR829">
-    <#assign ether_if = "GigabitEthernet0">
-    <#assign cell_if = "Cellular0/0">
+<#assign model = "IR829">
+<#assign ether_if = "GigabitEthernet0">
+<#assign cell_if = "Cellular0/0">
 
 <#-- Interface Menu -->
 <#assign GigEthernet1 = "${far.GigEthernet1}">
@@ -103,45 +103,42 @@
 <#assign lanWild = "${(255 - (lanNet[0])?number)?abs}.${(255 - (lanNet[1])?number)?abs}.${(255 - (lanNet[2])?number)?abs}.${(255 - (lanNet[3])?number)?abs}">
 
 
-   service tcp-keepalives-in
-   service tcp-keepalives-out
-   service timestamps debug datetime msec
-   service timestamps log datetime msec
-   service password-encryption
-   service call-home
-   !
-   !
-   !
-   no logging console
-   !
-   !
-   !
-  !
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service call-home
+!
+!
+!
+no logging console
+!
+!
+!
+!
 clock timezone ${clockTZ}
 ntp server ${ntpIP}
-   !
-   !
+!
+!
 ip name-server ${DNSIP}
 ip domain name ${domainName}
 
 ip dhcp excluded-address ${far.lanIPAddress}
-   !
-   !
+!
+!
 ip dhcp pool subtended
     network ${lanNtwk} ${far.lanNetmask}
     default-router ${far.lanIPAddress} 
     dns-server ${DNSIP}
     lease 0 0 10
-   !
-   !
-   !
-   
+!
+!
+!
 <#list far.Users as user >
 		username ${user.UserName} privilege ${user.UserPriv} algorithm-type scrypt secret ${user.UserPassword}
 </#list> 
-	
-   !
-
+!
 
 ip sla 30
  icmp-echo 208.67.222.222 source-interface ${ether_if}
@@ -155,12 +152,10 @@ ip sla 40
 !
 ip sla schedule 40 life forever start-time now
 
-
 track 5 interface ${ether_if} line-protocol
 !
 track 7 interface ${cell_if} line-protocol
 !
-
 track 30 ip sla 30 reachability
 !
 track 40 ip sla 40 reachability
@@ -171,8 +166,8 @@ interface ${ether_if}
     ip address dhcp
     no shutdown
     ip nat outside
-   !
-   !
+!
+!
 interface ${cell_if}
     ip address negotiated
     ip nat outside
@@ -181,14 +176,15 @@ interface ${cell_if}
     dialer idle-timeout 0
     dialer string lte
     dialer-group 1
-   !
-   !
+!
+!
 interface Vlan1
     ip address ${far.lanIPAddress} ${far.lanNetmask}
     ip nbar protocol-discovery
     ip nat inside
     ip verify unicast source reachable-via rx
-   !
+!
+!
    <#-- enabling/disabling of ethernet ports -->
 
 interface GigabitEthernet0
@@ -197,34 +193,34 @@ interface GigabitEthernet0
 <#else>
 	no shutdown
 </#if>
-   !
+!
 interface GigabitEthernet1
 <#if GigEthernet2 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>   
-   !
+!
 interface GigabitEthernet2
 <#if GigEthernet3 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>    
-   !
+!
 interface GigEthernet3
 <#if GigEthernet4 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>
-   !
+!
 interface Async0
     no ip address
     encapsulation scada
-   !
+!
 ip forward-protocol nd
-   !
+!
 ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
 ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
@@ -240,51 +236,51 @@ ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
-
 ip route 1.1.1.1 255.255.255.255 ${cell_if} 99 track 10
-
 
 ip route 9.9.9.9 255.255.255.255 Null0 3 tag 786
 ip route 8.8.8.8 255.255.255.255 ${cell_if} tag 786
 ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
-
-   !
-   !
+!
+!
 ip ssh rsa keypair-name SSHKEY
 ip ssh version 2
 ip scp server enable
-   !
-   !
-   !
-   !
-   !
+!
+!
+!
+!
+!
 ip access-list extended NAT_ACL
     permit ip ${lanNtwk} ${lanWild} any
-   !
+!
 dialer-list 1 protocol ip permit
-   !
-   !
+!
+!
 route-map RM_WAN_ACL permit 10 
     match ip address NAT_ACL
     match interface ${cell_if}
-   !
+!
 route-map RM_WAN_ACL2 permit 10 
     match ip address NAT_ACL
     match interface ${ether_if}
-   !
+!
 line vty 0 4
     exec-timeout 5 0
     length 0
     transport input ssh
-   !
+!
 
 <#-- Ignition Power Management -->
+
 <#if ignition == "true">
 ignition enable
 ignition off-timer 10
 <#else>
 no ignition enable
 </#if>
+
+<#-- Set APN -->
 
 event manager applet change_apn
 event timer countdown 10
@@ -295,12 +291,7 @@ action 25 cli command "end"
 action 30 end
 !
 !
-
 <#-- End eCVD template -->
-
-
-
-
 
 <#elseif far.isRunningCgOs()>
 
