@@ -36,7 +36,7 @@
 <#assign PatProtocol = "${far.portForwarding[0].protocol}">
 
 <#-- VPN Settings Menu -->
-<#assign herIpAdress 	= "${far.herIpAddress}">
+<#assign herIpAddress 	= "${far.herIpAddress}">
 <#assign herPsk			= "${far.herPsk}">
 <#assign isBackupHer	= "${far.isBackupHer}">
 <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
@@ -61,6 +61,7 @@
 <#assign clockTZ 	= "${far.clockTZ}">
 <#-- assign clockDST	= "${far.clockDST}"--> 
 <#assign ntpIP 		= "${far.ntpIP}">
+<#assign domainName 		= "${far.domainName}">
 
   
 <#-- Calculate Netmasks -->
@@ -346,6 +347,7 @@ ip scp server enable
 ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
 !
 ip route ${herIpAddress}  255.255.255.255 Vlan10 dhcp   
+<#if isBackupHer == "true">
 ip route ${backupHerIpAddress} 255.255.255.255 Vlan10 dhcp
 </#if>
 !
