@@ -185,7 +185,7 @@ crypto ikev2 profile CVPN_I2PF
 crypto ikev2 client flexvpn Tunnel2
   peer 1 ${herIpAddress} 
 <#if isBackupHer == "true">
-  peer 2 ${backupHerPsk}
+  peer 2 ${backupHerIpAddress}
 </#if>
   source 1 Vlan10 track 2
   client connect Tunnel2
