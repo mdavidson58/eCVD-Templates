@@ -296,7 +296,7 @@ interface Async0/2/0
     encapsulation scada
 !
    
-<-- Enable IOX -->
+<#-- Enable IOx -->
 iox
    
 <#-- Configure NAT and routing -->
