@@ -356,7 +356,7 @@ ip access-list extended filter-internet
  permit icmp any any packet-too-big
  permit icmp any any ttl-exceeded
  permit udp any eq bootps host 255.255.255.255 eq bootpc
- permit esp host $herIpAddress any
+ permit esp host ${herIpAddress} any
 <#if isBackupHer == "true">
  permit esp host ${backupHerIpAddress} any
 </#if>
