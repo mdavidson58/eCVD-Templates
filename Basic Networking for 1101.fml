@@ -36,7 +36,6 @@
 <#assign EthernetPriority = "${far.EthernetPriority}"?number + 100>
 <#assign Cell0Priority 	= "${far.Cell0Priority}"?number + 100>
 
-
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
