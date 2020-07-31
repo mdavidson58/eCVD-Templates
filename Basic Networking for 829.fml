@@ -29,7 +29,6 @@
       <#assign cell_if = "Cellular 0">
 </#if>
 
-
 <#-- Interface Menu -->
 <#assign GigEthernet1 = "${far.GigEthernet1}">
 <#assign GigEthernet2 = "${far.GigEthernet2}">
@@ -40,7 +39,6 @@
 <#assign APN			= "${far.APN}">
 <#assign EthernetPriority = "${far.EthernetPriority}"?number + 100>
 <#assign Cell0Priority 	= "${far.Cell0Priority}"?number + 100>
-
 
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
@@ -60,7 +58,6 @@
 <#-- assign clockDST	= "${far.clockDST}"--> 
 <#assign ntpIP 		= "${far.ntpIP}">
 
-  
 <#-- Calculate Netmasks -->
 
 <#assign  lan_ip=[]  lan_netmask=[]>
@@ -115,7 +112,6 @@
 
 <#assign lanNtwk = netid?join(".")?string>
 <#assign lanWild = "${(255 - (lanNet[0])?number)?abs}.${(255 - (lanNet[1])?number)?abs}.${(255 - (lanNet[2])?number)?abs}.${(255 - (lanNet[3])?number)?abs}">
-
 
 service tcp-keepalives-in
 service tcp-keepalives-out
@@ -199,7 +195,7 @@ interface Vlan1
     ip verify unicast source reachable-via rx
 !
 !
-   <#-- enabling/disabling of ethernet ports -->
+<#-- enabling/disabling of ethernet ports -->
 
 interface GigabitEthernet0
 	shutdown

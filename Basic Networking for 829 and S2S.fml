@@ -68,7 +68,6 @@
 <#-- assign clockDST	= "${far.clockDST}"--> 
 <#assign ntpIP 		= "${far.ntpIP}">
 
-  
 <#-- Calculate Netmasks -->
 
 <#assign  lan_ip=[]  lan_netmask=[]>

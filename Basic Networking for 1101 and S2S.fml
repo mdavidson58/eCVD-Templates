@@ -213,7 +213,6 @@ interface Tunnel2
  tunnel protection ipsec profile CVPN_IPS_PF
 !
 
-
 <#-- interface priorities -->
 
 ip sla 30
