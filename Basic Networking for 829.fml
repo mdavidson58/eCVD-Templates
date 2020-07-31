@@ -12,9 +12,23 @@
 <#-- Begin eCVD template -->
 
 <#-- Default BootStrap Configuration -->
+
+<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]>
+<#-- assign pid = sublist[0]>
+<#-- assign model = pid[0..4]>
+<#-- assign sn = sublist[1]>
+<#--assign gwips = far.ip?split(".")>
+<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
+<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
+
 <#assign model = "IR829">
-<#assign ether_if = "GigabitEthernet0">
-<#assign cell_if = "Cellular0/0">
+<#assign ether_if = "vlan10">
+<#if pid?contains("2LTE")>
+      <#assign cell_if = "Cellular 0/0">
+<#else>
+      <#assign cell_if = "Cellular 0">
+</#if>
+
 
 <#-- Interface Menu -->
 <#assign GigEthernet1 = "${far.GigEthernet1}">
@@ -188,27 +202,31 @@ interface Vlan1
    <#-- enabling/disabling of ethernet ports -->
 
 interface GigabitEthernet0
+	shutdown
+!
+interface GigabitEthernet1
 <#if GigEthernet1 != "true">
     shutdown
 <#else>
+	switchport access vlan 10
 	no shutdown
 </#if>
 !
-interface GigabitEthernet1
+interface GigabitEthernet2
 <#if GigEthernet2 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>   
 !
-interface GigabitEthernet2
+interface GigabitEthernet3
 <#if GigEthernet3 != "true">
     shutdown
 <#else>
 	no shutdown
 </#if>    
 !
-interface GigEthernet3
+interface GigEthernet4
 <#if GigEthernet4 != "true">
     shutdown
 <#else>

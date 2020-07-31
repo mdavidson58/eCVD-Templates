@@ -12,6 +12,15 @@
 <#-- Begin eCVD template -->
 
 <#-- Default BootStrap Configuration -->
+
+<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]>
+<#-- assign pid = sublist[0]>
+<#-- assign model = pid[0..4]>
+<#-- assign sn = sublist[1]>
+<#--assign gwips = far.ip?split(".")>
+<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
+<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
+
 <#assign model = "IR1101">
 <#assign ether_if = "GigabitEthernet0/0/0">
 <#assign cell_if = "Cellular0/1/0">
@@ -40,14 +49,6 @@
 <#assign isBackupHer	= "${far.isBackupHer}">
 <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
 <#assign backupHerPsk	= "${far.backupHerPsk}">
-
-<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]>
-<#-- assign pid = sublist[0]>
-<#-- assign model = pid[0..4]>
-<#-- assign sn = sublist[1]>
-<#--assign gwips = far.ip?split(".")>
-<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
-<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
 
 <#-- Device Settings Menu -->
 <#assign HostName	= "${far.HostName}">
