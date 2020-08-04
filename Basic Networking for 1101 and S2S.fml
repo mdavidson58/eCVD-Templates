@@ -204,7 +204,6 @@ interface Tunnel2
  ip address negotiated
  ip mtu 1358
  ip nat outside
- ip virtual-reassembly in
  ip tcp adjust-mss 1318
  tunnel source dynamic
  tunnel mode ipsec ipv4
