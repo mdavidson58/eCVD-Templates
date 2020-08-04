@@ -430,7 +430,7 @@
        <description>Enter the Cellular Access Point Name</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>WAN</section>
-       <required>1</required>
+       <required>0</required>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
@@ -541,7 +541,7 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanIPAddress'", "value": "${far.lanIPAddress}" }]</seedValues>
+      <seedValues>[{ "key": "Use Property 'lanIPAddress'", "value": "192.168.0.1" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -554,7 +554,7 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanDNSIPAddress'", "value": "${far.lanDNSIPAddress}" }]</seedValues>
+      <seedValues>[{ "key": "Use property 'lanDNSIPAddress'", "value": "${far.lanDNSIPAdress}" }]</seedValues>
     </propertyType>
    
     <propertyType>
@@ -567,7 +567,7 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanNetmask'", "value": "${far.lanNetmask}" }]</seedValues>
+      <seedValues>[{ "key": "Use property 'lanNetmask'", "value": "255.255.255.0" }]</seedValues>
     </propertyType>	    
     
     <propertyType>
@@ -576,7 +576,7 @@
        <description>Enter the NTP address to sync time</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>Device Settings>Time Settings</section>
-       <required>1</required>
+       <required>0</required>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
@@ -589,7 +589,7 @@
   	  <description>Router Local Timezone</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings>Time Settings</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
  	  <dataType>array</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -628,7 +628,7 @@
   	  <description>Enable Daylight Savings Time</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings>Time Settings</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -640,7 +640,7 @@
   	  <description>Add users</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>table</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -698,7 +698,7 @@
   	  <description>DNS IP address</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -711,7 +711,7 @@
   	  <description>Local Domain Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -724,7 +724,7 @@
   	  <description>Device Host Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -737,7 +737,7 @@
      <description>Port Forwarding</description>
      <exportAsTemplateKeys>1</exportAsTemplateKeys>
      <section>Network>Port Forwarding</section>
-     <required>1</required>
+     <required>0</required>
      <validationType>non-empty</validationType>
      <dataType>table</dataType>
      <deviceSpecific>1</deviceSpecific>
