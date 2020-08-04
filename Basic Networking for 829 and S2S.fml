@@ -13,13 +13,13 @@
 
 <#-- Default BootStrap Configuration -->
 
-<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]>
-<#-- assign pid = sublist[0]>
-<#-- assign model = pid[0..4]>
-<#-- assign sn = sublist[1]>
-<#--assign gwips = far.ip?split(".")>
-<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
-<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
+<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]-->
+<#-- assign pid = sublist[0]-->
+<#-- assign model = pid[0..4]-->
+<#-- assign sn = sublist[1]-->
+<#--assign gwips = far.ip?split(".")-->
+<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32-->
+<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix-->
 
 <#assign model = "IR829">
 <#assign ether_if = "vlan10">
@@ -55,7 +55,7 @@
 <#assign backupHerPsk	= "${far.backupHerPsk}">
 
 <#-- Device Settings Menu -->
-<#assign HostName	= "${far.HostName}">
+<#--assign HostName	= "${far.HostName}"-->
 <#assign domainName = "${far.domainName}">
 <#assign DNSIP		= "208.67.222.222 208.67.220.220">
 <#-- assign DNSIP 		= "${far.DNSIP}" -->

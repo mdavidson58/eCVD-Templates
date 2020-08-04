@@ -13,13 +13,13 @@
 
 <#-- Default BootStrap Configuration -->
 
-<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]>
-<#-- assign pid = sublist[0]>
-<#-- assign model = pid[0..4]>
-<#-- assign sn = sublist[1]>
-<#--assign gwips = far.ip?split(".")>
-<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
-<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
+<#-- assign sublist 		= "${far.eid}"?split("+")[0..1]-->
+<#-- assign pid = sublist[0]-->
+<#-- assign model = pid[0..4]-->
+<#-- assign sn = sublist[1]-->
+<#--assign gwips = far.ip?split(".")-->
+<#--assign nwk_suffix = (gwips[3]?number / 32)?int * 32-->
+<#--assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix-->
 
 <#assign model = "IR1101">
 <#assign ether_if = "GigabitEthernet0/0/0">
@@ -51,7 +51,7 @@
 <#assign backupHerPsk	= "${far.backupHerPsk}">
 
 <#-- Device Settings Menu -->
-<#assign HostName	= "${far.HostName}">
+<#--assign HostName	= "${far.HostName}"-->
 <#assign domainName = "${far.domainName}">
 <#-- assign DNSIP 		= "${far.DNSIP}" -->
 <#assign UserName 	= "${far.Users[0].UserName}">
