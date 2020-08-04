@@ -44,7 +44,7 @@
 <#assign PatProtocol = "${far.portForwarding[0].protocol}">
 
 <#-- Device Settings Menu -->
-<--#assign HostName	= "${far.HostName}"-->
+<#--assign HostName	= "${far.HostName}"-->
 <#assign domainName = "${far.domainName}">
 <#-- assign DNSIP 		= "${far.DNSIP}" -->
 <#assign UserName 	= "${far.Users[0].UserName}">

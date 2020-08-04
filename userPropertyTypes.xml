@@ -718,6 +718,19 @@
    	  <seedValues>[{ "key": "DomainName'", "value": "local" }]</seedValues>
 	</propertyType>
 	
+	<propertyType>
+  	  <name>HostName</name>
+  	  <displayName>Device Host Name</displayName>
+  	  <description>Device Host Name</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Device Settings</section>
+  	  <required>1</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	  <seedValues>[{ "key": "HostName'", "value": "local" }]</seedValues>
+	</propertyType>
+	
   <propertyType>
      <name>portForwarding</name>
      <displayName>Port Forwarding</displayName>
