@@ -8,21 +8,25 @@
       <displayName>Gateway Organization</displayName>
       <description>Organization to which gateway belongs.</description>
     </propertyType>
+  
     <propertyType>
       <name>fndRegistrationIp</name>
       <displayName>Field Network Director IP for gateway</displayName>
       <description>IP Address specified in gateway for SNMP Traps, Recovery profile and FND periodic profile</description>
     </propertyType>
+  
     <propertyType>
       <name>fndRegistrationPort</name>
       <displayName>Field Network Director Web Service Port for the gateway</displayName>
       <description>FND Service Port specified in gateway for Recovery Profile and FND periodic profile</description>
     </propertyType>
+ 
     <propertyType>
       <name>fndSnmpPort</name>
       <displayName>Field Network Director SNMP Port for gateway</displayName>
       <description>FND Service SNMP Port specified in gateway for SNMP Traps</description>
     </propertyType>
+  
     <propertyType>
       <name>dhcpHelperAddress</name>
       <displayName>DHCP Helper IP Address</displayName>
@@ -35,6 +39,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'dhcpHelperAddress'", "value": "${far.dhcpHelperAddress}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>wgbSsid</name>
       <displayName>SSID</displayName>
@@ -47,6 +52,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'wgbSsid'", "value": "${far.wgbSsid}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>wgbPsk</name>
       <displayName>Pre-shared key</displayName>
@@ -60,6 +66,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'wgbPsk'", "value": "${far.wgbPsk}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>busId</name>
       <displayName>Bus ID</displayName>
@@ -85,6 +92,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'boolProperty1'", "value": "${far.boolProperty1}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>boolProperty2</name>
       <displayName>Boolean Property 2</displayName>
@@ -97,6 +105,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'boolProperty2'", "value": "${far.boolProperty2}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>boolProperty3</name>
       <displayName>Boolean Property 3</displayName>
@@ -109,6 +118,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'boolProperty3'", "value": "${far.boolProperty3}" }]</seedValues>
     </propertyType>
+ 
     <propertyType>
       <name>boolProperty4</name>
       <displayName>Boolean Property 4</displayName>
@@ -121,6 +131,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'boolProperty4'", "value": "${far.boolProperty4}" }]</seedValues>
     </propertyType>
+ 
     <propertyType>
       <name>boolProperty5</name>
       <displayName>Boolean Property 5</displayName>
@@ -133,6 +144,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'boolProperty5'", "value": "${far.boolProperty5}" }]</seedValues>
     </propertyType>
+   
     <propertyType>
       <name>numProperty1</name>
       <displayName>Numeric Property 1</displayName>
@@ -145,6 +157,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'numProperty1'", "value": "${far.numProperty1}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>numProperty2</name>
       <displayName>Numeric Property 2</displayName>
@@ -157,6 +170,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'numProperty2'", "value": "${far.numProperty2}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>numProperty3</name>
       <displayName>Numeric Property 3</displayName>
@@ -169,7 +183,8 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'numProperty3'", "value": "${far.numProperty3}" }]</seedValues>
     </propertyType>
-    <propertyType>
+ 
+   <propertyType>
       <name>numProperty4</name>
       <displayName>Numeric Property 4</displayName>
       <description>Numeric Property 4</description>
@@ -181,6 +196,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'numProperty4'", "value": "${far.numProperty4}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>numProperty5</name>
       <displayName>Numeric Property 5</displayName>
@@ -193,6 +209,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'numProperty5'", "value": "${far.numProperty5}" }]</seedValues>
     </propertyType>
+ 
     <propertyType>
       <name>strProperty1</name>
       <displayName>String Property 1</displayName>
@@ -205,6 +222,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'strProperty1'", "value": "${far.strProperty1}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>strProperty2</name>
       <displayName>String Property 2</displayName>
@@ -217,6 +235,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'strProperty2'", "value": "${far.strProperty2}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>strProperty3</name>
       <displayName>String Property 3</displayName>
@@ -229,6 +248,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'strProperty3'", "value": "${far.strProperty3}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>strProperty4</name>
       <displayName>String Property 4</displayName>
@@ -241,6 +261,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'strProperty4'", "value": "${far.strProperty4}" }]</seedValues>
     </propertyType>
+ 
     <propertyType>
       <name>strProperty5</name>
       <displayName>String Property 5</displayName>
@@ -253,6 +274,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'strProperty5'", "value": "${far.strProperty5}" }]</seedValues>
     </propertyType>
+   
     <propertyType>
       <name>secProperty1</name>
       <displayName>Secure Property 1</displayName>
@@ -266,6 +288,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'secProperty1'", "value": "${far.secProperty1}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>secProperty2</name>
       <displayName>Secure Property 2</displayName>
@@ -279,6 +302,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'secProperty2'", "value": "${far.secProperty2}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>secProperty3</name>
       <displayName>Secure Property 3</displayName>
@@ -306,6 +330,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'secProperty4'", "value": "${far.secProperty4}" }]</seedValues>
     </propertyType>
+  
     <propertyType>
       <name>secProperty5</name>
       <displayName>Secure Property 5</displayName>
