@@ -293,6 +293,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'secProperty3'", "value": "${far.secProperty3}" }]</seedValues>
     </propertyType>
+    
     <propertyType>
       <name>secProperty4</name>
       <displayName>Secure Property 4</displayName>
