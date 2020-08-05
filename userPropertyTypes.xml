@@ -325,7 +325,7 @@
 	  <displayName>Gigabit Ethernet1</displayName>
 	  <description>Enable/Disable Gigabit Ethernet Port 1</description>
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -338,7 +338,7 @@
   	  <displayName>Gigabit Ethernet2</displayName>
   	  <description>Enable/Disable Gigabit Ethernet Port 2</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -351,7 +351,7 @@
   	  <displayName>Gigabit Ethernet3</displayName>
   	  <description>Enable/Disable Gigabit Ethernet Port 3</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -364,7 +364,7 @@
   	  <displayName>Gigabit Ethernet4</displayName>
   	  <description>Enable/Disable Gigabit Ethernet Port 4</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -377,7 +377,7 @@
 	  <displayName>Fast Ethernet1</displayName>
 	  <description>Enable/Disable Fast Ethernet Port 1</description>
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -390,7 +390,7 @@
   	  <displayName>Fast Ethernet2</displayName>
   	  <description>Enable/Disable Fast Ethernet Port 2</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -403,7 +403,7 @@
   	  <displayName>Fast Ethernet3</displayName>
   	  <description>Enable/Disable Fast Ethernet Port 3</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -416,7 +416,7 @@
   	  <displayName>Fast Ethernet4</displayName>
   	  <description>Enable/Disable Fast Ethernet Port 4</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interface</section>
+  	  <section>Interfaces</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -639,7 +639,7 @@
       <displayName>Users</displayName>
   	  <description>Add users</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Users</section>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>table</dataType>
@@ -653,7 +653,7 @@
   	  <displayName>User Name</displayName>
   	  <description>User Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Users</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
@@ -668,7 +668,7 @@
   	  <description>Password</description>
   	  <issecure>1</issecure>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Users</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <min>6</min>
@@ -682,7 +682,7 @@
   	  <displayName>Privilege Level</displayName>
   	  <description>Privilege Level</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Users</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>integer</dataType>
@@ -697,7 +697,7 @@
   	  <displayName>DNS IP address</displayName>
   	  <description>DNS IP address</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Host</section>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
@@ -710,7 +710,7 @@
   	  <displayName>Local Domain Name</displayName>
   	  <description>Local Domain Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Host</section>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
@@ -723,7 +723,7 @@
   	  <displayName>Device Host Name</displayName>
   	  <description>Device Host Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings</section>
+  	  <section>Device Settings>Host</section>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
@@ -829,7 +829,7 @@
       <displayName>Ignition</displayName>
       <description>Ignition</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Device Settings</section>
+      <section>Device Settings>Host</section>
       <required>1</required>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
@@ -842,7 +842,7 @@
       <displayName>HeadEnd IP Address</displayName>
       <description>IPv4 address of the HeadEnd</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>VPN</section>
+      <section>VPN>Primary HeadEnd</section>
       <required>1</required>
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
@@ -869,7 +869,7 @@
       <description>Pre-shared key of the HeadEnd</description>
       <issecure>1</issecure>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>VPN</section>
+      <section>VPN>Primary HeadEnd</section>
       <required>1</required>
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
