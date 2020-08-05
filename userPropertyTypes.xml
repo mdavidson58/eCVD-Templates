@@ -753,7 +753,7 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "HostName'", "value": "local" }]</seedValues>
+   	  <seedValues>[{ "key": "Use property 'HostName'", "value": "local" }]</seedValues>
 	</propertyType>
 	
   <propertyType>
