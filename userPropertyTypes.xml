@@ -72,8 +72,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Use property 'busId'", "value": "${far.busId}" }]</seedValues>
     </propertyType>
-   
- 
+    
     <propertyType>
       <name>boolProperty1</name>
       <displayName>Boolean Property 1</displayName>
