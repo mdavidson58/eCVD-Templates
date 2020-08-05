@@ -3,6 +3,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.w3schools.com propertyTypes.xsd">
   <propertyTypes kind="ir800,ir1100">
+    
     <propertyType>
       <name>organization</name>
       <displayName>Gateway Organization</displayName>
