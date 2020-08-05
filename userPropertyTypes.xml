@@ -770,8 +770,7 @@
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Use property 'protocol'", "value": "${far.protocol}" }]</seedValues>
    </propertyType>
- 
- 
+  
   <propertyType>
      <name>privateIP</name>
      <displayName>Private IP</displayName>
