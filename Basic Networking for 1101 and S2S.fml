@@ -216,11 +216,11 @@ crypto ikev2 client flexvpn Tunnel2
   peer 2 ${backupHerIpAddress}
 </#if>
 <#if EthernetPriority == 101>
-  source 1 ${ether_if} track 5
-  source 2 ${cell_if}  track 7
+  source 1 ${ether_if} track 30
+  source 2 ${cell_if}  track 40
 <#else>
-  source 1 ${cell_if} track 7
-  source 2 ${ether_if}  track 5
+  source 1 ${cell_if} track 40
+  source 2 ${ether_if}  track 30
 </#if>  
   client connect Tunnel2
 !
@@ -383,6 +383,17 @@ line vty 0 4
     length 0
     transport input ssh
 !
+<#-- Improve WAN failover performance -->
+event manager applet Eth-to-cell-failover
+ event track 30 state any
+ action 0.1 syslog msg "Gig0/0/0 connecitivity change. Clearing NAT translations."
+ action 0.2 cli command "enable"
+ action 1.0 cli command "clear ip nat translation *"
+event manager applet Cell-to-eth-failover
+ event track 40 state any
+ action 0.1 syslog msg "Cell0/1/0 connectivity change. Clearing NAT translations."
+ action 0.2 cli command "enable"
+ action 1.0 cli command "clear ip nat translation *"
 
 <#-- Configure APN -->
 
