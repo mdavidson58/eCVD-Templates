@@ -413,4 +413,3 @@ action 30 end
 <#else>
   ${provisioningFailed("FAR is not running CG-OS or IOS")}
 </#if>
-                         
