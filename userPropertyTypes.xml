@@ -606,7 +606,7 @@
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Use property 'ntpIP'", "value": "time.nist.gov" }]</seedValues>
+       <seedValues>[{ "key": "Use property 'ntpIP'", "value": "${far.ntpIP}" }]</seedValues>
     </propertyType>
 
 	<propertyType>
