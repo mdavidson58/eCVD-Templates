@@ -1,14 +1,3 @@
-<#if far.isRunningIos()>
-<#-- Enable periodic inventory notification every 30 mins to report metrics. -->
-    cgna profile cg-nms-periodic
-      add-command show inventory | format flash:/managed/odm/cg-nms.odm
-      no active
-      interval 15
-      active
-    exit
-<#-- Enable periodic configuration (heartbeat) notification every 10 mins. -->
-   cgna heart-beat interval 10
-
 <#-- Begin eCVD template -->
 <#-- Version 1.0         -->
 
@@ -397,6 +386,19 @@ ignition off-timer 10
 no ignition enable
 </#if>
 
+<#-- Improve WAN failover performance -->
+
+event manager applet Eth-to-cell-failover
+ event track 30 state any
+ action 0.1 syslog msg "Gig0/0/0 connecitivity change. Clearing NAT translations."
+ action 0.2 cli command "enable"
+ action 1.0 cli command "clear ip nat translation *"
+event manager applet Cell-to-eth-failover
+ event track 40 state any
+ action 0.1 syslog msg "Cell0/1/0 connectivity change. Clearing NAT translations."
+ action 0.2 cli command "enable"
+ action 1.0 cli command "clear ip nat translation *"
+ 
 <#-- Configure APN -->
 
 event manager applet change_apn
@@ -410,10 +412,3 @@ action 30 end
 !
 
 <#-- End eCVD template -->
-
-<#elseif far.isRunningCgOs()>
-
-<#else>
-  ${provisioningFailed("FAR is not running CG-OS or IOS")}
-</#if>
-                                
