@@ -31,15 +31,15 @@
 </#if>
 
 <#-- Interface Menu -->
-<#assign GigEthernet1 = "${far.GigEthernet1}">
-<#assign GigEthernet2 = "${far.GigEthernet2}">
-<#assign GigEthernet3 = "${far.GigEthernet3}">
-<#assign GigEthernet4 = "${far.GigEthernet4}">
+<#assign GigEthernet1 = "${far.gigEthernet1}">
+<#assign GigEthernet2 = "${far.gigEthernet2}">
+<#assign GigEthernet3 = "${far.gigEthernet3}">
+<#assign GigEthernet4 = "${far.gigEthernet4}">
 
 <#-- WAN Menu -->
-<#assign APN			= "${far.APN}">
-<#assign EthernetPriority = "${far.EthernetPriority}"?number + 100>
-<#assign Cell0Priority 	= "${far.Cell0Priority}"?number + 100>
+<#assign APN			= "${far.apn}">
+<#assign EthernetPriority = "${far.ethernetPriority}"?number + 100>
+<#assign Cell0Priority 	= "${far.cell0Priority}"?number + 100>
 
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
@@ -56,11 +56,11 @@
 <#assign backupHerPsk	= "${far.backupHerPsk}">
 
 <#-- Device Settings Menu -->
-<#--assign HostName	= "${far.HostName}"-->
-<#assign domainName = "${far.domainName}">
+<#--assign HostName	= "${far.localHostName}"-->
+<#assign domainName = "${far.localDomainName}">
 <#assign DNSIP		= "208.67.222.222 208.67.220.220">
-<#-- assign DNSIP 		= "${far.DNSIP}" -->
-<#assign UserName 	= "${far.Users[0].UserName}">
+<#-- assign DNSIP 		= "${far.dnsIP}" -->
+<#assign UserName 	= "${far.Users[0].userName}">
 <#assign ignition 	= "${far.ignition}">
 <#assign clockTZ 	= "${far.clockTZ}">
 <#-- assign clockDST	= "${far.clockDST}"--> 
@@ -161,7 +161,7 @@ ip dhcp pool subtended
 !
 !
 <#list far.Users as user >
-		username ${user.UserName} privilege ${user.UserPriv} algorithm-type scrypt secret ${user.UserPassword}
+		username ${user.userName} privilege ${user.userPriv} algorithm-type scrypt secret ${user.userPassword}
 </#list> 
 !
 <#-- S2S VPN Configuration -->

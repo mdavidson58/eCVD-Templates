@@ -27,15 +27,15 @@
 <#assign cell_if = "Cellular0/1/0">
 
 <#-- Interface Menu -->
-<#assign FastEthernet1 = "${far.FastEthernet1}">
-<#assign FastEthernet2 = "${far.FastEthernet2}">
-<#assign FastEthernet3 = "${far.FastEthernet3}">
-<#assign FastEthernet4 = "${far.FastEthernet4}">
+<#assign FastEthernet1 = "${far.fastEthernet1}">
+<#assign FastEthernet2 = "${far.fastEthernet2}">
+<#assign FastEthernet3 = "${far.fastEthernet3}">
+<#assign FastEthernet4 = "${far.fastEthernet4}">
 
 <#-- WAN Menu -->
-<#assign APN			= "${far.APN}">
-<#assign EthernetPriority = "${far.EthernetPriority}"?number + 100>
-<#assign Cell0Priority 	= "${far.Cell0Priority}"?number + 100>
+<#assign APN			= "${far.apn}">
+<#assign EthernetPriority = "${far.ethernetPriority}"?number + 100>
+<#assign Cell0Priority 	= "${far.cell0Priority}"?number + 100>
 
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
@@ -45,10 +45,10 @@
 <#assign PatProtocol = "${far.portForwarding[0].protocol}">
 
 <#-- Device Settings Menu -->
-<#--assign HostName	= "${far.HostName}"-->
-<#assign domainName = "${far.domainName}">
-<#-- assign DNSIP 		= "${far.DNSIP}" -->
-<#assign UserName 	= "${far.Users[0].UserName}">
+<#--assign HostName	= "${far.localHostName}"-->
+<#assign domainName = "${far.localDomainName}">
+<#-- assign DNSIP 		= "${far.dnsIP}" -->
+<#assign UserName 	= "${far.Users[0].userName}">
 <#assign DNSIP		= "208.67.222.222 208.67.220.220">
 <#assign clockTZ 	= "${far.clockTZ}">
 <#-- assign clockDST	= "${far.clockDST}"--> 
@@ -149,7 +149,7 @@ ip dhcp pool subtended
     lease 0 0 10
 !
 <#list far.Users as user >
-		username ${user.UserName} privilege ${user.UserPriv} algorithm-type scrypt secret ${user.UserPassword}
+		username ${user.userName} privilege ${user.userPriv} algorithm-type scrypt secret ${user.userPassword}
 </#list> 
 !
 
