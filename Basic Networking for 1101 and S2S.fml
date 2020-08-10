@@ -138,6 +138,7 @@ ip domain name ${domainName}
 <#-- Exclude the first 5 IP addresses of the LAN -->
 <#assign nwk_excludeip = nwk_suffix + 5}
 <#assign excludelan = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_excludeip>
+ip dhcp excluded-address ${far.lanIPAddress} ${excludelan}
 !
 
 ip dhcp excluded-address ${far.lanIPAddress} ${excludelan}
