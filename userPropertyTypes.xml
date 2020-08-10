@@ -347,6 +347,7 @@
 	  <description>Enable/Disable Gigabit Ethernet Port 1</description>
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
+  	  <defaultValue>true</defaultValue>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -360,6 +361,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <required>1</required>
+  	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -372,6 +374,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <required>1</required>
+  	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -384,6 +387,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <required>1</required>
+  	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -396,6 +400,7 @@
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <required>1</required>
+  	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -408,6 +413,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <required>1</required>
+  	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -420,6 +426,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <required>1</required>
+  	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -432,6 +439,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <required>1</required>
+  	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
