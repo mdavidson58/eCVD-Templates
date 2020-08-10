@@ -12,7 +12,9 @@
     path flash:
     maximum 3
     !
-    username ${far.apAdminUsername} privilege 15 secret ${far.apAdminPassword}
+    <#list far.Users as user >
+		username ${user.userName} privilege ${user.userPriv}  secret ${user.userPassword}
+	</#list> 
     no username Cisco
     do mkdir flash:/managed/data
     bridge irb
