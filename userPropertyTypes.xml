@@ -772,7 +772,7 @@
      <validationType>non-empty</validationType>
      <dataType>table</dataType>
      <deviceSpecific>1</deviceSpecific>
-     <tableColumns>[{ "colKey": "description", "colLabel": "Description" }, {"colKey": "protocol", "colLabel": "Protocol"}, {"colKey": "privateIP", "colLabel": "Private IP"}, {"colKey": "localPort", "colLabel": "Local Port"}, {"colKey": "publicIP", "colLabel": "Public IP"}, {"colKey": "publicPort", "colLabel": "Public Port"}]</tableColumns>
+     <tableColumns>[{ "colKey": "description", "colLabel": "Description" }, {"colKey": "protocol", "colLabel": "Protocol"}, {"colKey": "privateIP", "colLabel": "Private IP"}, {"colKey": "localPort", "colLabel": "Local Port"}, {"colKey": "publicPort", "colLabel": "Public Port"}]</tableColumns>
      <tableNumRows>8</tableNumRows>
    </propertyType>
  
