@@ -1,6 +1,9 @@
 <#-- Default Access point Configuration -->
 <#-- version 1.1 -->
 
+<#assign ap_ip = nwk_suffix + 1>
+<#assign apIP = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + ap_ip>
+
 <#if far.bootStrap>
     aaa new-model
     aaa authentication login default local
@@ -105,8 +108,7 @@ bridge 1 aging-time 86400
 bridge 10 aging-time 86400
     !
     interface BVI1
-    description ${far.apIpAddress} should match DHCP
-    ip address dhcp
+    ip address ${apIP}
     !
     ip http server
     ip http authentication local
