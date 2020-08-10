@@ -9,25 +9,25 @@
       <displayName>Gateway Organization</displayName>
       <description>Organization to which gateway belongs.</description>
     </propertyType>
-  
+    
     <propertyType>
       <name>fndRegistrationIp</name>
       <displayName>Field Network Director IP for gateway</displayName>
       <description>IP Address specified in gateway for SNMP Traps, Recovery profile and FND periodic profile</description>
     </propertyType>
-  
+    
     <propertyType>
       <name>fndRegistrationPort</name>
       <displayName>Field Network Director Web Service Port for the gateway</displayName>
       <description>FND Service Port specified in gateway for Recovery Profile and FND periodic profile</description>
     </propertyType>
- 
+    
     <propertyType>
       <name>fndSnmpPort</name>
       <displayName>Field Network Director SNMP Port for gateway</displayName>
       <description>FND Service SNMP Port specified in gateway for SNMP Traps</description>
     </propertyType>
-  
+    
     <propertyType>
       <name>dhcpHelperAddress</name>
       <displayName>DHCP Helper IP Address</displayName>
@@ -38,9 +38,9 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'dhcpHelperAddress'", "value": "${far.dhcpHelperAddress}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'dhcpHelperAddress' per device", "value": "${far.dhcpHelperAddress}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>wgbSsid</name>
       <displayName>SSID</displayName>
@@ -51,9 +51,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'wgbSsid'", "value": "${far.wgbSsid}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'wgbSsid' per device", "value": "${far.wgbSsid}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>wgbPsk</name>
       <displayName>Pre-shared key</displayName>
@@ -65,9 +65,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'wgbPsk'", "value": "${far.wgbPsk}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'wgbPsk' per device", "value": "${far.wgbPsk}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>busId</name>
       <displayName>Bus ID</displayName>
@@ -78,7 +78,7 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'busId'", "value": "${far.busId}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'busId' per device", "value": "${far.busId}" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -91,9 +91,8 @@
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'boolProperty1'", "value": "${far.boolProperty1}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>boolProperty2</name>
       <displayName>Boolean Property 2</displayName>
@@ -104,9 +103,8 @@
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'boolProperty2'", "value": "${far.boolProperty2}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>boolProperty3</name>
       <displayName>Boolean Property 3</displayName>
@@ -117,9 +115,8 @@
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'boolProperty3'", "value": "${far.boolProperty3}" }]</seedValues>
     </propertyType>
- 
+    
     <propertyType>
       <name>boolProperty4</name>
       <displayName>Boolean Property 4</displayName>
@@ -130,9 +127,8 @@
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'boolProperty4'", "value": "${far.boolProperty4}" }]</seedValues>
     </propertyType>
- 
+    
     <propertyType>
       <name>boolProperty5</name>
       <displayName>Boolean Property 5</displayName>
@@ -143,9 +139,8 @@
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'boolProperty5'", "value": "${far.boolProperty5}" }]</seedValues>
     </propertyType>
-   
+    
     <propertyType>
       <name>numProperty1</name>
       <displayName>Numeric Property 1</displayName>
@@ -156,9 +151,9 @@
       <validationType>non-empty</validationType>
       <dataType>integer</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'numProperty1'", "value": "${far.numProperty1}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'numProperty1' per device", "value": "${far.numProperty1}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>numProperty2</name>
       <displayName>Numeric Property 2</displayName>
@@ -169,9 +164,9 @@
       <validationType>non-empty</validationType>
       <dataType>integer</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'numProperty2'", "value": "${far.numProperty2}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'numProperty2' per device", "value": "${far.numProperty2}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>numProperty3</name>
       <displayName>Numeric Property 3</displayName>
@@ -182,10 +177,10 @@
       <validationType>non-empty</validationType>
       <dataType>integer</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'numProperty3'", "value": "${far.numProperty3}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'numProperty3' per device", "value": "${far.numProperty3}" }]</seedValues>
     </propertyType>
- 
-   <propertyType>
+    
+    <propertyType>
       <name>numProperty4</name>
       <displayName>Numeric Property 4</displayName>
       <description>Numeric Property 4</description>
@@ -195,9 +190,9 @@
       <validationType>non-empty</validationType>
       <dataType>integer</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'numProperty4'", "value": "${far.numProperty4}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'numProperty4' per device", "value": "${far.numProperty4}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>numProperty5</name>
       <displayName>Numeric Property 5</displayName>
@@ -208,9 +203,9 @@
       <validationType>non-empty</validationType>
       <dataType>integer</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'numProperty5'", "value": "${far.numProperty5}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'numProperty5' per device", "value": "${far.numProperty5}" }]</seedValues>
     </propertyType>
- 
+    
     <propertyType>
       <name>strProperty1</name>
       <displayName>String Property 1</displayName>
@@ -221,9 +216,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'strProperty1'", "value": "${far.strProperty1}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'strProperty1' per device", "value": "${far.strProperty1}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>strProperty2</name>
       <displayName>String Property 2</displayName>
@@ -234,9 +229,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'strProperty2'", "value": "${far.strProperty2}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'strProperty2' per device", "value": "${far.strProperty2}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>strProperty3</name>
       <displayName>String Property 3</displayName>
@@ -247,9 +242,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'strProperty3'", "value": "${far.strProperty3}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'strProperty3' per device", "value": "${far.strProperty3}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>strProperty4</name>
       <displayName>String Property 4</displayName>
@@ -260,9 +255,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'strProperty4'", "value": "${far.strProperty4}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'strProperty4' per device", "value": "${far.strProperty4}" }]</seedValues>
     </propertyType>
- 
+    
     <propertyType>
       <name>strProperty5</name>
       <displayName>String Property 5</displayName>
@@ -273,9 +268,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'strProperty5'", "value": "${far.strProperty5}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'strProperty5' per device", "value": "${far.strProperty5}" }]</seedValues>
     </propertyType>
-   
+    
     <propertyType>
       <name>secProperty1</name>
       <displayName>Secure Property 1</displayName>
@@ -287,9 +282,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'secProperty1'", "value": "${far.secProperty1}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'secProperty1' per device", "value": "${far.secProperty1}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>secProperty2</name>
       <displayName>Secure Property 2</displayName>
@@ -301,9 +296,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'secProperty2'", "value": "${far.secProperty2}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'secProperty2' per device", "value": "${far.secProperty2}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>secProperty3</name>
       <displayName>Secure Property 3</displayName>
@@ -315,7 +310,7 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'secProperty3'", "value": "${far.secProperty3}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'secProperty3' per device", "value": "${far.secProperty3}" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -329,9 +324,9 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'secProperty4'", "value": "${far.secProperty4}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'secProperty4' per device", "value": "${far.secProperty4}" }]</seedValues>
     </propertyType>
-  
+    
     <propertyType>
       <name>secProperty5</name>
       <displayName>Secure Property 5</displayName>
@@ -343,115 +338,107 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'secProperty5'", "value": "${far.secProperty5}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'secProperty5' per device", "value": "${far.secProperty5}" }]</seedValues>
     </propertyType>
     
 	<propertyType>
-	  <name>GigEthernet1</name>
+	  <name>gigEthernet1</name>
 	  <displayName>Gigabit Ethernet1</displayName>
 	  <description>Enable/Disable Gigabit Ethernet Port 1</description>
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "Use property 'FastEthernet1'", "value": "${far.FastEthernet1}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>GigEthernet2</name>
+  	  <name>gigEthernet2</name>
   	  <displayName>Gigabit Ethernet2</displayName>
   	  <description>Enable/Disable Gigabit Ethernet Port 2</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Use property 'FastEthernet2'", "value": "${far.FastEthernet2}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>GigEthernet3</name>
+  	  <name>gigEthernet3</name>
   	  <displayName>Gigabit Ethernet3</displayName>
   	  <description>Enable/Disable Gigabit Ethernet Port 3</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "Use property 'FastThernet3'", "value": "${far.FastEthernet3}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>GigEthernet4</name>
+  	  <name>gigEthernet4</name>
   	  <displayName>Gigabit Ethernet4</displayName>
   	  <description>Enable/Disable Gigabit Ethernet Port 4</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "Use property 'FastEthernet4'", "value": "${far.FastEthernet4}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-	  <name>FastEthernet1</name>
+	  <name>fastEthernet1</name>
 	  <displayName>Fast Ethernet1</displayName>
 	  <description>Enable/Disable Fast Ethernet Port 1</description>
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "Use property 'FastEthernet1'", "value": "${far.FastEthernet1}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>FastEthernet2</name>
+  	  <name>fastEthernet2</name>
   	  <displayName>Fast Ethernet2</displayName>
   	  <description>Enable/Disable Fast Ethernet Port 2</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Use property 'FastEthernet2'", "value": "${far.FastEthernet2}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>FastEthernet3</name>
+  	  <name>fastEthernet3</name>
   	  <displayName>Fast Ethernet3</displayName>
   	  <description>Enable/Disable Fast Ethernet Port 3</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "Use property 'FastThernet3'", "value": "${far.FastEthernet3}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>FastEthernet4</name>
+  	  <name>fastEthernet4</name>
   	  <displayName>Fast Ethernet4</displayName>
   	  <description>Enable/Disable Fast Ethernet Port 4</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Interfaces</section>
+  	  <section>Interface</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[{ "key": "Use property 'FastEthernet4'", "value": "${far.FastEthernet4}" }]</seedValues>
 	</propertyType>
 
-	<propertyType>
-       <name>APN</name>
+   <propertyType>
+       <name>apn</name>
        <displayName>Cellular Access Point Name</displayName>
        <description>Enter the Cellular Access Point Name</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
@@ -460,11 +447,11 @@
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Use property 'APN'", "value": "${far.APN}" }]</seedValues>
+       <seedValues>[{ "key": "Provide 'apn' per device", "value": "${far.apn}" }]</seedValues>
     </propertyType>
 
 	<propertyType>
-       <name>EthernetPriority</name>
+       <name>ethernetPriority</name>
        <displayName>Default WAN priority of Ethernet</displayName>
        <description>Enter priority of the Ethernet Port</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
@@ -473,14 +460,14 @@
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Use property 'EthernetPriority'", "value": "${far.EthernetPriority} },
+       <seedValues>[{ "key": "Provide 'ethernetPriority' per device", "value": "${far.ethernetPriority}" },
        				{ "key": "First", "value": "1" },
        				{ "key": "Second", "value": "2" }
        ]</seedValues>
     </propertyType>
     
 	<propertyType>
-       <name>Cell0Priority</name>
+       <name>cell0Priority</name>
        <displayName>Default WAN priority of Cellular Modem 0</displayName>
        <description>Enter priority of the Cellular Modem 0</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
@@ -489,14 +476,14 @@
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Use property 'Cell0Priority'", "value": "${far.Cell0Priority} },
+       <seedValues>[{ "key": "Provide 'cell0Priority' per device", "value": "${far.cell0Priority}" },
        				{ "key": "First", "value": "1" },
        				{ "key": "Second", "value": "2" }
        ]</seedValues>
    	</propertyType>	
 	
 	<propertyType>
-       <name>Cell1Priority</name>
+       <name>cell1Priority</name>
        <displayName>Default WAN priority of Cellular Modem 1</displayName>
        <description>Enter priority of the Cellular Modem 1</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
@@ -505,7 +492,7 @@
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Use property 'Cell0Priority'", "value": "${far.Cell1Priority} },
+       <seedValues>[{ "key": "Provide 'cell1Priority' per device", "value": "${far.cell1Priority}" },
        				{ "key": "First", "value": "1" },
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
@@ -514,16 +501,16 @@
     </propertyType>
 
 	<propertyType>
-       <name>WGBPriority</name>
+       <name>wgbPriority</name>
        <displayName>Default WAN priority of WiFi Uplink</displayName>
        <description>Enter priority of WiFi Uplink</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>WAN</section>
        <required>1</required>
        <validationType>non-empty</validationType>
-       <dataType>integer</dataType>
+       <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Use property 'Cell0Priority'", "value": "${far.Cell1Priority} },
+       <seedValues>[{ "key": "Provide 'wgbPriority' per device", "value": "${far.wgbPriority}" },
        				{ "key": "First", "value": "1" },
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
@@ -531,7 +518,7 @@
        ]</seedValues>   
     </propertyType>    
 
-	<propertyType>
+    <propertyType>
       <name>lanNetwork</name>
       <displayName>LAN Network</displayName>
       <description>IPv4 Address of the LAN Network</description>
@@ -541,10 +528,10 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanNetwork'", "value": "${far.lanNetwork}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'lanNetwork' per device", "value": "${far.lanNetwork}" }]</seedValues>
     </propertyType>
    
-	<propertyType>
+    <propertyType>
       <name>lanWildcard</name>
       <displayName>LAN Wildcard</displayName>
       <description>Wildcard used for LAN network</description>
@@ -554,7 +541,7 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanWildcard'", "value": "${far.lanWildcard}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'lanWildcard' per device", "value": "${far.lanWildcard}" }]</seedValues>
     </propertyType>
    
     <propertyType>
@@ -564,10 +551,11 @@
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>LAN</section>
       <required>1</required>
+      <defaultValue>192.168.1.1</defaultValue>
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use Property 'lanIPAddress'", "value": "192.168.0.1" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'lanIPAddress' per device", "value": "${far.lanIPAddress}" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -580,7 +568,7 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanDNSIPAddress'", "value": "${far.lanDNSIPAdress}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'lanDNSIPAddress' per device", "value": "${far.lanDNSIPAddress}" }]</seedValues>
     </propertyType>
    
     <propertyType>
@@ -589,11 +577,12 @@
       <description>LAN IPv4 Subnet mask</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>LAN</section>
+      <defaultValue>255.255.255.0</defaultValue>
       <required>1</required>
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'lanNetmask'", "value": "255.255.255.0" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'lanNetmask' per device", "value": "${far.lanNetmask}" }]</seedValues>
     </propertyType>	    
     
     <propertyType>
@@ -602,11 +591,12 @@
        <description>Enter the NTP address to sync time</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>Device Settings>Time Settings</section>
+       <sectionLevelInTree>1</sectionLevelInTree>
        <required>0</required>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Use property 'ntpIP'", "value": "${far.ntpIP}" }]</seedValues>
+       <seedValues>[{ "key": "Provide 'ntpIP' per device", "value": "${far.ntpIP}" }]</seedValues>
     </propertyType>
 
 	<propertyType>
@@ -615,11 +605,12 @@
   	  <description>Router Local Timezone</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings>Time Settings</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
- 	  <dataType>array</dataType>
+ 	    <dataType>array</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <seedValues>[ { "key": "clockTZ", "value": "${far.clockTZ}" },
+  	  <seedValues>[ { "key": "Provide 'clockTZ' per device", "value": "${far.clockTZ}" },
   	  				{ "key": "UTC+12 ANAT", "value": "anat" },
   	  				{ "key": "UTC+11 SBT", "value": "sbt" },
   	  				{ "key": "UTC+10 AEST", "value": "aest" },
@@ -654,6 +645,7 @@
   	  <description>Enable Daylight Savings Time</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings>Time Settings</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -665,99 +657,112 @@
       <displayName>Users</displayName>
   	  <description>Add users</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings>Users</section>
+  	  <section>Users</section>
   	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
   	  <validationType>non-empty</validationType>
   	  <dataType>table</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <tableColumns>[{ "colKey": "UserName", "colLabel": "User Name" }, {"colKey": "UserPassword", "colLabel": "UserPriv"}, {"colKey": "Privilege Level"}]</tableColumns>
+   	  <tableColumns>[{ "colKey": "userName", "colLabel": "User Name" }, {"colKey": "userPassword", "colLabel": "User Password"}, {"colKey": "userPriv", "colLabel": "Privilege Level"}]</tableColumns>
    	  <tableNumRows>6</tableNumRows>
    	</propertyType>  
     
 	<propertyType>
-  	  <name>UserName</name>
+  	  <name>userName</name>
   	  <displayName>User Name</displayName>
   	  <description>User Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings>Users</section>
+  	  <section>Users</section>
+	  <sectionLevelInTree>1</sectionLevelInTree>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <min>4</min>
   	  <max>8</max>
   	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'userName' per device", "value": "${far.userName}" }]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>UserPassword</name>
+  	  <name>userPassword</name>
   	  <displayName>Password</displayName>
   	  <description>Password</description>
   	  <issecure>1</issecure>
+	  <sectionLevelInTree>1</sectionLevelInTree>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings>Users</section>
+  	  <section>Users</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <min>6</min>
   	  <max>8</max>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'userPassword' per device", "value": "${far.userPassword}" }]</seedValues>
 	</propertyType>
 	
 	<propertyType>
-  	  <name>UserPriv</name>
+  	  <name>userPriv</name>
   	  <displayName>Privilege Level</displayName>
   	  <description>Privilege Level</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Device Settings>Users</section>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Users</section>
   	  <required>1</required>
+      <defaultValue>15</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>integer</dataType>
   	  <deviceSpecific>1</deviceSpecific>
   	  <min>1</min>
   	  <max>15</max>
-   	  <seedValues>[{ "key": "UserPriv'", "value": 15 }]</seedValues>
+   	  <seedValues>[{ "key": "Provide 'userPriv' per device", "value": "${far.userPriv}"}]</seedValues>
 	</propertyType>
 	
 	<propertyType>
-  	  <name>DNSIP</name>
+  	  <name>dnsIP</name>
   	  <displayName>DNS IP address</displayName>
   	  <description>DNS IP address</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings>Host</section>
   	  <required>0</required>
+	 <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>0.0.0.0</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "DNSIP'", "value": "0.0.0.0" }]</seedValues>
+   	  <seedValues>[{ "key": "Provide 'dnsIP' per device", "value": "${far.dnsIP}"}]</seedValues>
 	</propertyType>
 
 	<propertyType>
-  	  <name>DomainName</name>
+  	  <name>localDomainName</name>
   	  <displayName>Local Domain Name</displayName>
   	  <description>Local Domain Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings>Host</section>
   	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>local</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "DomainName'", "value": "local" }]</seedValues>
+   	  <seedValues>[{ "key": "Provide 'LocalDomainName' per device", "value": "${far.localDomainName}"}]</seedValues>
 	</propertyType>
-	
-	<propertyType>
-  	  <name>HostName</name>
+
+    <propertyType>
+  	  <name>localHostName</name>
   	  <displayName>Device Host Name</displayName>
   	  <description>Device Host Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Device Settings>Host</section>
   	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>local</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Use property 'HostName'", "value": "local" }]</seedValues>
-	</propertyType>
-	
-  <propertyType>
+   	  <seedValues>[{ "key": "Provide 'LocalDomainName' per device", "value": "${far.localDomainName}"}]</seedValues>
+	</propertyType>	
+  
+   <propertyType>
      <name>portForwarding</name>
      <displayName>Port Forwarding</displayName>
      <description>Port Forwarding</description>
@@ -777,11 +782,11 @@
      <description>Port Forwarding Description</description>
      <exportAsTemplateKeys>1</exportAsTemplateKeys>
      <section>Network>Port Forwarding</section>
-     <required>1</required>
+     <required>0</required>
      <validationType>non-empty</validationType>
      <dataType>string</dataType>
      <deviceSpecific>1</deviceSpecific>
-     <seedValues>[{ "key": "Use property 'description'", "value": "${far.description}" }]</seedValues>
+     <seedValues>[{ "key": "Provide 'Description' per device", "value": "${far.description}" }]</seedValues>
    </propertyType>
  
   <propertyType>
@@ -790,24 +795,25 @@
      <description>Port Forwarding Protocol</description>
      <exportAsTemplateKeys>1</exportAsTemplateKeys>
      <section>Network>Port Forwarding</section>
-     <required>1</required>
+     <required>0</required>
      <validationType>non-empty</validationType>
      <dataType>string</dataType>
      <deviceSpecific>1</deviceSpecific>
-     <seedValues>[{ "key": "Use property 'protocol'", "value": "${far.protocol}" }]</seedValues>
+     <seedValues>[{ "key": "Provide 'Protocol' per device", "value": "${far.protocol}" }]</seedValues>
    </propertyType>
-  
+ 
+ 
   <propertyType>
      <name>privateIP</name>
      <displayName>Private IP</displayName>
      <description>Port Forwarding Private IP</description>
      <exportAsTemplateKeys>1</exportAsTemplateKeys>
      <section>Network>Port Forwarding</section>
-     <required>1</required>
+     <required>0</required>
      <validationType>ipv4</validationType>
      <dataType>string</dataType>
      <deviceSpecific>1</deviceSpecific>
-     <seedValues>[{ "key": "Use property 'privateIP'", "value": "${far.privateIP}" }]</seedValues>
+     <seedValues>[{ "key": "Provide 'PrivateIP' per device", "value": "${far.privateIP}" }]</seedValues>
    </propertyType>
  
    <propertyType>
@@ -816,11 +822,11 @@
      <description>Port Forwarding Local Port</description>
      <exportAsTemplateKeys>1</exportAsTemplateKeys>
      <section>Network>Port Forwarding</section>
-     <required>1</required>
+     <required>0</required>
      <validationType>non-empty</validationType>
      <dataType>string</dataType>
      <deviceSpecific>1</deviceSpecific>
-     <seedValues>[{ "key": "Use property 'localPort'", "value": "${far.localPort}" }]</seedValues>
+     <seedValues>[{ "key": "Provide 'LocalPort' per device", "value": "${far.localPort}" }]</seedValues>
   </propertyType>
  
    <propertyType>
@@ -829,11 +835,11 @@
      <description>Port Forwarding Public IP</description>
      <exportAsTemplateKeys>1</exportAsTemplateKeys>
      <section>Network>Port Forwarding</section>
-     <required>1</required>
+     <required>0</required>
      <validationType>ipv4</validationType>
      <dataType>string</dataType>
      <deviceSpecific>1</deviceSpecific>
-     <seedValues>[{ "key": "Use property 'publicIP'", "value": "${far.publicIP}" }]</seedValues>
+     <seedValues>[{ "key": "Provide 'PublicIP' per device", "value": "${far.publicIP}" }]</seedValues>
    </propertyType>
  
    <propertyType>
@@ -842,11 +848,11 @@
      <description>Port Forwarding Public Port</description>
      <exportAsTemplateKeys>1</exportAsTemplateKeys>
      <section>Network>Port Forwarding</section>
-     <required>1</required>
+     <required>0</required>
      <validationType>non-empty</validationType>
      <dataType>string</dataType>
      <deviceSpecific>1</deviceSpecific>
-     <seedValues>[{ "key": "Use property 'publicPort'", "value": "${far.publicPort}" }]</seedValues>
+     <seedValues>[{ "key": "Provide 'PublicPort' per device", "value": "${far.publicPort}" }]</seedValues>
    </propertyType>
 	
    <propertyType>
@@ -855,14 +861,15 @@
       <description>Ignition</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>Device Settings>Host</section>
+	  <sectionLevelInTree>1</sectionLevelInTree>
       <required>1</required>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'ignition'", "value": "${far.ignition}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'Ignition' per device", "value": "${far.ignition}" }]</seedValues>
     </propertyType>
 	
-	   <propertyType>
+	<propertyType>
       <name>herIpAddress</name>
       <displayName>HeadEnd IP Address</displayName>
       <description>IPv4 address of the HeadEnd</description>
@@ -872,7 +879,7 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'herIpAddress'", "value": "${far.herIpAddress}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'herIpAddress' per device", "value": "${far.herIpAddress}" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -885,7 +892,7 @@
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'backupHerIpAddress'", "value": "${far.backupHerIpAddress}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'backupHerIpAddress' per device", "value": "${far.backupHerIpAddress}" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -899,7 +906,7 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'herPsk'", "value": "${far.herPsk}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'herPsk' per device", "value": "${far.herPsk}" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -909,11 +916,12 @@
       <issecure>1</issecure>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>VPN>Backup HeadEnd</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
       <required>0</required>
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'backupHerPsk'", "value": "${far.backupHerPsk}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'backupHerPsk' per device", "value": "${far.backupHerPsk}" }]</seedValues>
     </propertyType>
     
      <propertyType>
@@ -922,11 +930,11 @@
       <description>Enable Backup HeadEnd</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>VPN>Backup HeadEnd</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
       <required>1</required>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Use property 'boolProperty1'", "value": "${far.boolProperty1}" }]</seedValues>
     </propertyType>
     
   </propertyTypes>
