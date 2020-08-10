@@ -707,7 +707,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
 	  <section>Users</section>
-  	  <required>0</required>
+  	  <required>1</required>
       <defaultValue>15</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>integer</dataType>
