@@ -306,8 +306,14 @@ ip forward-protocol nd
 ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
 ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
+<#-- Use default i/f to set PAT -->
+
 <#list far.portForwarding as PAT>
-      ip nat inside source static ${PAT.protocol} ${PAT.privateIP} ${PAT.localPort} interface ${cell_if} ${PAT.publicPort}
+	<#if EthernetPriority == 101>
+  			ip nat inside source static ${PAT.protocol} ${PAT.privateIP} ${PAT.localPort} interface ${ether_if} ${PAT.publicPort}
+	<#else>
+			ip nat inside source static ${PAT.protocol} ${PAT.privateIP} ${PAT.localPort} interface ${cell_if} ${PAT.publicPort}
+	</#if>
 </#list>
    
 ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp ${EthernetPriority}

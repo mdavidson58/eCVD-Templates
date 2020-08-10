@@ -802,7 +802,6 @@
      <seedValues>[{ "key": "Provide 'Protocol' per device", "value": "${far.protocol}" }]</seedValues>
    </propertyType>
  
- 
   <propertyType>
      <name>privateIP</name>
      <displayName>Private IP</displayName>
