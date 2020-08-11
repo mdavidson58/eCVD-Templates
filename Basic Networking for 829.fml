@@ -39,15 +39,6 @@
 <#-- Network Menu -->
 <#--assign PatProtocol = "${far.portForwarding[0].protocol}"-->
 
-<#-- VPN Settings Menu -->
-<#assign herIpAddress 	= "${far.herIpAddress}">
-<#assign herPsk			= "${far.herPsk}">
-<#assign isBackupHer	= "${far.isBackupHer}">
-<#if far.isBackupHer == "true">
-<#assign backupHerIpAddress = "${far.backupHerIpAddress}">
-<#assign backupHerPsk	= "${far.backupHerPsk}">
-</#if>
-
 <<#-- Device Settings Menu -->
 <#if far.localDomainName?has_content>
 <#assign domainName = "${far.localDomainName}">

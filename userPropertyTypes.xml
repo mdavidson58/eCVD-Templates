@@ -666,7 +666,7 @@
       <displayName>Users</displayName>
   	  <description>Add users</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Users</section>
+  	  <section>User Management</section>
   	  <required>0</required>
 	  <sectionLevelInTree>1</sectionLevelInTree>
   	  <validationType>non-empty</validationType>
@@ -681,7 +681,7 @@
   	  <displayName>User Name</displayName>
   	  <description>User Name</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Users</section>
+  	  <section>User Management</section>
 	  <sectionLevelInTree>1</sectionLevelInTree>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
@@ -699,7 +699,7 @@
   	  <issecure>1</issecure>
 	  <sectionLevelInTree>1</sectionLevelInTree>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Users</section>
+  	  <section>User Management</section>
   	  <required>1</required>
   	  <validationType>non-empty</validationType>
   	  <min>6</min>
@@ -715,7 +715,7 @@
   	  <description>Privilege Level</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>Users</section>
+	  <section>User Management</section>
   	  <required>1</required>
       <defaultValue>15</defaultValue>
   	  <validationType>non-empty</validationType>
