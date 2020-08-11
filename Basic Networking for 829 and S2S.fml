@@ -137,14 +137,14 @@ no logging console
 clock timezone ${clockTZ} ${offset}
 <#if ntpIP?has_content>
 ntp server ${ntpIP}
-<#/if>
+</#if>
 !
 <#if DNSIP?has_content>
 ip name-server ${DNSIP}
-<#/if>
+</#if>
 <#if domainName?has_content>
 ip domain name ${domainName}
-<#/if>
+</#if>
 
 <#-- Exclude the first 5 IP addresses of the LAN -->
 <#assign nwk_excludeip = nwk_suffix + 5>
@@ -339,7 +339,7 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
 			ip nat inside source static ${PAT.protocol} ${PAT.privateIP} ${PAT.localPort} interface ${cell_if} ${PAT.publicPort}
 	</#if>
 </#list>
-<#/if>
+</#if>
    
 ip route 0.0.0.0 0.0.0.0 ${ether_if} DHCP ${EthernetPriority}
 ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 40
