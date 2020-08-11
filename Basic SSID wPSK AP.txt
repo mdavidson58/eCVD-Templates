@@ -1,7 +1,9 @@
 <#-- Default Access point Configuration -->
-<#-- version 1.4 -->
+<#-- version 1.5 -->
 
-<#assign ap_ip = nwk_suffix + 1>
+<#assign gwips = far.ip?split(".")>
+<#assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
+<#assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix><#assign ap_ip = nwk_suffix + 1>
 <#assign apIP = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + ap_ip>
 
 <#if far.bootStrap>
@@ -142,5 +144,4 @@ bridge 10 aging-time 86400
 
 <#else>
 
-</#if>     
- 
+</#if>
