@@ -60,7 +60,7 @@
 <#if far.ignition?has_content>
 <#assign ignition 	= "${far.ignition}">
 <#else>
-<#assign igition 	= "true">
+<#assign ignition 	= "true">
 </#if>
 <#if far.clockTZ?has_content>
 <#assign clockTZ 	= "${far.clockTZ}">

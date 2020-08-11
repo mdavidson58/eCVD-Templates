@@ -16,10 +16,10 @@
 <#assign cell_if = "Cellular0/1/0">
 
 <#-- Interface Menu -->
-<#assign GigEthernet1 = "${far.gigEthernet1}">
-<#assign GigEthernet2 = "${far.gigEthernet2}">
-<#assign GigEthernet3 = "${far.gigEthernet3}">
-<#assign GigEthernet4 = "${far.gigEthernet4}">
+<#assign FastEthernet1 = "${far.fastEthernet1}">
+<#assign FastEthernet2 = "${far.fastEthernet2}">
+<#assign FastEthernet3 = "${far.fastEthernet3}">
+<#assign FastEthernet4 = "${far.fastEthernet4}">
 
 <#-- WAN Menu -->
 <#if far.apn?has_content>
