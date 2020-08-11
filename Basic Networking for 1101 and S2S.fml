@@ -45,18 +45,29 @@
 </#if>
 
 <#-- Device Settings Menu -->
-<#--assign HostName	= "${far.localHostName}"-->
 <#if far.localDomainName?has_content>
 <#assign domainName = "${far.localDomainName}">
+<#else>
+<#assign domainName = "local">
 </#if>
 <#assign DNSIP		= "208.67.222.222 208.67.220.220">
 <#-- assign DNSIP 		= "${far.dnsIP}" -->
 <#--assign UserName 	= "${far.Users[0].userName}"-->
+<#if far.ignition?has_content>
 <#assign ignition 	= "${far.ignition}">
+<#else>
+<#assign ignition 	= "true">
+</#if>
+<#if far.clockTZ?has_content>
 <#assign clockTZ 	= "${far.clockTZ}">
+<#else>
+<#assign clockTZ	= "edt">
+</#if>
 <#-- assign clockDST	= "${far.clockDST}"--> 
 <#if far.ntpIP?has_content>
 <#assign ntpIP 		= "${far.ntpIP}">
+<#else>
+<#assign ntpIP		= "time.nist.gov">
 </#if>
 
 <#-- Calculate Netmasks -->
@@ -139,16 +150,10 @@ no platform punt-keepalive disable-kernel-core
 no logging console
 !
 clock timezone ${clockTZ} ${offset}
-<#if ntpIP?has_content>
 ntp server ${ntpIP}
-</#if>
 !
-<#if DNSIP?has_content>
 ip name-server ${DNSIP}
-</#if>
-<#if domainName?has_content>
 ip domain name ${domainName}
-</#if>
 
 <#-- Exclude the first 5 IP addresses of the LAN -->
 <#assign nwk_excludeip = nwk_suffix + 5>
