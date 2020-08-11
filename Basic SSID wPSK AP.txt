@@ -3,8 +3,8 @@
 
 <#assign gwips = far.ip?split(".")>
 <#assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
-<#assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix><#assign ap_ip = nwk_suffix + 1>
-<#assign apIP = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + ap_ip>
+<#assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
+<#assign apIP = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + (nwk_suffix + 1)>
 
 <#if far.bootStrap>
     aaa new-model
