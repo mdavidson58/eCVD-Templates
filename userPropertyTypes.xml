@@ -601,6 +601,7 @@
        <section>Device Settings>Time Settings</section>
        <sectionLevelInTree>1</sectionLevelInTree>
        <required>0</required>
+       <defaultValue>time.nist.gov</defaultValue>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
@@ -870,6 +871,7 @@
       <section>Device Settings>Host</section>
 	  <sectionLevelInTree>1</sectionLevelInTree>
       <required>1</required>
+      <defaultValue>true</defaultValue>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
@@ -896,6 +898,7 @@
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>VPN>Backup HeadEnd</section>
       <required>0</required>
+      <defaultValue>0.0.0.0</defaultValue>
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
@@ -925,6 +928,7 @@
       <section>VPN>Backup HeadEnd</section>
       <sectionLevelInTree>1</sectionLevelInTree>
       <required>0</required>
+      <defaultValue>psk</defaultValue>
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
