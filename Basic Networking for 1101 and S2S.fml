@@ -1,5 +1,5 @@
 <#-- Begin eCVD template -->
-<#-- Version 1.4         -->
+<#-- Version 1.5         -->
 
 <#-- Default BootStrap Configuration -->
 
@@ -16,13 +16,15 @@
 <#assign cell_if = "Cellular0/1/0">
 
 <#-- Interface Menu -->
-<#assign FastEthernet1 = "${far.fastEthernet1}">
-<#assign FastEthernet2 = "${far.fastEthernet2}">
-<#assign FastEthernet3 = "${far.fastEthernet3}">
-<#assign FastEthernet4 = "${far.fastEthernet4}">
+<#assign GigEthernet1 = "${far.gigEthernet1}">
+<#assign GigEthernet2 = "${far.gigEthernet2}">
+<#assign GigEthernet3 = "${far.gigEthernet3}">
+<#assign GigEthernet4 = "${far.gigEthernet4}">
 
 <#-- WAN Menu -->
+<#if far.apn?has_content>
 <#assign APN			= "${far.apn}">
+</#if>
 <#assign EthernetPriority = "${far.ethernetPriority}"?number + 100>
 <#assign Cell0Priority 	= "${far.cell0Priority}"?number + 100>
 
@@ -37,18 +39,25 @@
 <#assign herIpAddress 	= "${far.herIpAddress}">
 <#assign herPsk			= "${far.herPsk}">
 <#assign isBackupHer	= "${far.isBackupHer}">
+<#if far.isBackupHer == "true">
 <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
 <#assign backupHerPsk	= "${far.backupHerPsk}">
+</#if>
 
 <#-- Device Settings Menu -->
 <#--assign HostName	= "${far.localHostName}"-->
+<#if far.localDomainName?has_content>
 <#assign domainName = "${far.localDomainName}">
+</#if>
+<#assign DNSIP		= "208.67.222.222 208.67.220.220">
 <#-- assign DNSIP 		= "${far.dnsIP}" -->
 <#--assign UserName 	= "${far.Users[0].userName}"-->
-<#assign DNSIP		= "208.67.222.222 208.67.220.220">
+<#assign ignition 	= "${far.ignition}">
 <#assign clockTZ 	= "${far.clockTZ}">
 <#-- assign clockDST	= "${far.clockDST}"--> 
+<#if far.ntpIP?has_content>
 <#assign ntpIP 		= "${far.ntpIP}">
+</#if>
 
 <#-- Calculate Netmasks -->
 
