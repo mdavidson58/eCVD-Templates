@@ -166,6 +166,12 @@ track 30 ip sla 30 reachability
 track 40 ip sla 40 reachability
 !
 
+<#-- Enable GPS  -->
+controller ${cell_if}
+	lte gps mode ms-based
+  	lte gps nmea ip
+!
+
 interface ${ether_if}
     ip dhcp client route track 30
     ip address dhcp

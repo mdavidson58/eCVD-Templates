@@ -173,6 +173,13 @@ track 30 ip sla 30 reachability
 track 40 ip sla 40 reachability
 !
 
+<#-- Enable GPS and Gyroscope -->
+gyroscope-reading enable
+controller ${cell_if}
+	lte gps mode ms-based
+  	lte gps nmea ip
+!
+
 interface ${ether_if}
    	ip dhcp client route track 30
     ip address dhcp
@@ -235,6 +242,7 @@ interface Async0
     no ip address
     encapsulation scada
 !
+
 ip forward-protocol nd
 !
 ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
