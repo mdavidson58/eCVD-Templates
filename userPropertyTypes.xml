@@ -719,7 +719,7 @@
   	  <required>1</required>
       <defaultValue>15</defaultValue>
   	  <validationType>non-empty</validationType>
-  	  <dataType>integer</dataType>
+  	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
   	  <min>1</min>
   	  <max>15</max>

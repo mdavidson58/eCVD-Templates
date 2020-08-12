@@ -41,13 +41,14 @@
 <#else>
 <#assign domainName = "local">
 </#if>
+<#-- Assign Umbrella DNS servers for additional Security -->
 <#assign DNSIP		= "208.67.222.222 208.67.220.220">
 <#-- assign DNSIP 		= "${far.dnsIP}" -->
 <#--assign UserName 	= "${far.Users[0].userName}"-->
 <#if far.ignition?has_content>
 <#assign ignition 	= "${far.ignition}">
 <#else>
-<#assign igition 	= "true">
+<#assign ignition 	= "true">
 </#if>
 <#if far.clockTZ?has_content>
 <#assign clockTZ 	= "${far.clockTZ}">
