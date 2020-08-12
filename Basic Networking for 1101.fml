@@ -9,8 +9,8 @@
 <#assign sn = sublist[1]>
 
 <#assign model = "IR1101">
-<#assign ether_if = "GigabitEthernet0/0/0">
-<#assign cell_if = "Cellular0/1/0">
+<#assign ether_if = "GigabitEthernet 0/0/0">
+<#assign cell_if = "Cellular 0/1/0">
 
 <#-- Interface Menu -->
 <#assign FastEthernet1 = "${far.fastEthernet1}">
@@ -180,7 +180,7 @@ track 40 ip sla 40 reachability
 
 <#-- Enable GPS  -->
 controller ${cell_if}
-	lte gps mode ms-based
+	lte gps mode standalone
   	lte gps nmea ip
 !
 
