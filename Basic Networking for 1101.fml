@@ -181,7 +181,7 @@ track 40 ip sla 40 reachability
 <#-- Enable GPS  -->
 controller ${cell_if}
 	lte gps mode standalone
-  	lte gps nmea ip
+  	lte gps nmea
 !
 
 interface ${ether_if}

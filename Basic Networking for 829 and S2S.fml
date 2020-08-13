@@ -268,7 +268,7 @@ track 40 ip sla 40 reachability
 gyroscope-reading enable
 controller ${cell_if}
 	lte gps mode ms-based
-  	lte gps nmea ip
+  	lte gps nmea
 !
 
 interface ${ether_if}
