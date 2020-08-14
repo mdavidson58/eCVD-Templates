@@ -30,7 +30,6 @@
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
 
 <#-- Network Menu -->
-<#--assign PatProtocol = "${far.portForwarding[0].protocol}"-->
 
 <#-- VPN Settings Menu -->
 <#assign herIpAddress 	= "${far.herIpAddress}">
@@ -49,8 +48,7 @@
 </#if>
 <#-- Assign Umbrella DNS servers for additional Security -->
 <#assign DNSIP		= "208.67.222.222 208.67.220.220">
-<#-- assign DNSIP 		= "${far.dnsIP}" -->
-<#--assign UserName 	= "${far.Users[0].userName}"-->
+
 <#if far.clockTZ?has_content>
 <#assign clockTZ 	= "${far.clockTZ}">
 <#else>
