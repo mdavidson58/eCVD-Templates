@@ -458,7 +458,7 @@
        <seedValues>[{ "key": "Provide 'apn' per device", "value": "${far.apn}" }]</seedValues>
     </propertyType>
 
-	<propertyType>
+<propertyType>
        <name>ethernetPriority</name>
        <displayName>Default WAN priority of Ethernet</displayName>
        <description>Enter priority of the Ethernet Port</description>
@@ -490,7 +490,7 @@
        ]</seedValues>
    	</propertyType>	
 	
-	<propertyType>
+<propertyType>
        <name>cell1Priority</name>
        <displayName>Default WAN priority of Cellular Modem 1</displayName>
        <description>Enter priority of the Cellular Modem 1</description>
@@ -508,7 +508,7 @@
        ]</seedValues>    
     </propertyType>
 
-	<propertyType>
+<propertyType>
        <name>wgbPriority</name>
        <displayName>Default WAN priority of WiFi Uplink</displayName>
        <description>Enter priority of WiFi Uplink</description>
@@ -601,7 +601,7 @@
        <section>Device Settings>Time Settings</section>
        <sectionLevelInTree>1</sectionLevelInTree>
        <required>0</required>
-       <defaultValue>time.nist.gov</defaultValue>
+	<defaultValue>time.nist.gov</defaultValue>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
@@ -721,8 +721,6 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-  	  <min>1</min>
-  	  <max>15</max>
    	  <seedValues>[{ "key": "Provide 'userPriv' per device", "value": "${far.userPriv}"}]</seedValues>
 	</propertyType>
 	
@@ -734,7 +732,7 @@
   	  <section>Device Settings>Host</section>
   	  <required>0</required>
 	 <sectionLevelInTree>1</sectionLevelInTree>
-      <defaultValue>208.67.222.222/defaultValue>
+      <defaultValue>208.67.222.222</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -768,7 +766,7 @@
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	  <seedValues>[{ "key": "Provide 'LocalDomainName' per device", "value": "${far.localDomainName}"}]</seedValues>
+   	  <seedValues>[{ "key": "Provide 'localHostName' per device", "value": "${far.localHostName}"}]</seedValues>
 	</propertyType>	
   
    <propertyType>
@@ -793,7 +791,7 @@
      <section>Network>Port Forwarding</section>
      <required>0</required>
      <validationType>non-empty</validationType>
-     <dataType>a</dataType>
+     <dataType>string</dataType>
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Provide 'Description' per device", "value": "${far.description}" }]</seedValues>
    </propertyType>
@@ -809,9 +807,9 @@
      <dataType>array</dataType>
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Provide 'Protocol' per device", "value": "${far.protocol}" },
-  	  				{ "key": "TCP protocol", "value": "tcp" },
-  	  				{ "key": "UDP protocol", "value": "udp" }
-  	  ]</seedValues>
+	     	{ "key": "TCP", "value":"tcp" },
+	        { "key": "UDP", "value":"udp" }
+	]</seedValues>
    </propertyType>
  
   <propertyType>
@@ -868,20 +866,20 @@
 	
    <propertyType>
       <name>ignition</name>
-      <displayName>Ignition Power Management</displayName>
+      <displayName>Enable Ignition Power Management</displayName>
       <description>Enable Ignition Power Management</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>Device Settings>Host</section>
 	  <sectionLevelInTree>1</sectionLevelInTree>
       <required>1</required>
-      <defaultValue>true</defaultValue>
+	   <defaultValue>true</defaultValue>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'Ignition' per device", "value": "${far.ignition}" }]</seedValues>
     </propertyType>
 	
-	<propertyType>
+<propertyType>
       <name>herIpAddress</name>
       <displayName>HeadEnd IP Address</displayName>
       <description>IPv4 address of the HeadEnd</description>
@@ -901,7 +899,6 @@
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>VPN>Backup HeadEnd</section>
       <required>0</required>
-      <defaultValue>0.0.0.0</defaultValue>
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
@@ -931,7 +928,6 @@
       <section>VPN>Backup HeadEnd</section>
       <sectionLevelInTree>1</sectionLevelInTree>
       <required>0</required>
-      <defaultValue>psk</defaultValue>
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
