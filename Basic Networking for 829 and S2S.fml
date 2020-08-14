@@ -352,18 +352,21 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
 	</#if>
 </#list>
 </#if>
+
+<#-- remove this route from the bootstrap config to allow failover -->
+no ip route 0.0.0.0 0.0.0.0 ${cell_if} 100
    
-ip route 0.0.0.0 0.0.0.0 ${ether_if} DHCP ${EthernetPriority}
+<#-- add IPSLA tracking to allow i/f failover -->   
+ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp ${EthernetPriority}
 ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 40
 
 ip route 208.67.222.222 255.255.255.255 dhcp
-ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
+ip route 208.67.220.220 255.255.255.255 ${cell_if} track 40
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
 ip route 1.1.1.1 255.255.255.255 ${cell_if} 99 track 10
 
-ip route 9.9.9.9 255.255.255.255 Null0 3 tag 786
 ip route 8.8.8.8 255.255.255.255 ${cell_if} tag 786
 ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
 
