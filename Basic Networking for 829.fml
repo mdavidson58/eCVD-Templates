@@ -119,7 +119,7 @@
 
 <#-- Configure timezone offset -->
 
-<#assign TZ = { "adat":"+12", "sbt":"+11", "aest":"+10", "jst":"+9", "cst":"+8", "wib":"+7", "bst":"+6", "uzt":"+5", "gst":"+4", "msk":"+3", "cest":"+2", "bst":"+1", "gmt":"0", "cvt":"-1", "wgst":"-2", "art":"-3", "edt":"-4", "cdt":"-5", "mst":"-6", "pdt":"-7", "akdt":"-8", "hdt":"-9", "hst":"-10", "nut":"-11", "aeo":"-12" }>
+<#assign TZ = { "anat":"+12", "sbt":"+11", "aest":"+10", "jst":"+9", "cst":"+8", "wib":"+7", "bst":"+6", "uzt":"+5", "gst":"+4", "msk":"+3", "cest":"+2", "bst":"+1", "gmt":"0", "cvt":"-1", "wgst":"-2", "art":"-3", "edt":"-4", "cdt":"-5", "mst":"-6", "pdt":"-7", "akdt":"-8", "hdt":"-9", "hst":"-10", "nut":"-11", "aeo":"-12" }>
 <#list TZ as x, y >
 	<#if x != clockTZ>
 		<#continue>
@@ -164,7 +164,7 @@ ip dhcp pool subtended
 !
 !
 <#list far.Users as user >
-		username ${user.userName} privilege ${user.userPriv} algorithm-type scrypt secret ${user.userPassword}
+		username ${user['userName']} privilege ${user['userPriv']} algorithm-type scrypt secret ${user['userPassword']}
 </#list> 
 !
 
@@ -266,12 +266,12 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
 <#-- Use default i/f to set PAT -->
 
-<#if far.portForwarding?has_content>
+<<#if far.portForwarding?has_content>
 <#list far.portForwarding as PAT>
 	<#if EthernetPriority == 101>
-  			ip nat inside source static ${PAT.protocol} ${PAT.privateIP} ${PAT.localPort} interface ${ether_if} ${PAT.publicPort}
+  			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
 	<#else>
-			ip nat inside source static ${PAT.protocol} ${PAT.privateIP} ${PAT.localPort} interface ${cell_if} ${PAT.publicPort}
+			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${cell_if} ${PAT['publicPort']}
 	</#if>
 </#list>
 </#if>
