@@ -22,8 +22,15 @@
 <#if far.apn?has_content>
 <#assign APN			= "${far.apn}">
 </#if>
-<#assign EthernetPriority = "${far.ethernetPriority}"?number + 100>
-<#assign Cell0Priority 	= "${far.cell0Priority}"?number + 100>
+
+<#-- Set default interface -->
+<#if far.cell0Priority == 1>
+<#assign EthernetPriority = 102>
+<#assign Cell0Priority 	= 101>
+<#else>
+<#assign EthernetPriority = 101>
+<#assign Cell0Priority 	= 102>
+</#if>
 
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>

@@ -7,9 +7,13 @@
 <#assign pid = sublist[0]>
 <#assign model = pid[0..4]>
 <#assign sn = sublist[1]>
+<#assign gwips = far.ip?split(".")>
+<#assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
+<#assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
 
 <#assign model = "IR829">
 <#assign ether_if = "vlan10">
+<#assign cell_contr = "Cellular 0">
 <#if pid?contains("2LTE")>
       <#assign cell_if = "Cellular 0/0">
 <#else>
@@ -26,8 +30,16 @@
 <#if far.apn?has_content>
 <#assign APN			= "${far.apn}">
 </#if>
-<#assign EthernetPriority = "${far.ethernetPriority}"?number + 100>
-<#assign Cell0Priority 	= "${far.cell0Priority}"?number + 100>
+
+<#-- Set default interface -->
+<#if far.cell0Priority == 1>
+<#assign EthernetPriority = 102>
+<#assign Cell0Priority 	= 101>
+<#else>
+<#assign EthernetPriority = 101>
+<#assign Cell0Priority 	= 102>
+</#if>
+
 
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
@@ -143,8 +155,7 @@ service timestamps debug datetime msec
 service timestamps log datetime msec
 service password-encryption
 service call-home
-platform qfp utilization monitor load 80
-no platform punt-keepalive disable-kernel-core
+
 !
 no logging console
 !
@@ -263,9 +274,8 @@ track 40 ip sla 40 reachability
 
 <#-- Enable GPS and Gyroscope -->
 gyroscope-reading enable
-controller ${cell_if}
-	lte gps mode ms-based
-  	lte gps nmea
+controller ${cell_contr}
+	lte gps mode standalone
 !
 
 interface ${ether_if}
@@ -290,6 +300,7 @@ interface Vlan1
     ip nbar protocol-discovery
     ip nat inside
     ip verify unicast source reachable-via rx
+    no shut
 !
 !
 <#-- enabling/disabling of ethernet ports -->
@@ -319,7 +330,7 @@ interface GigabitEthernet3
 	no shutdown
 </#if>    
 !
-interface GigEthernet4
+interface GigabitEthernet4
 <#if GigEthernet4 != "true">
     shutdown
 <#else>
@@ -418,7 +429,7 @@ line vty 0 4
 
 <#if ignition == "true">
 ignition enable
-ignition off-timer 10
+ignition off-timer 400
 <#else>
 no ignition enable
 </#if>
