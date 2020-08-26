@@ -14,13 +14,14 @@
 
 <#assign model = "IR829">
 <#assign ether_if = "vlan10">
+<#assign cell_contr = "Cellular 0">
 <#if pid?contains("2LTE")>
       <#assign cell_if = "Cellular 0/0">
 <#else>
       <#assign cell_if = "Cellular 0">
 </#if>
 
-<<#-- Interface Menu -->
+<#-- Interface Menu -->
 <#assign GigEthernet1 = "${far.gigEthernet1}">
 <#assign GigEthernet2 = "${far.gigEthernet2}">
 <#assign GigEthernet3 = "${far.gigEthernet3}">
@@ -47,7 +48,7 @@
 
 <#-- Network Menu -->
 
-<<#-- Device Settings Menu -->
+<#-- Device Settings Menu -->
 <#if far.localDomainName?has_content>
 <#assign domainName = "${far.localDomainName}">
 <#else>
@@ -147,8 +148,7 @@ service timestamps debug datetime msec
 service timestamps log datetime msec
 service password-encryption
 service call-home
-platform qfp utilization monitor load 80
-no platform punt-keepalive disable-kernel-core
+
 !
 no logging console
 !
@@ -202,9 +202,8 @@ track 40 ip sla 40 reachability
 
 <#-- Enable GPS and Gyroscope -->
 gyroscope-reading enable
-controller ${cell_if}
-	lte gps mode ms-based
-  	lte gps nmea
+controller ${cell_contr}
+	lte gps mode standalone
 !
 
 interface ${ether_if}
@@ -229,6 +228,7 @@ interface Vlan1
     ip nbar protocol-discovery
     ip nat inside
     ip verify unicast source reachable-via rx
+    no shut
 !
 !
 <#-- enabling/disabling of ethernet ports -->
@@ -258,7 +258,7 @@ interface GigabitEthernet3
 	no shutdown
 </#if>    
 !
-interface GigEthernet4
+interface GigabitEthernet4
 <#if GigEthernet4 != "true">
     shutdown
 <#else>
@@ -277,7 +277,7 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
 <#-- Use default i/f to set PAT -->
 
-<<#if far.portForwarding?has_content>
+<#if far.portForwarding?has_content>
 <#list far.portForwarding as PAT>
 	<#if EthernetPriority == 101>
   			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
@@ -337,7 +337,7 @@ line vty 0 4
 
 <#if ignition == "true">
 ignition enable
-ignition off-timer 10
+ignition off-timer 400
 <#else>
 no ignition enable
 </#if>
