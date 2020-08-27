@@ -194,13 +194,13 @@ crypto ikev2 keyring Flex_key
  peer ${herIpAddress}   
   address ${herIpAddress} 
   identity key-id ${herIpAddress}
-  pre-shared-key ${herPsk}  
+  pre-shared-key ${herPsk}
  !
 <#if isBackupHer == "true">
  peer ${backupHerIpAddress}   
   address ${backupHerIpAddress}
   identity key-id ${backupHerIpAddress}
-  pre-shared-key ${backupHerPsk}  
+  pre-shared-key ${backupHerPsk}
  !
 </#if>
 !
@@ -372,14 +372,9 @@ ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
-ip route 1.1.1.1 255.255.255.255 ${cell_if} 99 track 10
-
-ip route 8.8.8.8 255.255.255.255 ${cell_if} tag 786
-ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
-
-ip route ${herIpAddress}  255.255.255.255 vlan10 dhcp  
+ip route ${herIpAddress}  255.255.255.255 ${ether_if} dhcp  
 <#if isBackupHer == "true">
-ip route ${backupHerIpAddress} 255.255.255.255 vlan10 dhcp
+ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
 </#if>
 !
 ip ssh rsa keypair-name SSHKEY
@@ -450,12 +445,11 @@ event manager applet Cell-to-eth-failover
 
 <#if APN?has_content>
 event manager applet change_apn
-event timer countdown 10
+event timer countdown time 10
+action 5 syslog msg "Changing APN Profile"
 action 10 cli command "enable"
-action 15 cli command “${cell_if} lte profile create 1 ${APN}” pattern "confirm"
+action 15 cli command "${cell_if} lte profile create 1 ${APN}" pattern "confirm"
 action 20 cli command "y"
-action 25 cli command "end"
-action 30 end
 !
 !
 </#if>

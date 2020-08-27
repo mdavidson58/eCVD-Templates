@@ -281,10 +281,6 @@ ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
-ip route 1.1.1.1 255.255.255.255 ${cell_if} 99 track 10
-
-ip route 8.8.8.8 255.255.255.255 ${cell_if} tag 786
-ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
 !
 !
 ip ssh rsa keypair-name SSHKEY
@@ -315,16 +311,27 @@ line vty 0 4
     transport input ssh
 !
 
+<#-- Improve WAN failover performance -->
+event manager applet Eth-to-cell-failover
+ event track 30 state any
+ action 0.1 syslog msg "Gig0/0/0 connecitivity change. Clearing NAT translations."
+ action 0.2 cli command "enable"
+ action 1.0 cli command "clear ip nat translation *"
+event manager applet Cell-to-eth-failover
+ event track 40 state any
+ action 0.1 syslog msg "Cell0/1/0 connectivity change. Clearing NAT translations."
+ action 0.2 cli command "enable"
+ action 1.0 cli command "clear ip nat translation *"
+
 <#-- Set APN -->
 
 <#if APN?has_content>
 event manager applet change_apn
-event timer countdown 10
+event timer countdown time 10
+action 5 syslog msg "Changing APN Profile"
 action 10 cli command "enable"
-action 15 cli command “${cell_if} lte profile create 1 ${APN}” pattern "confirm"
+action 15 cli command "${cell_if} lte profile create 1 ${APN}" pattern "confirm"
 action 20 cli command "y"
-action 25 cli command "end"
-action 30 end
 !
 !
 </#if>
