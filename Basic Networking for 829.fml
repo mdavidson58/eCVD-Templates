@@ -292,7 +292,7 @@ no ip route 0.0.0.0 0.0.0.0 ${cell_if} 100
    
 <#-- add IPSLA tracking to allow i/f failover -->   
 ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp ${EthernetPriority}
-ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 40
+ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 7
 
 ip route 208.67.222.222 255.255.255.255 dhcp
 ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7

@@ -1,11 +1,6 @@
 <#-- Default Access point Configuration -->
 <#-- version 1.5 -->
 
-<#assign gwips = far.ip?split(".")>
-<#assign nwk_suffix = (gwips[3]?number / 32)?int * 32>
-<#assign nwk_addr = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + nwk_suffix>
-<#assign apIP = gwips[0] + "." + gwips[1] + "." + gwips[2] + "." + (nwk_suffix + 1)>
-
 <#if far.bootStrap>
     aaa new-model
     aaa authentication login default local
@@ -17,9 +12,10 @@
     path flash:
     maximum 3
     !
-    <#list far.Users as user >
-		username ${user.userName} privilege ${user.userPriv}  secret ${user.userPassword}
-	</#list> 
+username ${deviceDefault.apAdminUsername} privilege 15 secret ${deviceDefault.apAdminPassword}
+<#list far.Users as user >
+	username ${user.userName} privilege ${user.userPriv}  secret ${user.userPassword}
+</#list> 
     no username Cisco
     do mkdir flash:/managed/data
     bridge irb
@@ -71,6 +67,7 @@ interface Dot11Radio1
  !
  no dfs band block
  mbssid
+packet retries 64 drop-packet
  channel dfs
  station-role root
 !
@@ -110,7 +107,8 @@ bridge 1 aging-time 86400
 bridge 10 aging-time 86400
     !
     interface BVI1
-    ip address ${apIP}
+    description Cisco Rainier AP v2.21, ${deviceDefault.apIpAddress} should match DHCP
+    ip address dhcp
     !
     ip http server
     ip http authentication local
