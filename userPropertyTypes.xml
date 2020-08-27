@@ -772,7 +772,7 @@
 	</propertyType>	
   
    <propertyType>
-     <name>isPortForarding></name>
+     <name>isPortForwarding></name>
       <displayName>Enable Port Forwarding</displayName>
       <description>Enable Port Forwarding</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
@@ -888,7 +888,7 @@
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>Device Settings>Host</section>
 	  <sectionLevelInTree>1</sectionLevelInTree>
-      <required>1</required>
+      <required>0</required>
 	   <defaultValue>true</defaultValue>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
@@ -958,7 +958,8 @@
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>VPN>Backup HeadEnd</section>
       <sectionLevelInTree>1</sectionLevelInTree>
-      <required>1</required>
+      	   <defaultValue>false</defaultValue>
+      <required>0</required>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
