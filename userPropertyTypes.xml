@@ -348,7 +348,7 @@
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
   	  <defaultValue>true</defaultValue>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -360,7 +360,7 @@
   	  <description>Enable/Disable Gigabit Ethernet Port 2</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -373,7 +373,7 @@
   	  <description>Enable/Disable Gigabit Ethernet Port 3</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -386,7 +386,7 @@
   	  <description>Enable/Disable Gigabit Ethernet Port 4</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -399,7 +399,7 @@
 	  <description>Enable/Disable Fast Ethernet Port 1</description>
  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -412,7 +412,7 @@
   	  <description>Enable/Disable Fast Ethernet Port 2</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -425,7 +425,7 @@
   	  <description>Enable/Disable Fast Ethernet Port 3</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
@@ -438,7 +438,7 @@
   	  <description>Enable/Disable Fast Ethernet Port 4</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>Interface</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <defaultValue>true</defaultValue>
   	  <validationType>non-empty</validationType>
   	  <dataType>boolean</dataType>
