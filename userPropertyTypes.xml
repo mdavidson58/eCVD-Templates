@@ -772,7 +772,7 @@
 	</propertyType>	
   
    <propertyType>
-     <name>isPortForwarding></name>
+     <name>isPortForwarding</name>
       <displayName>Enable Port Forwarding</displayName>
       <description>Enable Port Forwarding</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
