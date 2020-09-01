@@ -24,7 +24,7 @@
 </#if>
 
 <#-- Set default interface -->
-<#if far.cell0Priority == 1>
+<#if far.cell0Priority == "1">
 <#assign EthernetPriority = 102>
 <#assign Cell0Priority 	= 101>
 <#else>
@@ -260,7 +260,7 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
 
 <#-- Use default i/f to set PAT -->
 
-<#if ISPortForward == true>
+<#if ISPortForward == "true">
 <#list far.portForwarding as PAT>
 	<#if EthernetPriority == 101>
   			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
