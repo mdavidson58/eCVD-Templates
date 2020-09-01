@@ -482,6 +482,7 @@
        <section>WAN</section>
        <required>1</required>
        <validationType>non-empty</validationType>
+       <defaultValue>Second</defaultValue>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
        <seedValues>[{ "key": "Provide 'cell0Priority' per device", "value": "${far.cell0Priority}" },
