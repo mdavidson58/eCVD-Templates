@@ -46,6 +46,7 @@
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
 
 <#-- Network Menu -->
+<#assign ISPortForward = far.isPortForwarding>
 
 <#-- VPN Settings Menu -->
 <#assign herIpAddress 	= "${far.herIpAddress}">
@@ -350,7 +351,7 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
 <#-- Use default i/f to set PAT -->
 
-<#if far.portForwarding?has_content>
+<#if ISPortForward == true>
 <#list far.portForwarding as PAT>
 	<#if EthernetPriority == 101>
   			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
