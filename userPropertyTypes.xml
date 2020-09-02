@@ -777,7 +777,7 @@
       <displayName>Enable Port Forwarding</displayName>
       <description>Enable Port Forwarding</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Network>Port Forwarding</section>
+      <section>Network>Enable Port Forwarding</section>
 	  <sectionLevelInTree>1</sectionLevelInTree>
       <required>1</required>
 	   <defaultValue>false</defaultValue>

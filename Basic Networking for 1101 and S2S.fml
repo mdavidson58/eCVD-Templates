@@ -38,13 +38,13 @@
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
 
 <#-- Network Menu -->
-<#assign ISPortForward = far.isPortForwarding>
+<#assign ISPortForward = "${section.network_portForwarding}">
 
 <#-- VPN Settings Menu -->
 <#assign herIpAddress 	= "${far.herIpAddress}">
 <#assign herPsk			= "${far.herPsk}">
-<#assign isBackupHer	= "${far.isBackupHer}">
-<#if far.isBackupHer == "true">
+<#assign isBackupHer	= "${section.vpn_backupheadend}">
+<#if !IisBackupHer?? || isBackupHer == "true">
 <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
 <#assign backupHerPsk	= "${far.backupHerPsk}">
 </#if>
@@ -186,8 +186,8 @@ crypto ikev2 keyring Flex_key
   identity key-id ${herIpAddress}
   pre-shared-key ${herPsk}
 !
-<#if isBackupHer == "true">
- peer ${backupHerIpAddress}   
+<#if !IisBackupHer?? || isBackupHer == "true">
+  peer ${backupHerIpAddress}   
   address ${backupHerIpAddress}
   identity key-id ${backupHerIpAddress}
   pre-shared-key ${backupHerPsk}
@@ -197,7 +197,7 @@ crypto ikev2 keyring Flex_key
 !
 crypto ikev2 profile CVPN_I2PF
  match identity remote key-id ${herIpAddress} 
- <#if isBackupHer == "true">
+<#if !IisBackupHer?? || isBackupHer == "true">
   match identity remote key-id ${backupHerIpAddress}
 </#if>
  identity local email ${sn}@iotspdev.io  
@@ -226,7 +226,7 @@ interface Tunnel2
 !
 crypto ikev2 client flexvpn Tunnel2
   peer 1 ${herIpAddress} 
-<#if isBackupHer == "true">
+<#if !IisBackupHer?? || isBackupHer == "true">
   peer 2 ${backupHerIpAddress}
 </#if>
 <#if EthernetPriority == 101>
@@ -339,7 +339,7 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
 <#-- Use default i/f to set PAT -->
 
-<#if ISPortForward == "true">
+<#if !ISPortForward?? || ISPortForward == "true">
 <#list far.portForwarding as PAT>
 	<#if EthernetPriority == 101>
   			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
@@ -362,7 +362,7 @@ ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
 ip route ${herIpAddress}  255.255.255.255 ${ether_if} dhcp   
-<#if isBackupHer == "true">
+<#if !IisBackupHer?? || isBackupHer == "true">
 ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
 </#if>
 
@@ -381,8 +381,8 @@ ip access-list extended filter-internet
  permit icmp any any ttl-exceeded
  permit udp any eq bootps host 255.255.255.255 eq bootpc
  permit esp host ${herIpAddress} any
-<#if isBackupHer == "true">
- permit esp host ${backupHerIpAddress} any
+<#if !IisBackupHer?? || isBackupHer == "true">
+  permit esp host ${backupHerIpAddress} any
 </#if>
 !
    
