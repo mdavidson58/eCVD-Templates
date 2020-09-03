@@ -184,7 +184,7 @@ crypto ikev2 keyring Flex_key
   identity key-id ${herIpAddress}
   pre-shared-key ${herPsk}
 !
-<#if !IisBackupHer?? || isBackupHer == "true">
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
   peer ${backupHerIpAddress}   
   address ${backupHerIpAddress}
   identity key-id ${backupHerIpAddress}

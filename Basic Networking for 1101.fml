@@ -42,8 +42,7 @@
 <#-- VPN Settings Menu -->
 <#assign herIpAddress 	= "${far.herIpAddress}">
 <#assign herPsk			= "${far.herPsk}">
-<#assign isBackupHer	= "${section.vpn_backupheadend}">
-<#if !IisBackupHer?? || isBackupHer == "true">
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
 <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
 <#assign backupHerPsk	= "${far.backupHerPsk}">
 </#if>
@@ -196,7 +195,7 @@ crypto ikev2 keyring Flex_key
 !
 crypto ikev2 profile CVPN_I2PF
  match identity remote key-id ${herIpAddress} 
-<#if !IisBackupHer?? || isBackupHer == "true">
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
   match identity remote key-id ${backupHerIpAddress}
 </#if>
  identity local email ${sn}@iotspdev.io  
@@ -225,7 +224,7 @@ interface Tunnel2
 !
 crypto ikev2 client flexvpn Tunnel2
   peer 1 ${herIpAddress} 
-<#if !IisBackupHer?? || isBackupHer == "true">
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
   peer 2 ${backupHerIpAddress}
 </#if>
 <#if EthernetPriority == 101>
@@ -361,7 +360,7 @@ ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
 ip route ${herIpAddress}  255.255.255.255 ${ether_if} dhcp   
-<#if !IisBackupHer?? || isBackupHer == "true">
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
 ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
 </#if>
 
@@ -380,7 +379,7 @@ ip access-list extended filter-internet
  permit icmp any any ttl-exceeded
  permit udp any eq bootps host 255.255.255.255 eq bootpc
  permit esp host ${herIpAddress} any
-<#if !IisBackupHer?? || isBackupHer == "true">
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
   permit esp host ${backupHerIpAddress} any
 </#if>
 !
