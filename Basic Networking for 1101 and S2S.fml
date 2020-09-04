@@ -42,9 +42,13 @@
 <#-- VPN Settings Menu -->
 <#assign herIpAddress 	= "${far.herIpAddress}">
 <#assign herPsk			= "${far.herPsk}">
-<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
-<#assign backupHerIpAddress = "${far.backupHerIpAddress}">
-<#assign backupHerPsk	= "${far.backupHerPsk}">
+<#if far.backupHerIpAddress?has_content>
+  <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
+  <#if far.backupHerPsk?has_content>
+    <#assign backupHerPsk	= "${far.backupHerPsk}">
+  <#else>
+    <#assign backupHerPsk = "nodefaultPSK">
+  </#if>
 </#if>
 
 <#-- Device Settings Menu -->
@@ -184,7 +188,7 @@ crypto ikev2 keyring Flex_key
   identity key-id ${herIpAddress}
   pre-shared-key ${herPsk}
 !
-<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+<#if backupHerIpAddress?has_content>
   peer ${backupHerIpAddress}   
   address ${backupHerIpAddress}
   identity key-id ${backupHerIpAddress}
@@ -195,7 +199,7 @@ crypto ikev2 keyring Flex_key
 !
 crypto ikev2 profile CVPN_I2PF
  match identity remote key-id ${herIpAddress} 
-<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+<#if backupHerIpAddress?has_content>
   match identity remote key-id ${backupHerIpAddress}
 </#if>
  identity local email ${sn}@iotspdev.io  
@@ -224,7 +228,7 @@ interface Tunnel2
 !
 crypto ikev2 client flexvpn Tunnel2
   peer 1 ${herIpAddress} 
-<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+<#if backupHerIpAddress?has_content>
   peer 2 ${backupHerIpAddress}
 </#if>
 <#if EthernetPriority == 101>
@@ -337,15 +341,15 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
 <#-- Use default i/f to set PAT -->
 
-<#if !section.network_portforwarding?? || section.network_portforwarding == "true">
 <#list far.portForwarding as PAT>
-	<#if EthernetPriority == 101>
+  <#if PAT['protocol']?has_content>
+  	<#if EthernetPriority == 101>
   			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
 	<#else>
 			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${cell_if} ${PAT['publicPort']}
 	</#if>
+  </#if>
 </#list>
-</#if>
 
 <#-- remove this route from the bootstrap config to allow failover -->
 no ip route 0.0.0.0 0.0.0.0 ${cell_if} 100
@@ -360,7 +364,7 @@ ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
 ip route ${herIpAddress}  255.255.255.255 ${ether_if} dhcp   
-<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+<#if backupHerIpAddress?has_content>
 ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
 </#if>
 
@@ -379,7 +383,7 @@ ip access-list extended filter-internet
  permit icmp any any ttl-exceeded
  permit udp any eq bootps host 255.255.255.255 eq bootpc
  permit esp host ${herIpAddress} any
-<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+<#if backupHerIpAddress?has_content>
   permit esp host ${backupHerIpAddress} any
 </#if>
 !

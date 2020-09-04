@@ -277,15 +277,15 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
    
 <#-- Use default i/f to set PAT -->
 
-<#if !section.network_portforwarding?? || section.network_portforwarding == "true">
 <#list far.portForwarding as PAT>
+  <#if PAT['protocol']?has_content>
 	<#if EthernetPriority == 101>
   			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
 	<#else>
 			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${cell_if} ${PAT['publicPort']}
 	</#if>
+  </#if>
 </#list>
-</#if>
 
 <#-- remove this route from the bootstrap config to allow failover -->
 no ip route 0.0.0.0 0.0.0.0 ${cell_if} 100
