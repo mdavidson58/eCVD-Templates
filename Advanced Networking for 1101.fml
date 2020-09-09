@@ -1,5 +1,5 @@
 <#-- Begin eCVD template -->
-<#-- Version 1.05        -->
+<#-- Version 1.06        -->
 
 <#-- Default BootStrap Configuration -->
 
@@ -230,6 +230,20 @@ interface Tunnel2
  tunnel protection ipsec profile CVPN_IPS_PF
 !
 !
+<#-- interface priorities -->
+
+ip sla 30
+ icmp-echo 208.67.222.222 source-interface ${ether_if}
+ frequency 10
+!
+ip sla schedule 30 life forever start-time now
+
+ip sla 40
+ icmp-echo 208.67.220.220 source-interface ${cell_if}
+ frequency 50
+!
+ip sla schedule 40 life forever start-time now
+!
 <#-- ADDED 6 LINES BELOW FOR ADVANCED -->
 <#-- IP SLA for Cellular 0/3/0 -->
 ip sla 41
@@ -428,22 +442,6 @@ interface ${cell_if}
 interface ${cell_if2}
  service-policy output PMAP-LEVEL1
 !
-
-<#-- interface priorities -->
-
-ip sla 30
- icmp-echo 208.67.222.222 source-interface ${ether_if}
- frequency 10
-!
-ip sla schedule 30 life forever start-time now
-
-ip sla 40
- icmp-echo 208.67.220.220 source-interface ${cell_if}
- frequency 50
-!
-ip sla schedule 40 life forever start-time now
-!
-
 <#-- Enable GPS  -->
 controller ${cell_if}
 	lte gps mode standalone
