@@ -1,5 +1,5 @@
 <#-- Begin eCVD template -->
-<#-- Version 1.06        -->
+<#-- Version 1.07        -->
 
 <#-- Default BootStrap Configuration -->
 
@@ -527,6 +527,25 @@ interface Async0/2/0
 iox
 
 <#-- Enable NAT and routing -->
+ip access-list extended NAT_ACL
+     permit ip ${lanNtwk} ${lanWild} any
+     permit ip ${nwk_addr} 0.0.0.31 any
+!
+route-map RM_Tu2 permit 10
+     match ip address NAT_ACL
+     match interface Tunnel2
+!
+dialer-list 1 protocol ip permit
+!
+!
+route-map RM_WAN_ACL permit 10 
+    match ip address NAT_ACL
+    match interface ${cell_if}
+!
+route-map RM_WAN_ACL2 permit 10 
+    match ip address NAT_ACL
+    match interface ${ether_if}
+!
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 route-map RM_WAN_ACL3 permit 10 
     match ip address NAT_ACL
@@ -602,26 +621,6 @@ ip access-list extended filter-internet
 <#if isBackupHer == "true">
  permit esp host ${backupHerIpAddress} any
 </#if>
-!
-   
-ip access-list extended NAT_ACL
-     permit ip ${lanNtwk} ${lanWild} any
-     permit ip ${nwk_addr} 0.0.0.31 any
-!
-route-map RM_Tu2 permit 10
-     match ip address NAT_ACL
-     match interface Tunnel2
-!
-dialer-list 1 protocol ip permit
-!
-!
-route-map RM_WAN_ACL permit 10 
-    match ip address NAT_ACL
-    match interface ${cell_if}
-!
-route-map RM_WAN_ACL2 permit 10 
-    match ip address NAT_ACL
-    match interface ${ether_if}
 !
 
 <#-- ADDED 11 LINES BELOW FOR ADVANCED -->
