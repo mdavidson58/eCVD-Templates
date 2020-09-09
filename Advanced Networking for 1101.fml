@@ -1,5 +1,5 @@
 <#-- Begin eCVD template -->
-<#-- Version 1.03        -->
+<#-- Version 1.04        -->
 
 <#-- Default BootStrap Configuration -->
 
@@ -153,12 +153,12 @@ no logging console
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 snmp-server community communityString RO
 snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
-snmp-server host server.snmp.com version 2c communityString
+snmp-server host 192.168.1.55 version 2c communityString
 !
 clock timezone ${clockTZ} ${offset}
 ntp server ${ntpIP}
 !
-ip name-server ${DNSIP}
+<#-- ip name-server ${DNSIP} -->
 ip domain name ${domainName}
 
 <#-- Exclude the first 5 IP addresses of the LAN -->
@@ -229,6 +229,29 @@ interface Tunnel2
  tunnel path-mtu-discovery
  tunnel protection ipsec profile CVPN_IPS_PF
 !
+!
+<#-- ADDED 6 LINES BELOW FOR ADVANCED -->
+<#-- IP SLA for Cellular 0/3/0 -->
+ip sla 41
+ icmp-echo 9.9.9.9 source-interface ${cell_if2}
+ frequency 50
+!
+ip sla schedule 41 life forever start-time now
+!
+
+track 5 interface ${ether_if} line-protocol
+!
+track 7 interface ${cell_if} line-protocol
+!
+<#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+track 8 interface ${cell_if2} line-protocol
+!
+track 30 ip sla 30 reachability
+!
+track 40 ip sla 40 reachability
+!
+<#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+track 41 ip sla 41 reachability
 !
 <#-- FOR ADVANCED: need to add some logic below to allow user to select which WAN interfaces to make available for Tunnel source -->
 !
@@ -348,8 +371,6 @@ int ${cell_if}
 int ${cell_if2}
   zone-member security INTERNET
   !
-interface Vlan 1
-  zone-member security default
 !
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- QOS config -->
@@ -491,16 +512,20 @@ policy-map WEBUI-QUEUING-OUT
   fair-queue
   random-detect dscp-based
 
-<#-- All internal interfaces need to have the nbar and service policy commands. vlan10 is example below. -->
-interface Vlan10
+<#-- All internal interfaces need to have the nbar and service policy commands. vlan1 is example below. -->
+interface Vlan1
   description LAN Interface
   ip nbar protocol-discovery
   service-policy input WEBUI-MARKING-IN
 !
 <#-- all wan interfaces need to apply outbound policy -->
 interface GigabitEthernet0/0/0
-  description WAN Interface
   service-policy output WEBUI-QUEUING-OUT
+interface ${cell_if}
+  service-policy output WEBUI-QUEUING-OUT
+interface ${cell_if2}
+  service-policy output WEBUI-QUEUING-OUT
+
 
 <#-- interface priorities -->
 
@@ -516,29 +541,7 @@ ip sla 40
 !
 ip sla schedule 40 life forever start-time now
 !
-<#-- ADDED 6 LINES BELOW FOR ADVANCED -->
-<#-- IP SLA for Cellular 0/3/0 -->
-ip sla 41
- icmp-echo 208.67.220.220 source-interface ${cell_if2}
- frequency 50
-!
-ip sla schedule 41 life forever start-time now
-!
 
-track 5 interface ${ether_if} line-protocol
-!
-track 7 interface ${cell_if} line-protocol
-!
-<#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-track 8 interface ${cell_if2}line-protocol
-!
-track 30 ip sla 30 reachability
-!
-track 40 ip sla 40 reachability
-!
-<#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-track 41 ip sla 41 reachability
-!
 <#-- Enable GPS  -->
 controller ${cell_if}
 	lte gps mode standalone
@@ -624,7 +627,11 @@ interface Async0/2/0
 iox
 
 <#-- Enable NAT and routing -->
-
+<#-- ADDED 3 LINES BELOW FOR ADVANCED -->
+route-map RM_WAN_ACL3 permit 10 
+    match ip address NAT_ACL
+    match interface ${cell_if2}
+!
 
 ip forward-protocol nd
 !
@@ -652,12 +659,12 @@ no ip route 0.0.0.0 0.0.0.0 ${cell_if} 100
 ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp ${EthernetPriority}
 ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 7
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-ip route 0.0.0.0 0.0.0.0 ${cell_if2} cell1priority track 8
+ip route 0.0.0.0 0.0.0.0 ${cell_if2} 103 track 8
 
 ip route 208.67.222.222 255.255.255.255 dhcp
 ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-ip route 208.67.220.220 255.255.255.255 ${cell_if2} track 8
+ip route 9.9.9.9 255.255.255.255 ${cell_if2} track 8
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
@@ -716,11 +723,7 @@ route-map RM_WAN_ACL2 permit 10
     match ip address NAT_ACL
     match interface ${ether_if}
 !
-<#-- ADDED 3 LINES BELOW FOR ADVANCED -->
-route-map RM_WAN_ACL3 permit 10 
-    match ip address NAT_ACL
-    match interface ${cell_if2}
-!
+
 <#-- ADDED 11 LINES BELOW FOR ADVANCED -->
 <#-- OPTIONALLY remove NAT overload config and config and setup routing over FlexVPN S2SVPN -->
 no ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
@@ -735,7 +738,7 @@ crypto ikev2 authorization policy CVPN
 !
 
 <#-- ADDED LINES BELOW FOR ADVANCED -->
-<#-- Reverse telnet to serial port -->
+<#-- Reverse telnet to serial port at TCP port 2050 -->
 
 interface Async0/2/0
   no ip address
@@ -748,7 +751,6 @@ line 0/2/0
   parity none
   stopbits 1
   speed 9600
-no relay line 0/2/0 0/0/0
 
 line vty 0 4
     exec-timeout 5 0
@@ -827,3 +829,4 @@ action 20 cli command "y"
 !
 </#if>
 <#-- End eCVD template -->
+        
