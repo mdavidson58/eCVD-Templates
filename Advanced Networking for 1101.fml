@@ -1,5 +1,5 @@
 <#-- Begin eCVD template -->
-<#-- Version 1.04        -->
+<#-- Version 1.05        -->
 
 <#-- Default BootStrap Configuration -->
 
@@ -374,158 +374,60 @@ int ${cell_if2}
 !
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- QOS config -->
-class-map match-all WEBUI-MULTIMEDIA_CONFERENCING-DSCP
- match dscp af41 
-!
-class-map match-all WEBUI-BROADCAST_VIDEO-NBAR
- match protocol attribute traffic-class broadcast-video
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-VOICE-NBAR
- match protocol attribute traffic-class voip-telephony
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-BULK_DATA-NBAR
- match protocol attribute traffic-class bulk-data
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-SIGNALING-NBAR
- match protocol attribute traffic-class signaling
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-NETWORK_CONTROL-DSCP
- match dscp cs6
-!
-class-map match-all WEBUI-SCAVENGER-NBAR
- match protocol attribute business-relevance business-irrelevant
-!
-class-map match-all WEBUI-SCAVENGER-DSCP
- match dscp cs1 
-!
-class-map match-all WEBUI-NETWORK_CONTROL-NBAR
- match protocol attribute traffic-class network-control
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-SIGNALING-DSCP
- match dscp cs3 
-!
-class-map match-all WEBUI-BULK_DATA-DSCP
- match dscp af11 
-!
-class-map match-all WEBUI-BROADCAST_VIDEO-DSCP
- match dscp cs5 
-!
-class-map match-all WEBUI-MULTIMEDIA_CONFERENCING-NBAR
- match protocol attribute traffic-class multimedia-conferencing
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-VOICE-DSCP
- match dscp ef 
-!
-class-map match-all WEBUI-NETWORK_MANAGEMENT-NBAR
- match protocol attribute traffic-class ops-admin-mgmt
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-MULTIMEDIA_STREAMING-DSCP
- match dscp af31 
-!
-class-map match-all WEBUI-REALTIME_INTERACTIVE-NBAR
- match protocol attribute traffic-class real-time-interactive
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-TRANSACTIONAL_DATA-DSCP
- match dscp af21 
-!
-class-map match-all WEBUI-REALTIME_INTERACTIVE-DSCP
- match dscp cs4 
-!
-class-map match-all WEBUI-TRANSACTIONAL_DATA-NBAR
- match protocol attribute traffic-class transactional-data
- match protocol attribute business-relevance business-relevant
-!
-class-map match-all WEBUI-NETWORK_MANAGEMENT-DSCP
- match dscp cs2 
-!
-class-map match-all WEBUI-MULTIMEDIA_STREAMING-NBAR
- match protocol attribute traffic-class multimedia-streaming
- match protocol attribute business-relevance business-relevant
-!
-policy-map WEBUI-MARKING-IN
- class WEBUI-VOICE-NBAR
-  set dscp ef
- class WEBUI-BROADCAST_VIDEO-NBAR
-  set dscp cs5
- class WEBUI-REALTIME_INTERACTIVE-NBAR
-  set dscp cs4
- class WEBUI-MULTIMEDIA_CONFERENCING-NBAR
-  set dscp af41
- class WEBUI-MULTIMEDIA_STREAMING-NBAR
-  set dscp af31
- class WEBUI-SIGNALING-NBAR
-  set dscp cs3
- class WEBUI-NETWORK_CONTROL-NBAR
-  set dscp cs6
- class WEBUI-NETWORK_MANAGEMENT-NBAR
-  set dscp cs2
- class WEBUI-TRANSACTIONAL_DATA-NBAR
-  set dscp af21
- class WEBUI-BULK_DATA-NBAR
-  set dscp af11
- class WEBUI-SCAVENGER-NBAR
-  set dscp cs1
- class class-default
-  set dscp default
-!
-policy-map WEBUI-QUEUING-OUT
- class WEBUI-VOICE-DSCP
-  priority percent 10
- class WEBUI-BROADCAST_VIDEO-DSCP
-  priority percent 10
- class WEBUI-REALTIME_INTERACTIVE-DSCP
-  priority percent 13
- class WEBUI-NETWORK_CONTROL-DSCP
-  bandwidth percent 2 
- class WEBUI-SIGNALING-DSCP
-  bandwidth percent 2 
- class WEBUI-NETWORK_MANAGEMENT-DSCP
-  bandwidth percent 3 
- class WEBUI-MULTIMEDIA_CONFERENCING-DSCP
-  bandwidth percent 10 
-  fair-queue
-  random-detect dscp-based
- class WEBUI-MULTIMEDIA_STREAMING-DSCP
-  bandwidth percent 10 
-  fair-queue
-  random-detect dscp-based
- class WEBUI-TRANSACTIONAL_DATA-DSCP
-  bandwidth percent 10 
-  fair-queue
-  random-detect dscp-based
- class WEBUI-BULK_DATA-DSCP
-  bandwidth percent 4 
-  fair-queue
-  random-detect dscp-based
- class WEBUI-SCAVENGER-DSCP
-  bandwidth percent 1 
- class class-default
-  bandwidth percent 25 
-  fair-queue
-  random-detect dscp-based
+class-map match-any CLASS-GOLD
+<#-- traffic class possible values are listed below.  User should be able to place multiple TCs in a class (gold, silver, bronze).
+ match protocol attribute traffic-class VALUE
+  broadcast-video                  Broadcast TV, live events, video surveillance
+  bulk-data                             Non-interactive data applications
+  multimedia-conferencing     Desktop software multimedia collaboration applications
+  multimedia-streaming          Video-on-Demand (VoD) streaming video
+  network-control                    Network control plane traffic
+  ops-admin-mgmt                 Network operations, administration, and management traffic
+  real-time-interactive             High-definition interactive video applications
+  signaling                               Signaling traffic that supports IP voice and video telephony
+  transactional-data                 Interactive data applications
+  voip-telephony                     VoIP telephony (bearer-only) traffic
 
-<#-- All internal interfaces need to have the nbar and service policy commands. vlan1 is example below. -->
-interface Vlan1
-  description LAN Interface
-  ip nbar protocol-discovery
-  service-policy input WEBUI-MARKING-IN
+ 
+class-map match-any CLASS-SILVER
+ match protocol attribute traffic-class VALUE
+class-map match-any CLASS-BRONZE
+ match protocol attribute traffic-class VALUE
 !
-<#-- all wan interfaces need to apply outbound policy -->
-interface GigabitEthernet0/0/0
-  service-policy output WEBUI-QUEUING-OUT
+policy-map PMAP-LEVEL3
+ class CLASS-SILVER
+<#-- calculate based on 37.5% of SILVER-BRONZE bandwidth, units of Kbps -->
+  bandwidth 150
+ class CLASS-BRONZE
+<#-- calculate based on 62.5% of SILVER-BRONZE bandwidth, units of Kbps -->
+  bandwidth 250
+!
+policy-map PMAP-LEVEL2
+ class CLASS-GOLD
+  priority 100
+ class CLASS-SILVER-BRONZE
+<#-- calculate based on 25% of total upstream throughput, units of Kbps -->
+  bandwidth 400
+<#-- calculate based on 25% of total upstream throughput units of bits per second-->
+  shape average 400000
+   service-policy PMAP-LEVEL3
+ class class-default
+  fair-queue
+  random-detect dscp-based
+!
+policy-map PMAP-LEVEL1
+ class class-default
+<#-- input value from user based on real-world upstream throughput. Units of bits per second -->
+  shape average 1500000
+  service-policy PMAP-LEVEL2
+!
+
 interface ${cell_if}
-  service-policy output WEBUI-QUEUING-OUT
+ service-policy output PMAP-LEVEL1
+!
 interface ${cell_if2}
-  service-policy output WEBUI-QUEUING-OUT
-
+ service-policy output PMAP-LEVEL1
+!
 
 <#-- interface priorities -->
 
