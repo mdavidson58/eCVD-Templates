@@ -65,7 +65,7 @@
       <validationType>non-empty</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Provide 'wgbPsk' per device", "value": "${far.wgbPsk}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'wgb' per device", "value": "${far.wgb}" }]</seedValues>
     </propertyType>
     
     <propertyType>
@@ -446,19 +446,32 @@
 	</propertyType>
 
    <propertyType>
-       <name>apn</name>
-       <displayName>Cellular Access Point Name</displayName>
-       <description>Enter the Cellular Access Point Name</description>
+       <name>apn1</name>
+       <displayName>Primary Cellular Access Point Name</displayName>
+       <description>Enter the Primary Cellular Access Point Name</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>WAN</section>
        <required>0</required>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Provide 'apn' per device", "value": "${far.apn}" }]</seedValues>
+       <seedValues>[{ "key": "Provide 'apn1' per device", "value": "${far.apn1}" }]</seedValues>
     </propertyType>
 
-<propertyType>
+   <propertyType>
+       <name>apn2</name>
+       <displayName>Secondary Cellular Access Point Name</displayName>
+       <description>Enter the Secondary Cellular Access Point Name</description>
+       <exportAsTemplateKeys>1</exportAsTemplateKeys>
+       <section>WAN>Cell2</section>
+       <required>0</required>
+       <validationType>non-empty</validationType>
+       <dataType>string</dataType>
+       <deviceSpecific>1</deviceSpecific>
+       <seedValues>[{ "key": "Provide 'apn2' per device", "value": "${far.apn2}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
        <name>ethernetPriority</name>
        <displayName>Default WAN priority of Ethernet</displayName>
        <description>Enter priority of the Ethernet Port</description>
@@ -476,8 +489,8 @@
     
 	<propertyType>
        <name>cell0Priority</name>
-       <displayName>Default WAN priority of Cellular Modem 0</displayName>
-       <description>Enter priority of the Cellular Modem 0</description>
+       <displayName>Default WAN interface</displayName>
+       <description>Enter default interface for the WAN</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>WAN</section>
        <required>1</required>
@@ -486,8 +499,8 @@
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
        <seedValues>[{ "key": "Provide 'cell0Priority' per device", "value": "${far.cell0Priority}" },
-       				{ "key": "First", "value": "1" },
-       				{ "key": "Second", "value": "2" }
+       				{ "key": "Ethernet", "value": "1" },
+       				{ "key": "Cellular0", "value": "2" }
        ]</seedValues>
    	</propertyType>	
 	
@@ -511,7 +524,7 @@
 
 <propertyType>
        <name>wgbPriority</name>
-       <displayName>Default WAN priority of WiFi Uplink</displayName>
+       <displayName>Default WAN priority of  Uplink</displayName>
        <description>Enter priority of WiFi Uplink</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>WAN</section>
@@ -568,18 +581,33 @@
     </propertyType>
     
     <propertyType>
-      <name>lanDNSIPAddress</name>
-      <displayName>LAN DNS IP Address</displayName>
-      <description>LAN DNS IPv4 Address</description>
+      <name>lancommIPAddress1</name>
+      <displayName>Primary LAN DNS IP Address</displayName>
+      <description>Primary LAN DNS IPv4 Address</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>1</required>
+      <defaultValue>208.67.222.222</defaultValue>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'lanDNSIPAddress1' per device", "value": "${far.lanDNSIPAddress1}" }]</seedValues>
+    </propertyType>
+   
+     <propertyType>
+      <name>lanDNSIPAddress2</name>
+      <displayName>Secondary LAN DNS IP Address</displayName>
+      <description>Secondary DNS IPv4 Address</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <defaultValue>208.67.220.220</defaultValue>
       <section>LAN</section>
       <required>1</required>
       <validationType>ipv4</validationType>
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Provide 'lanDNSIPAddress' per device", "value": "${far.lanDNSIPAddress}" }]</seedValues>
+      <seedValues>[{ "key": "Provide 'lanDNSIPAddress2' per device", "value": "${far.lanDNSIPAddress2}" }]</seedValues>
     </propertyType>
-   
+    
     <propertyType>
       <name>lanNetmask</name>
       <displayName>LAN Subnet mask</displayName>
@@ -890,7 +918,7 @@
       <section>Device Settings>Host</section>
 	  <sectionLevelInTree>1</sectionLevelInTree>
       <required>0</required>
-	   <defaultValue>true</defaultValue>
+	   <defaultValue>false</defaultValue>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
@@ -959,12 +987,283 @@
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>VPN>Backup HeadEnd</section>
       <sectionLevelInTree>1</sectionLevelInTree>
-      	   <defaultValue>false</defaultValue>
+      <defaultValue>false</defaultValue>
       <required>0</required>
       <validationType>non-empty</validationType>
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isBackupHer' per device", "value": "${far.isBackupHer}" }]</seedValues>
+      
     </propertyType>
     
+    <propertyType>
+      <name>isSecondCell</name>
+      <displayName>Enable Secondary Cellular Radio</displayName>
+      <description>Enable Secondary Cellular Radio</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>WAN>Cell2</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>false</defaultValue>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isSecondCell' per device", "value": "${far.isSecondCell}" }]</seedValues>
+    </propertyType>
+    
+     <propertyType>
+      <name>isSnmp</name>
+      <displayName>Enable SNMP</displayName>
+      <description>Enable SNMP</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Device Settings>SNMP</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>false</defaultValue>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isSnmp' per device", "value": "${far.isSnmp}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
+  	  <name>snmpVersion</name>
+  	  <displayName>Select Version of SNMP</displayName>
+  	  <description>Select Version of SNMP</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Device Settings>SNMP</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>array</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'snmpVersion' per device", "value": "${far.snmpVersion}" },
+	     	{ "key": "V1", "value":"1" },
+	        { "key": "V2C", "value":"2c" },
+	        { "key": "V3", "value":"3" }
+	]</seedValues>
+   </propertyType>
+   
+    <propertyType>
+  	  <name>snmpHost</name>
+  	  <displayName>Enter IP address of SNMP Host</displayName>
+  	  <description>Enter IP address of SNMP Host</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Device Settings>SNMP</section>
+  	  <required>0</required>
+  	  <validationType>ipv4</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'snmpHost' per device", "value": "${far.snmpHost}" }
+   	   	]</seedValues>
+   </propertyType>
+   
+    <propertyType>
+      <name>communityString</name>
+      <displayName>SNMP Community String</displayName>
+  	  <description>SNMP Community String</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Device Settings>SNMP>Community</section>
+  	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>table</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	  <tableColumns>[{ "colKey": "snmpCommunity", "colLabel": "SNMP Community String" }, {"colKey": "snmpType", "colLabel": "RO/RW"}]</tableColumns>
+   	  <tableNumRows>6</tableNumRows>
+   	</propertyType>  
+
+    <propertyType>
+  	  <name>snmpCommunity</name>
+  	  <displayName>Enter SNMP Community String</displayName>
+  	  <description>Enter SNMP Community String</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Device Settings>SNMP>Community</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'snmpCommunity' per device", "value": "${far.snmpCommunity}" }
+   	   	]</seedValues>
+   </propertyType>
+   
+    <propertyType>
+  	  <name>snmpType</name>
+  	  <displayName>Select RW/RO</displayName>
+  	  <description>Select RW/RO</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Device Settings>SNMP>Community</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>array</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'snmpType' per device", "value": "${far.snmpType}" },
+	     	{ "key": "RW", "value":"rw" },
+	        { "key": "RO", "value":"ro" }
+	]</seedValues>
+   </propertyType>
+   
+     <propertyType>
+  	  <name>snmpV3User</name>
+  	  <displayName>Enter SNMP V3 User</displayName>
+  	  <description>Enter SNMP V3 User</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Device Settings>SNMP</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'snmpV3User' per device", "value": "${far.snmpV3User}" }
+   	   	]</seedValues>
+   </propertyType>
+   
+     <propertyType>
+  	  <name>snmpV3Pass</name>
+  	  <displayName>Enter SNMP V3 Password</displayName>
+  	  <description>Enter SNMP V3 Password</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Device Settings>SNMP</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <issecure>1</issecure>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'snmpV3Pass' per device", "value": "${far.snmpV3Pass}" }
+   	   	]</seedValues>
+   </propertyType>
+   
+   <propertyType>
+      <name>isUmbrella</name>
+      <displayName>Enable SNMP</displayName>
+      <description>Enable SNMP</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Network>Security>Umbrella</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>false</defaultValue>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isUmbrella' per device", "value": "${far.isUmbrella}" }]</seedValues>
+    </propertyType> 
+   
+    <propertyType>
+      <name>umbrellaToken</name>
+      <displayName>Enter Umbrella Token Here</displayName>
+      <description>Umbrella Token</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Network>Security>Umbrella</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'umbrellaToken' per device", "value": "${far.umbrellaToken}" }]</seedValues>
+    </propertyType> 
+     
+    <propertyType>
+      <name>firewallIp</name>
+      <displayName>Enter Firewall Rules</displayName>
+  	  <description>Enter Firewall Rules</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>Security>Firewall</section>
+  	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>table</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	  <tableColumns>[{ "colKey": "fwType", "colLabel": "Allow/Deny" }, {"colKey": "fwProtocol", "colLabel": "Protocol"}, {"colKey": "fwSrcIp", "colLabel": "Source IP"}, {"colKey": "fwSrcMask", "colLabel" : "Source IP Netmask"}, {"colKey": "fwPort", "colLabel": "Port"}]</tableColumns>
+   	  <tableNumRows>6</tableNumRows>
+   	</propertyType>  
+
+    <propertyType>
+  	  <name>fwSrcIp</name>
+  	  <displayName>Source IP Address</displayName>
+  	  <description>Source IP Address</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>Security>Firewall</section>
+  	  <required>0</required>
+      <defaultValue>0.0.0.0</defaultValue>
+  	  <validationType>ipv4</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'fwSrcIp' per device", "value": "${far.fwSrcIp}" }
+   	   	]</seedValues>
+   </propertyType>
+   
+    <propertyType>
+        <name>fwSrcMask</name>
+        <displayName>Source IP NetMask</displayName>
+        <description>Source IP NetMask</description>
+        <exportAsTemplateKeys>1</exportAsTemplateKeys>
+        <sectionLevelInTree>1</sectionLevelInTree>
+        <section>Network>Security>Firewall</section>
+        <required>0</required>
+        <defaultValue>255.255.255.255</defaultValue>
+        <validationType>ipv4</validationType>
+        <dataType>string</dataType>
+        <deviceSpecific>1</deviceSpecific>
+          <seedValues>[{ "key": "Provide 'fwSrcMask' per device", "value": "${far.fwSrcMask}" }
+              ]</seedValues>
+   </propertyType>
+
+  <propertyType>
+  	  <name>fwType</name>
+  	  <displayName>Allow or Deny Firewall Rule</displayName>
+  	  <description>Select Direction of firewall traffic</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>Security>Firewall</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>array</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'twType' per device", "value": "${far.fwType}" },
+	     	{ "key": "Allow", "value":"allow" },
+	        { "key": "Deny", "value":"deny" }
+	]</seedValues>
+   </propertyType>
+   
+    <propertyType>
+  	  <name>fwProtocol</name>
+  	  <displayName>IP Protocol</displayName>
+  	  <description>Select IP Protocol</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>Security>Firewall</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+      <defaultValue>IP</defaultValue>
+  	  <dataType>array</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'twType' per device", "value": "${far.fwType}" },
+	     	{ "key": "TCP", "value":"tcp" },
+	        { "key": "UDP", "value":"udp" },
+            { "key": "IP", "value":"ip"},
+            { "key": "ICMP", "value":"icmp"}
+	]</seedValues>
+   </propertyType>
+   
+   <propertyType>
+  	  <name>fwPort</name>
+  	  <displayName>IP Port</displayName>
+  	  <description>IP Port</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>Security>Firewall</section>
+  	  <required>0</required>
+  	  <validationType>string</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'fwPort' per device", "value": "${far.fwPort}" }
+   	   	]</seedValues>
+   </propertyType>
+   
   </propertyTypes>
 </cgms>
