@@ -1,5 +1,5 @@
 <#-- Begin eCVD template -->
-<#-- Version 1.07        -->
+<#-- Version 1.6        -->
 
 <#-- Default BootStrap Configuration -->
 
@@ -12,7 +12,6 @@
 <#assign ether_if = "GigabitEthernet 0/0/0">
 <#assign cell_if = "Cellular 0/1/0">
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-<#assign cell_if2 = "Cellular 0/3/0" >
 
 <#-- Interface Menu -->
 <#assign FastEthernet1 = "${far.fastEthernet1}">
@@ -21,8 +20,14 @@
 <#assign FastEthernet4 = "${far.fastEthernet4}">
 
 <#-- WAN Menu -->
-<#if far.apn?has_content>
-<#assign APN			= "${far.apn}">
+<#if far.apn1?has_content>
+<#assign APN1			= "${far.apn1}">
+</#if>
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
+<#if far.apn2?has_content>
+<#assign APN2			= "${far.apn2}">
+</#if>
+<#assign cell_if2 = "Cellular 0/3/0" >
 </#if>
 
 <#-- Set default interface -->
@@ -40,6 +45,9 @@
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
 
 <#-- Network Menu -->
+<#if far.umbrellaToken?has_content>
+<#assign UmbrellaToken = far.umbrellaToken>
+</#if>
 
 <#-- VPN Settings Menu -->
 <#assign herIpAddress 	= "${far.herIpAddress}">
@@ -57,7 +65,15 @@
 <#assign domainName = "local">
 </#if>
 <#-- Assign Umbrella DNS servers for additional Security -->
-<#assign DNSIP		= "208.67.222.222 208.67.220.220">
+<#if far.lanDNSIPAddres1?has_content>
+<#assign dns1 = far.lanDNSIPAddress1>
+</#if>
+<#if far.lanDNSIPAddress2?has_content>
+<#assign dns2 = far.lanDNSIPaddress2>
+<#else>
+<#assign dns2 = "">
+</#if>
+<#assign DNSIP		= dns1 dns2>
 
 <#if far.clockTZ?has_content>
 <#assign clockTZ 	= "${far.clockTZ}">
@@ -151,9 +167,18 @@ no platform punt-keepalive disable-kernel-core
 no logging console
 !
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
-snmp-server community communityString RO
-snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
-snmp-server host 192.168.1.55 version 2c communityString
+<#if !section.devicesettings_snmp?? || section.devicesettings_snmp == "true">
+<#list far.commmunityString as CS>
+  <#if CS['snmpCommunity']?has_content>
+      snmp-server community ${CS['snmpCommunity']} ${CS['snmpType']} 
+  </#if>
+<#if far.snmpVersion == "3">
+  snmp-server  user ${far.snmpV3User} group1 v3 auth md5 ${far.snmpV3Pass}
+  snmp-server  host ${far.snmpHost} version ${far.snmpVersion} auth ${CS['snmpCommunity']}
+<#else>
+     snmp-server host ${far.snmpHost version ${far.snmpVersion} ${CS['snmpCommunity']}
+</#if>
+</#list>
 !
 clock timezone ${clockTZ} ${offset}
 ntp server ${ntpIP}
@@ -246,27 +271,33 @@ ip sla schedule 40 life forever start-time now
 !
 <#-- ADDED 6 LINES BELOW FOR ADVANCED -->
 <#-- IP SLA for Cellular 0/3/0 -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 ip sla 41
  icmp-echo 9.9.9.9 source-interface ${cell_if2}
  frequency 50
 !
 ip sla schedule 41 life forever start-time now
 !
-
+</#if>
 track 5 interface ${ether_if} line-protocol
 !
 track 7 interface ${cell_if} line-protocol
 !
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 track 8 interface ${cell_if2} line-protocol
 !
+</#if>
 track 30 ip sla 30 reachability
 !
 track 40 ip sla 40 reachability
 !
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 track 41 ip sla 41 reachability
 !
+</#if>
+
 <#-- FOR ADVANCED: need to add some logic below to allow user to select which WAN interfaces to make available for Tunnel source -->
 !
 crypto ikev2 client flexvpn Tunnel2
@@ -278,18 +309,23 @@ crypto ikev2 client flexvpn Tunnel2
   source 1 ${ether_if} track 30
   source 2 ${cell_if}  track 40
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
   source 3 ${cell_if2} track 41
+</#if>
 <#else>
   source 1 ${cell_if} track 40
 <#-- CHANGED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
   source 3 ${ether_if} track 30
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
   source 2 ${cell_if2} track 41
+</#if>
 </#if>  
   client connect Tunnel2
 !
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- Umbrella DNS -->
+<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
 crypto pki trustpoint umbrella
  revocation-check none
 crypto pki certificate chain umbrella
@@ -338,7 +374,7 @@ parameter-map type regex dns_bypass
 pattern .*\.cisco\..*
 !
 parameter-map type umbrella global
-token TOKENVARIABLEHERE
+token ${far.umbrellaToken}
 local-domain dns_bypass
 dnscrypt
 udp-timeout 5
@@ -348,6 +384,7 @@ no ip dns server
 interface Vlan 1
 ip nbar protocol-discovery
 !
+</#if>
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- Zone based firewall.  Expands on Bootstrap config -->
   ip access-list extended eCVD-deny-from-outside
@@ -465,9 +502,12 @@ interface ${cell_if}
     dialer-group 1
     pulse-time 1
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
      umbrella out
+</#if>
 !
 <#-- ADDED 8 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 interface ${cell_if2}
     ip address negotiated
     ip nat outside
@@ -477,13 +517,17 @@ interface ${cell_if2}
     pulse-time 1
     umbrella out
 !
+</#if>
+
 interface Vlan1
     ip address ${far.lanIPAddress} ${far.lanNetmask}
     ip nbar protocol-discovery
     ip nat inside
     ip verify unicast source reachable-via rx
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
      umbrella in my_tag
+</#if>
 !
 !
    
@@ -557,7 +601,9 @@ ip forward-protocol nd
 ip nat inside source route-map RM_WAN_ACL interface ${cell_if} overload
 ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 ip nat inside source route-map RM_WAN_ACL3 interface ${cell_if2} overload
+</#if>
    
 <#-- Use default i/f to set PAT -->
 
@@ -578,12 +624,16 @@ no ip route 0.0.0.0 0.0.0.0 ${cell_if} 100
 ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp ${EthernetPriority}
 ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 7
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 ip route 0.0.0.0 0.0.0.0 ${cell_if2} 103 track 8
+</#if>
 
 ip route 208.67.222.222 255.255.255.255 dhcp
 ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 ip route 9.9.9.9 255.255.255.255 ${cell_if2} track 8
+</#if>
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
@@ -709,15 +759,18 @@ event manager applet Cell2-to-eth-failover
 
 <#-- Set APN -->
 
-<#if APN?has_content>
+<#if APN1?has_content>
 event manager applet change_apn
 event timer countdown time 10
 action 5 syslog msg "Changing APN Profile"
 action 10 cli command "enable"
-action 15 cli command "${cell_if} lte profile create 1 ${APN}" pattern "confirm"
+action 15 cli command "${cell_if} lte profile create 1 ${APN1}" pattern "confirm"
 action 20 cli command "y"
 !
+!
+</#if>
 <#-- ADDED 5 LINES BELOW FOR ADVANCED -->
+</if APN2?has_content>
 event manager applet change_apn2
 event timer countdown time 10
 action 5 syslog msg "Changing APN Profile for Cellular0/3/0"
