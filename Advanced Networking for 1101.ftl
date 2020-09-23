@@ -28,6 +28,7 @@
 <#assign APN2			= "${far.apn2}">
 </#if>
 <#assign cell_if2 = "Cellular 0/3/0" >
+<assign cell2priority = far.cell1Priority>
 </#if>
 
 <#-- Set default interface -->
@@ -770,7 +771,7 @@ action 20 cli command "y"
 !
 </#if>
 <#-- ADDED 5 LINES BELOW FOR ADVANCED -->
-</if APN2?has_content>
+<#if APN2?has_content>
 event manager applet change_apn2
 event timer countdown time 10
 action 5 syslog msg "Changing APN Profile for Cellular0/3/0"
@@ -781,4 +782,3 @@ action 20 cli command "y"
 !
 </#if>
 <#-- End eCVD template -->
-        
