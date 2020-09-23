@@ -483,7 +483,8 @@
        <deviceSpecific>1</deviceSpecific>
        <seedValues>[{ "key": "Provide 'ethernetPriority' per device", "value": "${far.ethernetPriority}" },
        				{ "key": "First", "value": "1" },
-       				{ "key": "Second", "value": "2" }
+       				{ "key": "Second", "value": "2" },
+       				{ "key": "Third", "value": "3"}
        ]</seedValues>
     </propertyType>
     
@@ -500,7 +501,8 @@
        <deviceSpecific>1</deviceSpecific>
        <seedValues>[{ "key": "Provide 'cell0Priority' per device", "value": "${far.cell0Priority}" },
        				{ "key": "Ethernet", "value": "1" },
-       				{ "key": "Cellular0", "value": "2" }
+       				{ "key": "Cellular0", "value": "2" },
+       				{ "key": "
        ]</seedValues>
    	</propertyType>	
 	
@@ -509,12 +511,12 @@
        <displayName>Default WAN priority of Cellular Modem 1</displayName>
        <description>Enter priority of the Cellular Modem 1</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>WAN</section>
+       <section>WAN>Cell1</section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Provide 'cell1Priority' per device", "value": "${far.cell1Priority}" },
+       <seedValues>[{ "key": "Provide 'cell1Priority' per device", "value": "${far.cell1Priority}" }wifi,
        				{ "key": "First", "value": "1" },
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
@@ -525,7 +527,7 @@
 <propertyType>
        <name>wgbPriority</name>
        <displayName>Default WAN priority of  Uplink</displayName>
-       <description>Enter priority of WiFi Uplink</description>
+       <description>Enter priority of W Uplink</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>WAN</section>
        <required>1</required>
@@ -568,7 +570,7 @@
    
     <propertyType>
       <name>lanIPAddress</name>
-      <displayName>LAN IP Address</displayName>
+      <displayName>LAN IP DHCP Scope Address</displayName>
       <description>LAN IPv4 Address</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>LAN</section>
@@ -610,7 +612,7 @@
     
     <propertyType>
       <name>lanNetmask</name>
-      <displayName>LAN Subnet mask</displayName>
+      <displayName>LAN Subnet DHCP Scope Netmask</displayName>
       <description>LAN IPv4 Subnet mask</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
       <section>LAN</section>
@@ -980,7 +982,7 @@
       <seedValues>[{ "key": "Provide 'backupHerPsk' per device", "value": "${far.backupHerPsk}" }]</seedValues>
     </propertyType>
     
-     <propertyType>
+    <propertyType>
       <name>isBackupHer</name>
       <displayName>Enable Backup HeadEnd</displayName>
       <description>Enable Backup HeadEnd</description>
@@ -993,8 +995,7 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isBackupHer' per device", "value": "${far.isBackupHer}" }]</seedValues>
-      
-    </propertyType>
+   </propertyType>
     
     <propertyType>
       <name>isSecondCell</name>
@@ -1142,7 +1143,7 @@
       <displayName>Enable SNMP</displayName>
       <description>Enable SNMP</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Network>Security>Umbrella</section>
+      <section>Security>Umbrella</section>
       <sectionLevelInTree>1</sectionLevelInTree>
       <defaultValue>false</defaultValue>
       <required>0</required>
@@ -1157,7 +1158,7 @@
       <displayName>Enter Umbrella Token Here</displayName>
       <description>Umbrella Token</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>Network>Security>Umbrella</section>
+      <section>>Security>Umbrella</section>
       <sectionLevelInTree>1</sectionLevelInTree>
       <required>0</required>
       <validationType>non-empty</validationType>
@@ -1171,7 +1172,7 @@
       <displayName>Enter Firewall Rules</displayName>
   	  <description>Enter Firewall Rules</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
-  	  <section>Network>Security>Firewall</section>
+  	  <section>Security>Firewall</section>
   	  <required>0</required>
 	  <sectionLevelInTree>1</sectionLevelInTree>
   	  <validationType>non-empty</validationType>
@@ -1187,7 +1188,7 @@
   	  <description>Source IP Address</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>Network>Security>Firewall</section>
+	  <section>Security>Firewall</section>
   	  <required>0</required>
       <defaultValue>0.0.0.0</defaultValue>
   	  <validationType>ipv4</validationType>
@@ -1203,7 +1204,7 @@
         <description>Source IP NetMask</description>
         <exportAsTemplateKeys>1</exportAsTemplateKeys>
         <sectionLevelInTree>1</sectionLevelInTree>
-        <section>Network>Security>Firewall</section>
+        <section>Security>Firewall</section>
         <required>0</required>
         <defaultValue>255.255.255.255</defaultValue>
         <validationType>ipv4</validationType>
@@ -1216,15 +1217,15 @@
   <propertyType>
   	  <name>fwType</name>
   	  <displayName>Allow or Deny Firewall Rule</displayName>
-  	  <description>Select Direction of firewall traffic</description>
+  	  <description>Select Direction of Firewall traffic</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>Network>Security>Firewall</section>
+	  <section>Security>Firewall</section>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>array</dataType>
   	  <deviceSpecific>1</deviceSpecific>
-   	   <seedValues>[{ "key": "Provide 'twType' per device", "value": "${far.fwType}" },
+   	   <seedValues>[{ "key": "Provide 'fwType' per device", "value": "${far.fwType}" },
 	     	{ "key": "Allow", "value":"allow" },
 	        { "key": "Deny", "value":"deny" }
 	]</seedValues>
@@ -1236,7 +1237,7 @@
   	  <description>Select IP Protocol</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>Network>Security>Firewall</section>
+	  <section>Security>Firewall</section>
   	  <required>0</required>
   	  <validationType>non-empty</validationType>
       <defaultValue>IP</defaultValue>
@@ -1256,7 +1257,7 @@
   	  <description>IP Port</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>Network>Security>Firewall</section>
+	  <section>Security>Firewall</section>
   	  <required>0</required>
   	  <validationType>string</validationType>
   	  <dataType>string</dataType>
@@ -1265,5 +1266,202 @@
    	   	]</seedValues>
    </propertyType>
    
+   <propertyType>
+      <name>isWifi</name>
+      <displayName>Enable Wifi</displayName>
+      <description>Enable Wifi</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>WiFi</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>false</defaultValue>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isWifi' per device", "value": "${far.isWifi}" }]</seedValues>
+    </propertyType> 
+    
+    <propertyType>
+      <name>isQos</name>
+      <displayName>Enable QoS</displayName>
+      <description>Enable QoS</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Network>QoS</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>false</defaultValue>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isQos' per device", "value": "${far.isQos}" }]</seedValues>
+    </propertyType> 
+   
+    <propertyType>
+  	  <name>qosBandwidth</name>
+  	  <displayName>Enter Typical Cellular Interface Bandwidth</displayName>
+  	  <description>Enter Typical Cellular Interface Bandwidth</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>QoS</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'qosBandwidth' per device", "value": "${far.qosBandwidth}" }
+   	   	]</seedValues>
+   </propertyType>
+   
+    <propertyType>
+      <name>qos</name>
+      <displayName>Enable Network QoS rules</displayName>
+  	  <description>Enable QoS</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>QoS</section>
+  	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>table</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	  <tableColumns>[{ "colKey": "qosType", "colLabel": "Select Traffic Type" }, {"colKey": "qosPriority", "colLabel": "Enter QoS Priority"}]</tableColumns>
+   	  <tableNumRows>6</tableNumRows>
+   	</propertyType>    
+   
+   <propertyType>
+  	  <name>qosType</name>
+  	  <displayName>Select Traffic Type</displayName>
+  	  <description>Select Traffic Type</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>QoS</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+      <defaultValue>IP</defaultValue>
+  	  <dataType>array</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'qosType' per device", "value": "${far.qosType}" },
+	     	{ "key": "Broadcast TV, live events, video surveillance", "value":"broadcast-video" },
+	        { "key": "Non-interactive data applications", "value":"bulk-data" },
+            { "key": "Multimedia Collaboration applications", "value":"multimedia-conferencing"},
+            { "key": "Video-On-Demand (VoD) streaming video", "value":"multimedia-streaming"},
+            { "key": "Network Control Plane traffic", "value":"network-control"},
+            { "key": "Network operations, administration, and management traffic", "value":"ops-admin-mgmt"},
+            { "key": "High-definition interactive video applications", "value":"real-time-interactive"},
+            { "key": "Signaling traffic that supports IP voice and video telephony", "value":"signaling"},
+            { "key": "Interactive data applications", "value":"transactional-data"},
+            { "key": "VoIP telephony traffic", "value":"voip-telephony"}
+      ]</seedValues>
+   </propertyType>
+   
+   <propertyType>
+  	  <name>qosPriority</name>
+  	  <displayName>Select QoS Priority</displayName>
+  	  <description>Select QoS Priority</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>QoS</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+      <defaultValue>IP</defaultValue>
+  	  <dataType>array</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'qosPriority' per device", "value": "${far.qosPriority}" },
+	     	{ "key": "Low", "value":"low" },
+	        { "key": "Med", "value":"med" },
+            { "key": "Hi", "value":"hi"}
+	]</seedValues>
+   </propertyType>
+   
+   <propertyType>
+      <name>staticRoute</name>
+      <displayName>Add Static Routes</displayName>
+  	  <description>Add Static Routes</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>Static Routes</section>
+  	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>table</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	  <tableColumns>[{ "colKey": "destNetwork", "colLabel": "Destination Network" }, {"colKey": "destNetMask", "colLabel": "Destination Network Netmask"}, {"colKey": "nextInterface", "colLabel": "Destination Interface"}]</tableColumns>
+   	  <tableNumRows>6</tableNumRows>
+   	</propertyType>     
+
+   <propertyType>
+  	  <name>nextInterface</name>
+  	  <displayName>Select Route Destination Interface</displayName>
+  	  <description>Select Route Destination Interface</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>Static Routes</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+      <defaultValue>IP</defaultValue>
+  	  <dataType>array</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'nextInterface' per device", "value": "${far.nextInterface}" },
+	     	{ "key": "Ethernet", "value":"ether_if" },
+	        { "key": "Cell1", "value":"cell_if" },
+            { "key": "Cell2", "value":"cell_if2"},
+            { "key": "VPN", "value":"Tunnel2" },
+            { "key": "WiFi Uplink", "value":"WGB" }    
+   	]</seedValues>
+   </propertyType>
+   
+   <propertyType>
+      <name>destNetwork</name>
+      <displayName>Destination Network</displayName>
+      <description>Destination Network</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Network>Static Routes</section>
+      <required>0</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'destNetwork' per device", "value": "${far.destNetwork}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
+      <name>destNetMask</name>
+      <displayName>Destination Network Netmask</displayName>
+      <description>Destination Network Netmask</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Network>Static Routes</section>
+      <required>0</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'destNetMask' per device", "value": "${far.destNetMask}" }]</seedValues>
+    </propertyType>
+    
+    <propertyType>
+      <name>isNetflow</name>
+      <displayName>Enable Netflow</displayName>
+      <description>Enable Netflow</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Security>Netflow</section>
+      <sectionLevelInTree>1</sectionLevelInTree>
+      <defaultValue>false</defaultValue>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isNetflow' per device", "value": "${far.isNetflow}" }]</seedValues>
+    </propertyType> 
+   
+    <propertyType>
+  	  <name>netflowCollecterIP</name>
+  	  <displayName>Enter IP of Netflow Collector</displayName>
+  	  <description>Enter IP of Netflow Collector</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <sectionLevelInTree>1</sectionLevelInTree>
+	  <section>Network>QoS</section>
+  	  <required>0</required>
+  	  <validationType>ipv4</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	   <seedValues>[{ "key": "Provide 'netflowCollectorIP' per device", "value": "${far.netflowCollectorIP}" }
+   	   	]</seedValues>
+   </propertyType>   
+    
   </propertyTypes>
 </cgms>
