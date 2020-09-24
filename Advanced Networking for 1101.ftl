@@ -66,15 +66,15 @@
 <#assign domainName = "local">
 </#if>
 <#-- Assign Umbrella DNS servers for additional Security -->
-<#if far.lanDNSIPAddres1?has_content>
-<#assign dns1 = far.lanDNSIPAddress1>
+<#if far.lanDNSIPAddress1?has_content>
+<#assign dns1 = "${far.lanDNSIPAddress1}">
 </#if>
 <#if far.lanDNSIPAddress2?has_content>
-<#assign dns2 = far.lanDNSIPaddress2>
+<#assign dns2 = "${far.lanDNSIPAddress2}">
 <#else>
 <#assign dns2 = "">
 </#if>
-<#assign DNSIP		= dns1 dns2>
+<#assign DNSIP		= "${dns1} ${dns2}">
 
 <#if far.clockTZ?has_content>
 <#assign clockTZ 	= "${far.clockTZ}">
@@ -169,7 +169,7 @@ no logging console
 !
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 <#if !section.devicesettings_snmp?? || section.devicesettings_snmp == "true">
-<#list far.commmunityString as CS>
+<#list far.communityString as CS>
   <#if CS['snmpCommunity']?has_content>
       snmp-server community ${CS['snmpCommunity']} ${CS['snmpType']} 
   </#if>
@@ -180,6 +180,7 @@ no logging console
      snmp-server host ${far.snmpHost version ${far.snmpVersion} ${CS['snmpCommunity']}
 </#if>
 </#list>
+</#if>
 !
 clock timezone ${clockTZ} ${offset}
 ntp server ${ntpIP}
@@ -737,7 +738,6 @@ flow monitor dsw_Gi0_0_0_-63055531
 <#-- add logic to use other WAN interfaces -->
 interface ${ether_if}
  ip flow monitor dsw_Gi0_0_0_-63055531 input
-}
 
 !
 <#-- Improve WAN failover performance -->
