@@ -1,5 +1,17 @@
+<#if far.isRunningIos()>
+<#-- Enable periodic inventory notification every 30 mins to report metrics. -->
+    cgna profile cg-nms-periodic
+      no active
+      interval 30
+      active
+    exit
+<#-- Enable periodic configuration (heartbeat) notification every 10 mins. -->
+   cgna heart-beat interval 10
+
+   event manager directory user policy "flash:/managed/scripts"
+
 <#-- Begin eCVD template -->
-<#-- Version 1.5         -->
+<#-- Version 1.6         -->
 
 <#-- Default BootStrap Configuration -->
 
@@ -32,11 +44,24 @@
 <#assign Cell0Priority 	= 102>
 </#if>
 
+
 <#-- LAN Menu -->
 <#assign lanIP 		= "${far.lanIPAddress}"?split(".")>
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
 
 <#-- Network Menu -->
+
+<#-- VPN Settings Menu -->
+<#assign herIpAddress 	= "${far.herIpAddress}">
+<#assign herPsk			= "${far.herPsk}">
+<#if far.backupHerIpAddress?has_content>
+  <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
+  <#if far.backupHerPsk?has_content>
+    <#assign backupHerPsk	= "${far.backupHerPsk}">
+  <#else>
+    <#assign backupHerPsk = "nodefaultPSK">
+  </#if>
+</#if>
 
 <#-- Device Settings Menu -->
 <#if far.localDomainName?has_content>
@@ -52,23 +77,23 @@
 <#else>
 <#assign clockTZ	= "edt">
 </#if>
-<#-- assign clockDST	= "${far.clockDST}"--> 
+<#-- assign clockDST	= "${far.clockDST}"-->
 <#if far.ntpIP?has_content>
 <#assign ntpIP 		= "${far.ntpIP}">
 <#else>
 <#assign ntpIP		= "time.nist.gov">
 </#if>
-  
+
 <#-- Calculate Netmasks -->
 
 <#assign  lan_ip=[]  lan_netmask=[]>
 
 <#-- Binary Conversion of LAN IP-->
 
-<#list lanIP as lann> 
+<#list lanIP as lann>
 <#assign lan=lann?number>
 <#list 1..100 as y>
-<#if lan < 1> 
+<#if lan < 1>
 <#if lan == 0>
 <#list 1..8 as s> <#assign lan_ip=lan_ip+["0"]> </#list> </#if>
 <#if lan_ip?size % 8 != 0> <#list 1..8 as s> <#assign lan_ip=lan_ip+["0"]> <#if lan_ip?size % 8 == 0> <#break> </#if> </#list> </#if>
@@ -78,7 +103,7 @@
 
 <#-- Binary Conversion of NetMask-->
 
-<#list lanNet as lann> 
+<#list lanNet as lann>
 <#assign lan=lann?number>
 <#list 1..100 as y>
 <#if lan < 1 >
@@ -153,14 +178,85 @@ ip dhcp excluded-address ${far.lanIPAddress} ${nwk_addr}
 
 ip dhcp pool subtended
     network ${lanNtwk} ${far.lanNetmask}
-    default-router ${far.lanIPAddress} 
+    default-router ${far.lanIPAddress}
     dns-server ${DNSIP}
     lease 0 0 10
 !
+!
 <#list far.Users as user >
 		username ${user['userName']} privilege ${user['userPriv']} algorithm-type scrypt secret ${user['userPassword']}
-</#list> 
+</#list>
 !
+<#-- S2S VPN Configuration -->
+!
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
+
+crypto ikev2 authorization policy CVPN
+ 	route set interface
+ 	route accept any distance 70
+!
+crypto ikev2 keyring Flex_key
+!
+ peer ${herIpAddress}
+  address ${herIpAddress}
+  identity key-id ${herIpAddress}
+  pre-shared-key ${herPsk}
+!
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+  peer ${backupHerIpAddress}
+  address ${backupHerIpAddress}
+  identity key-id ${backupHerIpAddress}
+  pre-shared-key ${backupHerPsk}
+!
+</#if>
+!
+!
+crypto ikev2 profile CVPN_I2PF
+ match identity remote key-id ${herIpAddress}
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+  match identity remote key-id ${backupHerIpAddress}
+</#if>
+ identity local email ${sn}@iotspdev.io
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local Flex_key
+ dpd 29 2 periodic
+ aaa authorization group psk list CVPN CVPN
+!
+!
+crypto ipsec profile CVPN_IPS_PF
+ set ikev2-profile CVPN_I2PF
+!
+!
+interface Tunnel2
+ ip address negotiated
+ ip mtu 1358
+ ip nat outside
+ ip tcp adjust-mss 1318
+ tunnel source dynamic
+ tunnel mode ipsec ipv4
+ tunnel destination dynamic
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile CVPN_IPS_PF
+!
+!
+crypto ikev2 client flexvpn Tunnel2
+  peer 1 ${herIpAddress}
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+  peer 2 ${backupHerIpAddress}
+</#if>
+<#if EthernetPriority == 101>
+  source 1 ${ether_if} track 30
+  source 2 ${cell_if}  track 40
+<#else>
+  source 1 ${cell_if} track 40
+  source 2 ${ether_if}  track 30
+</#if>
+  client connect Tunnel2
+!
+!
+</#if>
+<#-- interface priorities -->
 
 ip sla 30
  icmp-echo 208.67.222.222 source-interface ${ether_if}
@@ -183,13 +279,14 @@ track 30 ip sla 30 reachability
 track 40 ip sla 40 reachability
 !
 
-<#-- Enable GPS  -->
+<#-- Enable GPS and Gyroscope -->
 controller ${cell_if}
 	lte gps mode standalone
   	lte gps nmea
 !
 
 interface ${ether_if}
+    media-type rj45
     ip dhcp client route track 30
     ip address dhcp
     no shutdown
@@ -212,6 +309,7 @@ interface Vlan1
     ip verify unicast source reachable-via rx
 !
 !
+
 <#-- enabling/disabling of ethernet ports -->
 
 interface FastEthernet0/0/1
@@ -226,14 +324,14 @@ interface FastEthernet0/0/2
     shutdown
 <#else>
 	no shutdown
-</#if>   
+</#if>
 !
 interface FastEthernet0/0/3
 <#if FastEthernet3 != "true">
     shutdown
 <#else>
 	no shutdown
-</#if>    
+</#if>
 !
 interface FastEthernet0/0/4
 <#if FastEthernet4 != "true">
@@ -250,7 +348,7 @@ interface Async0/2/0
 <#-- Enable IOx -->
 iox
 
-<#-- Enable NAT and routing -->
+<#-- Configure NAT and routing -->
 
 ip forward-protocol nd
 !
@@ -261,7 +359,7 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
 
 <#list far.portForwarding as PAT>
   <#if PAT['protocol']?has_content>
-	<#if EthernetPriority == 101>
+  	<#if EthernetPriority == 101>
   			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${ether_if} ${PAT['publicPort']}
 	<#else>
 			ip nat inside source static ${PAT['protocol']} ${PAT['privateIP']} ${PAT['localPort']} interface ${cell_if} ${PAT['publicPort']}
@@ -271,8 +369,8 @@ ip nat inside source route-map RM_WAN_ACL2 interface ${ether_if} overload
 
 <#-- remove this route from the bootstrap config to allow failover -->
 no ip route 0.0.0.0 0.0.0.0 ${cell_if} 100
-   
-<#-- add IPSLA tracking to allow i/f failover -->   
+
+<#-- add IPSLA tracking to allow i/f failover -->
 ip route 0.0.0.0 0.0.0.0 ${ether_if} dhcp ${EthernetPriority}
 ip route 0.0.0.0 0.0.0.0 ${cell_if} ${Cell0Priority} track 7
 
@@ -281,27 +379,53 @@ ip route 208.67.220.220 255.255.255.255 ${cell_if} track 7
 ip route 208.67.220.220 255.255.255.255 Null0 3
 ip route 208.67.222.222 255.255.255.255 Null0 3
 
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
+ip route ${herIpAddress}  255.255.255.255 ${ether_if} dhcp
+<#if backupHerIpAddress?has_content>
+ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
+</#if>
+</#if>
 !
+
 !
 ip ssh rsa keypair-name SSHKEY
 ip ssh version 2
 ip scp server enable
 !
+ip access-list extended filter-internet
+ permit icmp any any echo
+ permit icmp any any echo-reply
+ permit icmp any any unreachable
+ permit icmp any any packet-too-big
+ permit icmp any any ttl-exceeded
+ permit udp any eq bootps host 255.255.255.255 eq bootpc
+<#if primaryHerIpAddress?has_content>
+ permit esp host ${herIpAddress} any
+</#if>
+<#if backupHerIpAddress?has_content>
+  permit esp host ${backupHerIpAddress} any
+</#if>
 !
-!
-!
-!
+
 ip access-list extended NAT_ACL
-    permit ip ${lanNtwk} ${lanWild} any
+     permit ip ${lanNtwk} ${lanWild} any
+     permit ip ${nwk_addr} 0.0.0.31 any
 !
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
+route-map RM_Tu2 permit 10
+     match ip address NAT_ACL
+     match interface Tunnel2
+!
+ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
+</#if>
 dialer-list 1 protocol ip permit
 !
 !
-route-map RM_WAN_ACL permit 10 
+route-map RM_WAN_ACL permit 10
     match ip address NAT_ACL
     match interface ${cell_if}
 !
-route-map RM_WAN_ACL2 permit 10 
+route-map RM_WAN_ACL2 permit 10
     match ip address NAT_ACL
     match interface ${ether_if}
 !
@@ -310,7 +434,6 @@ line vty 0 4
     length 0
     transport input ssh
 !
-
 <#-- Improve WAN failover performance -->
 event manager applet Eth-to-cell-failover
  event track 30 state any
@@ -336,3 +459,10 @@ action 20 cli command "y"
 !
 </#if>
 <#-- End eCVD template -->
+
+
+<#elseif far.isRunningCgOs()>
+
+<#else>
+  ${provisioningFailed("FAR is not running CG-OS or IOS")}
+</#if>
