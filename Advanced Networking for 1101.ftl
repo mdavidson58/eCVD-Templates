@@ -413,7 +413,7 @@ ip nbar protocol-discovery
   ip access-list extended eCVD-deny-from-outside
   
 <#assign count = 10>
-<#list firewallIP as FW>
+<#list far.firewallIP as FW>
   <#if FW['fwType']?has_content>
    <#if FW['fwType'] == "deny">
     <#if FW['fwProtocol'] == "ip" || FW['fwProtocol'] == "icmp">
@@ -429,7 +429,7 @@ ip nbar protocol-discovery
   ip access-list extended eCVD-permit-from-outside
   
 <#assign count = 10>
-<#list firewallIP as FW>
+<#list far.firewallIP as FW>
   <#if FW['fwType']?has_content>
    <#if FW['fwType'] == "allow">
     <#if FW['fwProtocol'] == "ip" || FW['fwProtocol'] == "icmp">
@@ -474,7 +474,7 @@ int ${cell_if2}
 <#if !section.network_qos?? || section.network_qos == "true">
 class-map match-any CLASS-GOLD
 <#-- traffic class possible values are listed below.  User should be able to place multiple TCs in a class (gold, silver, bronze). -->
-<#list qos as QOS>
+<#list far.qos as QOS>
   <#if QOS['qosType']?has_content>
    <#if QOS['qosQuality'] == "hi">
       match protocol attribute traffic-class ${QOS['qosType']}
@@ -484,7 +484,7 @@ class-map match-any CLASS-GOLD
 !
 !
 class-map match-any CLASS-SILVER
-<#list qos as QOS>
+<#list far.qos as QOS>
   <#if QOS['qosType']?has_content>
    <#if QOS['qosQuality'] == "med">
       match protocol attribute traffic-class ${QOS['qosType']}
@@ -494,7 +494,7 @@ class-map match-any CLASS-SILVER
 !
 !
 class-map match-any CLASS-BRONZE
-<#list qos as QOS>
+<#list far.qos as QOS>
   <#if QOS['qosType']?has_content>
    <#if QOS['qosQuality'] == "low">
       match protocol attribute traffic-class ${QOS['qosType']}
@@ -727,7 +727,7 @@ ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
 
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 <#-- User defined static routes with either next hop or egress interface -->
-<#list staticRoute as SR>
+<#list far.staticRoute as SR>
   <#if SR['destNetwork'}?has_content>
       ip route ${SR['destNetwork']} ${SR['destNetMask']} ${SR['nextInterface']}
   </#if>
