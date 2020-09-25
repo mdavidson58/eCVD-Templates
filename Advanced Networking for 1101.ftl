@@ -28,7 +28,6 @@
 <#assign APN2			= "${far.apn2}">
 </#if>
 <#assign cell_if2 = "Cellular 0/3/0" >
-<assign cell2priority = far.cell1Priority>
 </#if>
 
 <#-- Set default interface -->
@@ -46,17 +45,27 @@
 <#assign lanNet 	= "${far.lanNetmask}"?split(".")>
 
 <#-- Network Menu -->
+<#if far.qosBandwidth?has_content>
+<#assign QOSbw = far.qosBandwidth?number>
+</#if> 
+
+<#-- Security Menu -->
 <#if far.umbrellaToken?has_content>
 <#assign UmbrellaToken = far.umbrellaToken>
 </#if>
+<#assign isNetFlow = "${far.isNetFlow}">
 
 <#-- VPN Settings Menu -->
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
 <#assign herIpAddress 	= "${far.herIpAddress}">
 <#assign herPsk			= "${far.herPsk}">
-<#assign isBackupHer	= "${far.isBackupHer}">
-<#if far.isBackupHer == "true">
+<#if !section.vpn_backupheadend?? || section.vpn_backupheadend == "true">
+<#assign isBackupHer	= "true">
 <#assign backupHerIpAddress = "${far.backupHerIpAddress}">
 <#assign backupHerPsk	= "${far.backupHerPsk}">
+<#else>
+<#assign isBackupHer = "false">
+</#if>
 </#if>
 
 <#-- Device Settings Menu -->
@@ -66,13 +75,15 @@
 <#assign domainName = "local">
 </#if>
 <#-- Assign Umbrella DNS servers for additional Security -->
-<#if far.lanDNSIPAddress1?has_content>
-<#assign dns1 = "${far.lanDNSIPAddress1}">
+<#if far.lanDNSIPAddres1?has_content>
+<#assign dns1 = far.lanDNSIPAddress1>
+<#else>
+<#assign dns1 = "208.67.222.222">
 </#if>
 <#if far.lanDNSIPAddress2?has_content>
-<#assign dns2 = "${far.lanDNSIPAddress2}">
+<#assign dns2 = far.lanDNSIPaddress2>
 <#else>
-<#assign dns2 = "">
+<#assign dns2 = "208.67.220.220">
 </#if>
 <#assign DNSIP		= "${dns1} ${dns2}">
 
@@ -169,7 +180,7 @@ no logging console
 !
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 <#if !section.devicesettings_snmp?? || section.devicesettings_snmp == "true">
-<#list far.communityString as CS>
+<#list far.commmunityString as CS>
   <#if CS['snmpCommunity']?has_content>
       snmp-server community ${CS['snmpCommunity']} ${CS['snmpType']} 
   </#if>
@@ -208,6 +219,8 @@ ip dhcp pool subtended
 !
 <#-- S2S VPN Configuration -->   
 !
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
+
 crypto ikev2 authorization policy CVPN 
  	route set interface
  	route accept any distance 70
@@ -257,6 +270,8 @@ interface Tunnel2
  tunnel protection ipsec profile CVPN_IPS_PF
 !
 !
+</#if>
+
 <#-- interface priorities -->
 
 ip sla 30
@@ -302,6 +317,7 @@ track 41 ip sla 41 reachability
 
 <#-- FOR ADVANCED: need to add some logic below to allow user to select which WAN interfaces to make available for Tunnel source -->
 !
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
 crypto ikev2 client flexvpn Tunnel2
   peer 1 ${herIpAddress} 
 <#if isBackupHer == "true">
@@ -325,6 +341,9 @@ crypto ikev2 client flexvpn Tunnel2
 </#if>  
   client connect Tunnel2
 !
+!
+</#if>
+
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- Umbrella DNS -->
 <#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
@@ -387,20 +406,41 @@ interface Vlan 1
 ip nbar protocol-discovery
 !
 </#if>
+
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- Zone based firewall.  Expands on Bootstrap config -->
+
   ip access-list extended eCVD-deny-from-outside
-   10 deny   ip host 34.45.56.67 any
-   20 deny   ip 35.67.78.0 0.0.0.255 any
-   30 deny   tcp any any eq 5678
-   40 deny   udp any eq 34567 any
+  
+<#assign count = 10>
+<#list firewallIP as FW>
+  <#if FW['fwType']?has_content>
+   <#if FW['fwType'] == "deny">
+    <#if FW['fwProtocol'] == "ip" || FW['fwProtocol'] == "icmp">
+   ${count} deny ${FW['fwProtocol']} ${FW['fwSrcIp']} ${FW['fwSrcMask']} any
+    <#else>
+   ${count} deny ${FW['fwProtocol']} ${FW['fwSrcIp']} ${FW['fwSrcMask']} eq ${FW['fwPort']} any
+    </#if>
+   <#assign count += 10>
+   </#if>
+  </#if>
+ </#list>
 
   ip access-list extended eCVD-permit-from-outside
-   10 permit icmp any any
-   20 permit ip host 8.8.8.8 any
-   30 remark The next line permits some cool stuff
-   40 permit tcp any any eq 9999
-   50 permit udp 98.76.65.0 0.0.0.255 any eq 5060
+  
+<#assign count = 10>
+<#list firewallIP as FW>
+  <#if FW['fwType']?has_content>
+   <#if FW['fwType'] == "allow">
+    <#if FW['fwProtocol'] == "ip" || FW['fwProtocol'] == "icmp">
+   ${count} permit ${FW['fwProtocol']} ${FW['fwSrcIp']} ${FW['fwSrcMask']} any
+    <#else>
+   ${count} permit ${FW['fwProtocol']} ${FW['fwSrcIp']} ${FW['fwSrcMask']} eq ${FW['fwPort']} any
+    </#if>
+   <#assign count += 10>
+   </#if>
+  </#if>
+ </#list>
 !
  class-map type inspect match-any eCVD-deny-list
    match access-group name eCVD-deny-from-outside
@@ -421,48 +461,70 @@ int ${ether_if}
 int ${cell_if}
   zone-member security INTERNET
   !
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 int ${cell_if2}
   zone-member security INTERNET
   !
+  !
+</#if>
 !
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- QOS config -->
+
+<#if !section.network_qos?? || section.network_qos == "true">
 class-map match-any CLASS-GOLD
 <#-- traffic class possible values are listed below.  User should be able to place multiple TCs in a class (gold, silver, bronze).
- match protocol attribute traffic-class VALUE
-  broadcast-video                  Broadcast TV, live events, video surveillance
-  bulk-data                             Non-interactive data applications
-  multimedia-conferencing     Desktop software multimedia collaboration applications
-  multimedia-streaming          Video-on-Demand (VoD) streaming video
-  network-control                    Network control plane traffic
-  ops-admin-mgmt                 Network operations, administration, and management traffic
-  real-time-interactive             High-definition interactive video applications
-  signaling                               Signaling traffic that supports IP voice and video telephony
-  transactional-data                 Interactive data applications
-  voip-telephony                     VoIP telephony (bearer-only) traffic
-
- 
+<#list qos as QOS>
+  <#if QOS['qosType']?has_content>
+   <#if QOS['qosQuality'] == "hi">
+      match protocol attribute traffic-class ${QOS['qosType']}
+     </#if>
+  </#if>
+</#list>         
+!
+!
 class-map match-any CLASS-SILVER
- match protocol attribute traffic-class VALUE
+<#list qos as QOS>
+  <#if QOS['qosType']?has_content>
+   <#if QOS['qosQuality'] == "med">
+      match protocol attribute traffic-class ${QOS['qosType']}
+     </#if>
+  </#if>
+ </#list>
+!
+!
 class-map match-any CLASS-BRONZE
- match protocol attribute traffic-class VALUE
+<#list qos as QOS>
+  <#if QOS['qosType']?has_content>
+   <#if QOS['qosQuality'] == "low">
+      match protocol attribute traffic-class ${QOS['qosType']}
+     </#if>
+  </#if>
+</#list>   
+!
 !
 policy-map PMAP-LEVEL3
  class CLASS-SILVER
 <#-- calculate based on 37.5% of SILVER-BRONZE bandwidth, units of Kbps -->
-  bandwidth 150
+<#assign qosbwkb = QOSbw / 37.5 / 1024>
+  bandwidth qosbwkb
+!
  class CLASS-BRONZE
 <#-- calculate based on 62.5% of SILVER-BRONZE bandwidth, units of Kbps -->
-  bandwidth 250
+<#assign qosbwkb = QOSbw / 62.5 / 1024>
+  bandwidth qosbwkb
+!
 !
 policy-map PMAP-LEVEL2
  class CLASS-GOLD
   priority 100
  class CLASS-SILVER-BRONZE
 <#-- calculate based on 25% of total upstream throughput, units of Kbps -->
-  bandwidth 400
+<#assign qosbwkb = QOSbw / 25 / 1024>
+  bandwidth qosbwkb
 <#-- calculate based on 25% of total upstream throughput units of bits per second-->
-  shape average 400000
+<#assign gbw = QOSbw / 25>
+  shape average ${qbw}
    service-policy PMAP-LEVEL3
  class class-default
   fair-queue
@@ -471,16 +533,20 @@ policy-map PMAP-LEVEL2
 policy-map PMAP-LEVEL1
  class class-default
 <#-- input value from user based on real-world upstream throughput. Units of bits per second -->
-  shape average 1500000
+  shape average ${QOSbw}
   service-policy PMAP-LEVEL2
 !
 
 interface ${cell_if}
  service-policy output PMAP-LEVEL1
 !
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 interface ${cell_if2}
  service-policy output PMAP-LEVEL1
+</#if>
 !
+</#if>
+
 <#-- Enable GPS  -->
 controller ${cell_if}
 	lte gps mode standalone
@@ -493,7 +559,9 @@ interface ${ether_if}
     no shutdown
     ip nat outside
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
+<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
      umbrella out
+</#if>
 !
 !
 interface ${cell_if}
@@ -517,7 +585,9 @@ interface ${cell_if2}
     dialer idle-timeout 0
     dialer-group 1
     pulse-time 1
+<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
     umbrella out
+</#if>
 !
 </#if>
 
@@ -577,9 +647,11 @@ ip access-list extended NAT_ACL
      permit ip ${lanNtwk} ${lanWild} any
      permit ip ${nwk_addr} 0.0.0.31 any
 !
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
 route-map RM_Tu2 permit 10
      match ip address NAT_ACL
      match interface Tunnel2
+</#if>
 !
 dialer-list 1 protocol ip permit
 !
@@ -593,9 +665,11 @@ route-map RM_WAN_ACL2 permit 10
     match interface ${ether_if}
 !
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
+<#if !section.wan_cell2?? || section.wan_cell2 == "true">
 route-map RM_WAN_ACL3 permit 10 
     match ip address NAT_ACL
     match interface ${cell_if2}
+</#if>
 !
 
 ip forward-protocol nd
@@ -644,19 +718,25 @@ ip route 1.1.1.1 255.255.255.255 ${cell_if} 99 track 10
 ip route 8.8.8.8 255.255.255.255 ${cell_if} tag 786
 ip route 8.8.8.8 255.255.255.255 Null0 3 tag 786
 
-ip route ${herIpAddress}  255.255.255.255 ${ether_if} dhcp   
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
+ip route ${herIpAddress}  255.255.255.255 ${ether_if} dhcp
+<#if backupHerIpAddress?has_content>
+ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
+</#if>
+</#if>  
 
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 <#-- User defined static routes with either next hop or egress interface -->
-ip route 172.16.0.0 255.255.0.0 8.8.8.8
-ip route 172.17.1.0 255.255.255.0 Tunnel2
-
-<#if isBackupHer == "true">
-ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
-</#if>
+<#list staticRoute as SR>
+  <#if SR['destNetwork'}?has_content>
+      ip route ${SR['destNetwork']} ${SR['destNetMask']} ${SR['nextInterface']}
+  </#if>
+</#list>
 
 !
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
 ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
+</#if>
 !
 ip ssh rsa keypair-name SSHKEY
 ip ssh version 2
@@ -669,24 +749,33 @@ ip access-list extended filter-internet
  permit icmp any any packet-too-big
  permit icmp any any ttl-exceeded
  permit udp any eq bootps host 255.255.255.255 eq bootpc
+<#if primaryHerIpAddress?has_content>
  permit esp host ${herIpAddress} any
-<#if isBackupHer == "true">
- permit esp host ${backupHerIpAddress} any
+</#if>
+<#if backupHerIpAddress?has_content>
+  permit esp host ${backupHerIpAddress} any
 </#if>
 !
 
 <#-- ADDED 11 LINES BELOW FOR ADVANCED -->
 <#-- OPTIONALLY remove NAT overload config and config and setup routing over FlexVPN S2SVPN -->
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
 no ip nat inside source route-map RM_Tu2 interface Tunnel2 overload
 no route-map RM_Tu2 permit 10
+
 interface Tunnel2
  no ip nat outside
 !
+</#if>
+
 ip access-list standard CLOUD
   permit ${lanNtwk} ${lanWild}
+
+<#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
 crypto ikev2 authorization policy CVPN 
   route set access-list CLOUD
 !
+</#if
 
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- Reverse telnet to serial port at TCP port 2050 -->
@@ -711,6 +800,8 @@ line vty 0 4
 !
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- Netflow -->
+
+<#if !section.security_netflow?? || section.security_netflow == "true">
  flow record defaultStealthWatch
   match ipv4 protocol
   match ipv4 source address
@@ -726,7 +817,7 @@ line vty 0 4
   collect timestamp sys-uptime last
 
 flow exporter export_Gi0_0_0_-63055531
- destination 10.3.21.15
+ destination ${far.netflowCollectorIP}
  source Loopback 1
  transport udp 2055
  template data timeout 60
@@ -738,8 +829,10 @@ flow monitor dsw_Gi0_0_0_-63055531
 <#-- add logic to use other WAN interfaces -->
 interface ${ether_if}
  ip flow monitor dsw_Gi0_0_0_-63055531 input
-
 !
+!
+</#if>
+
 <#-- Improve WAN failover performance -->
 event manager applet Eth-to-cell-failover
  event track 30 state any
@@ -782,3 +875,4 @@ action 20 cli command "y"
 !
 </#if>
 <#-- End eCVD template -->
+        
