@@ -473,7 +473,7 @@ int ${cell_if2}
 
 <#if !section.network_qos?? || section.network_qos == "true">
 class-map match-any CLASS-GOLD
-<#-- traffic class possible values are listed below.  User should be able to place multiple TCs in a class (gold, silver, bronze).
+<#-- traffic class possible values are listed below.  User should be able to place multiple TCs in a class (gold, silver, bronze). -->
 <#list qos as QOS>
   <#if QOS['qosType']?has_content>
    <#if QOS['qosQuality'] == "hi">
