@@ -516,7 +516,7 @@
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
        <deviceSpecific>1</deviceSpecific>
-       <seedValues>[{ "key": "Provide 'cell1Priority' per device", "value": "${far.cell1Priority}" }wifi,
+       <seedValues>[{ "key": "Provide 'cell1Priority' per device", "value": "${far.cell1Priority}" },
        				{ "key": "First", "value": "1" },
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
