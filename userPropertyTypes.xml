@@ -1454,7 +1454,7 @@
   	  <description>Enter IP of Netflow Collector</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>Network>QoS</section>
+	  <section>Security>Netflow</section>
   	  <required>0</required>
   	  <validationType>ipv4</validationType>
   	  <dataType>string</dataType>
@@ -1462,6 +1462,211 @@
    	   <seedValues>[{ "key": "Provide 'netflowCollectorIP' per device", "value": "${far.netflowCollectorIP}" }
    	   	]</seedValues>
    </propertyType>   
+    
+   <propertyType>
+     <name>isVirtualNetworks</name>
+      <displayName>Enable Virtual Networks</displayName>
+      <description>Enable Virtual Networks</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>Network>Virtual Networks</section>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+      <required>1</required>
+	   <defaultValue>false</defaultValue>
+      <validationType>non-empty</validationType>
+      <dataType>boolean</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'isVirtualNetworks' per device", "value": "${far.isVirtualNetworks}" }]</seedValues>
+    </propertyType>
+
+    <propertyType>
+      <name>VirtualNetworks</name>
+      <displayName>VirtualNetworks</displayName>
+  	  <description>Add Virtual Networks</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>Virtual Networks</section>
+  	  <required>0</required>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>table</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+   	  <tableColumns>[{ "colKey": "vnName", "colLabel": "Virtual Network Name" }, {"colKey": "vnTunnelLocalIP", "colLabel": "VN Tunnel Local IP"}, {"colKey": "vnNHRPip", "colLabel": "VN NHRP IP Address"}, {"colKey": "vnNHRPnbmaIP", "colLabel": "VN NHRP NBMA Address"}]</tableColumns>
+   	  <tableNumRows>10</tableNumRows>
+   	</propertyType>
+
+	<propertyType>
+  	  <name>vnName</name>
+  	  <displayName>Virtual Network Name</displayName>
+  	  <description>Virtual Network Name</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>Virtual Networks</section>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'vnName' per device", "value": "${far.vnName}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>vnTunnelLocalIP</name>
+  	  <displayName>VN Tunnel Local IP</displayName>
+  	  <description>VN Tunnel Local IP</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>Virtual Networks</section>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <required>0</required>
+  	  <validationType>ipv4</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'vnTunnelLocalIP' per device", "value": "${far.vnTunnelLocalIP}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>vnNHRPip</name>
+  	  <displayName>VN Tunnel Local IP</displayName>
+  	  <description>VN Tunnel Local IP</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>Virtual Networks</section>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <required>0</required>
+  	  <validationType>ipv4</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'vnNHRPip' per device", "value": "${far.vnNHRPip}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>vnNHRPnbmaIP</name>
+  	  <displayName>VN Tunnel Local IP</displayName>
+  	  <description>VN Tunnel Local IP</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>Network>Virtual Networks</section>
+	  <sectionLevelInTree>1</sectionLevelInTree>
+  	  <required>0</required>
+  	  <validationType>ipv4</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'vnNHRPnbmaIP' per device", "value": "${far.vnNHRPnbmaIP}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>pkiEnrollmentURL</name>
+  	  <displayName>PKI Enrollment URL</displayName>
+  	  <description>PKI Enrollment URL</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>VPN>Advanced</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'pkiEnrollmentURL' per device", "value": "${far.pkiEnrollmentURL}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>flexVPNlocalIdFQDN</name>
+  	  <displayName>FlexVPN Local Identity FQDN</displayName>
+  	  <description>FlexVPN Local Identity FQDN</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>VPN>Advanced</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'flexVPNlocalIdFQDN' per device", "value": "${far.flexVPNlocalIdFQDN}" }]</seedValues>
+	</propertyType>
+
+	<propertyType>
+  	  <name>flexVPNremoteIdFQDN</name>
+  	  <displayName>FlexVPN Remote Identity FQDN</displayName>
+  	  <description>FlexVPN Remote Identity FQDN<</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>VPN>Advanced</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'flexVPNremoteIdFQDN' per device", "value": "${far.flexVPNremoteIdFQDN}" }]</seedValues>
+	</propertyType>
+
+   <propertyType>
+  	  <name>flexVPNloopbackLocalIP</name>
+  	  <displayName>FlexVPN Loopback Local IP</displayName>
+  	  <description>FlexVPN Loopback Local IP</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>VPN>Advanced</section>
+  	  <required>0</required>
+  	  <validationType>ipv4</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'flexVPNloopbackLocalIP' per device", "value": "${far.flexVPNloopbackLocalIP}" }]</seedValues>
+	</propertyType>
+    
+	<propertyType>
+  	  <name>flexVPNcert</name>
+  	  <displayName>FlexVPN Certificate</displayName>
+  	  <description>FlexVPN Certificate</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>VPN>Advanced</section>
+  	  <required>0</required>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>string</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'flexVPNcert' per device", "value": "${far.flexVPNcert}" }]</seedValues>
+	</propertyType>
+
+  <propertyType>
+      <name>successRedirectURL</name>
+      <displayName>Splash Page Successful Redirect URL</displayName>
+      <description>Splash Page Successful Redirect URL</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>WiFi>Advanced</section>
+      <required>0</required>
+      <defaultValue>http://www.google.com</defaultValue>
+      <validationType>non-empty</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'successRedirectURL' per device", "value": "${far.successRedirectURL}" }]</seedValues>
+  </propertyType>
+  
+  <propertyType>
+      <name>splashPageBanner</name>
+      <displayName>Splash Page Banner Message</displayName>
+      <description>Splash Page Banner Message</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>WiFi>Advanced</section>
+      <required>0</required>
+      <defaultValue>Welcome to Cisco IOT WiFi!</defaultValue>
+      <validationType>non-empty</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'splashPageBanner' per device", "value": "${far.splashPageBanner}" }]</seedValues>
+  </propertyType>
+  
+  <propertyType>
+      <name>wgbSSID</name>
+      <displayName>WiFi Uplink (WGB) SSID</displayName>
+      <description>WiFi Uplink (WGB) SSID</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>WiFi>WGB</section>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'wgbSSID' per device", "value": "${far.wgbSSID}" }]</seedValues>
+  </propertyType>
+  
+  <propertyType>
+      <name>wgbPSK</name>
+      <displayName>WiFi Uplink (WGB) Pre-shared Key</displayName>
+      <description>WiFi Uplink (WGB) Pre-shared Key</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>WiFi>WGB</section>
+      <required>0</required>
+      <validationType>non-empty</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'wgbPSK' per device", "value": "${far.wgbPSK}" }]</seedValues>
+  </propertyType>
     
   </propertyTypes>
 </cgms>
