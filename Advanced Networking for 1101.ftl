@@ -188,7 +188,7 @@ no logging console
   snmp-server  user ${far.snmpV3User} group1 v3 auth md5 ${far.snmpV3Pass}
   snmp-server  host ${far.snmpHost} version ${far.snmpVersion} auth ${CS['snmpCommunity']}
 <#else>
-     snmp-server host ${far.snmpHost version ${far.snmpVersion} ${CS['snmpCommunity']}
+     snmp-server host ${far.snmpHost} version ${far.snmpVersion} ${CS['snmpCommunity']}
 </#if>
 </#list>
 </#if>
@@ -728,7 +728,7 @@ ip route ${backupHerIpAddress} 255.255.255.255 ${ether_if} dhcp
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 <#-- User defined static routes with either next hop or egress interface -->
 <#list far.staticRoute as SR>
-  <#if SR['destNetwork'}?has_content>
+  <#if SR['destNetwork']?has_content>
       ip route ${SR['destNetwork']} ${SR['destNetMask']} ${SR['nextInterface']}
   </#if>
 </#list>
