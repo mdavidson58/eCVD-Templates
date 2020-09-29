@@ -42,33 +42,6 @@
     </propertyType>
     
     <propertyType>
-      <name>wgbSsid</name>
-      <displayName>SSID</displayName>
-      <description>WGB SSID</description>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>WGB</section>
-      <required>1</required>
-      <validationType>non-empty</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Provide 'wgbSsid' per device", "value": "${far.wgbSsid}" }]</seedValues>
-    </propertyType>
-    
-    <propertyType>
-      <name>wgbPsk</name>
-      <displayName>Pre-shared key</displayName>
-      <description>WGB Pre-Shared key</description>
-      <issecure>1</issecure>
-      <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>WGB</section>
-      <required>1</required>
-      <validationType>non-empty</validationType>
-      <dataType>string</dataType>
-      <deviceSpecific>1</deviceSpecific>
-      <seedValues>[{ "key": "Provide 'wgb' per device", "value": "${far.wgb}" }]</seedValues>
-    </propertyType>
-    
-    <propertyType>
       <name>busId</name>
       <displayName>Bus ID</displayName>
       <description>Bus ID</description>
@@ -445,12 +418,25 @@
   	  <deviceSpecific>1</deviceSpecific>
 	</propertyType>
 
+	<propertyType>
+  	  <name>isCell1</name>
+  	  <displayName>Is Cell1 enabled</displayName>
+  	  <description>Enable/Disable Cell1</description>
+  	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
+  	  <section>WAN>Cell1</section>
+  	  <required>0</required>
+  	  <defaultValue>true</defaultValue>
+  	  <validationType>non-empty</validationType>
+  	  <dataType>boolean</dataType>
+  	  <deviceSpecific>1</deviceSpecific>
+	</propertyType>
+
    <propertyType>
        <name>apn1</name>
        <displayName>Primary Cellular Access Point Name</displayName>
        <description>Enter the Primary Cellular Access Point Name</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>WAN</section>
+       <section>WAN>Cell1</section>
        <required>0</required>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
@@ -476,7 +462,7 @@
        <displayName>Default WAN priority of Ethernet</displayName>
        <description>Enter priority of the Ethernet Port</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
-       <section>WAN</section>
+       <section>WAN></section>
        <required>1</required>
        <validationType>non-empty</validationType>
        <dataType>array</dataType>
@@ -526,8 +512,8 @@
 
 <propertyType>
        <name>wgbPriority</name>
-       <displayName>Default WAN priority of  Uplink</displayName>
-       <description>Enter priority of W Uplink</description>
+       <displayName>Default WAN priority of WGB Uplink</displayName>
+       <description>Enter priority of WGB Uplink</description>
        <exportAsTemplateKeys>1</exportAsTemplateKeys>
        <section>WAN</section>
        <required>1</required>
@@ -1578,7 +1564,7 @@
 	<propertyType>
   	  <name>flexVPNremoteIdFQDN</name>
   	  <displayName>FlexVPN Remote Identity FQDN</displayName>
-  	  <description>FlexVPN Remote Identity FQDN<</description>
+  	  <description>FlexVPN Remote Identity FQDN</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>VPN>Advanced</section>
   	  <required>0</required>
