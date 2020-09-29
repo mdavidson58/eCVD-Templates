@@ -1158,7 +1158,7 @@
       <displayName>Enter Umbrella Token Here</displayName>
       <description>Umbrella Token</description>
       <exportAsTemplateKeys>1</exportAsTemplateKeys>
-      <section>>Security>Umbrella</section>
+      <section>Security>Umbrella</section>
       <sectionLevelInTree>1</sectionLevelInTree>
       <required>0</required>
       <validationType>non-empty</validationType>
