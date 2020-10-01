@@ -1437,7 +1437,7 @@
     </propertyType> 
    
     <propertyType>
-  	  <name>netflowCollecterIP</name>
+  	  <name>netflowCollectorIP</name>
   	  <displayName>Enter IP of Netflow Collector</displayName>
   	  <description>Enter IP of Netflow Collector</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
