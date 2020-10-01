@@ -75,7 +75,7 @@
 <#assign domainName = "local">
 </#if>
 <#-- Assign Umbrella DNS servers for additional Security -->
-<#if far.lanDNSIPAddres1?has_content>
+<#if far.lanDNSIPAddress1?has_content>
 <#assign dns1 = far.lanDNSIPAddress1>
 <#else>
 <#assign dns1 = "208.67.222.222">
