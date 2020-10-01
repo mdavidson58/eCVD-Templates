@@ -346,7 +346,7 @@ crypto ikev2 client flexvpn Tunnel2
 
 <#-- ADDED LINES BELOW FOR ADVANCED -->
 <#-- Umbrella DNS -->
-<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
+<#if !section.security_umbrella?? || section.security_umbrella == "true">
 crypto pki trustpoint umbrella
  revocation-check none
 crypto pki certificate chain umbrella
@@ -559,7 +559,7 @@ interface ${ether_if}
     no shutdown
     ip nat outside
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
+<#if !section.security_umbrella?? || section.security_umbrella == "true">
      umbrella out
 </#if>
 !
@@ -572,7 +572,7 @@ interface ${cell_if}
     dialer-group 1
     pulse-time 1
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
+<#if !section.security_umbrella?? || section.security_umbrella == "true">
      umbrella out
 </#if>
 !
@@ -585,7 +585,7 @@ interface ${cell_if2}
     dialer idle-timeout 0
     dialer-group 1
     pulse-time 1
-<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
+<#if !section.security_umbrella?? || section.security_umbrella == "true">
     umbrella out
 </#if>
 !
@@ -597,7 +597,7 @@ interface Vlan1
     ip nat inside
     ip verify unicast source reachable-via rx
 <#-- ADDED 1 LINES BELOW FOR ADVANCED -->
-<#if !section.network_security_umbrella?? || section.network_security_umbrella == "true">
+<#if !section.security_umbrella?? || section.security_umbrella == "true">
      umbrella in my_tag
 </#if>
 !
