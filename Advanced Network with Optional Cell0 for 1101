@@ -55,7 +55,9 @@
 <#if far.umbrellaToken?has_content>
 <#assign UmbrellaToken = far.umbrellaToken>
 </#if>
+<#if !section.security_netflow?? || section.security_netflow == "true">
 <#assign isNetFlow = "${far.isNetFlow}">
+</#if>
 
 <#-- VPN Settings Menu -->
 <#if !section.vpn_primaryheadend?? || section.vpn_primaryheadend == "true">
