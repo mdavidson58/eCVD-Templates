@@ -180,7 +180,7 @@ no logging console
 !
 <#-- ADDED 3 LINES BELOW FOR ADVANCED -->
 <#if !section.devicesettings_snmp?? || section.devicesettings_snmp == "true">
-<#list far.commmunityString as CS>
+<#list far.communityString as CS>
   <#if CS['snmpCommunity']?has_content>
       snmp-server community ${CS['snmpCommunity']} ${CS['snmpType']} 
   </#if>
