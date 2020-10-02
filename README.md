@@ -1,2 +1,3 @@
-# eCVD-Templates
-Contains eCVD templates for Cisco IoT Operations Center
+
+Please use this repo instead:
+https://cto-github.cisco.com/IOTNM/eCVD-Templates

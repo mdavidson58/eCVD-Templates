@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- UPT template v1.1 -->
 <cgms xmlns="http://www.w3schools.com"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.w3schools.com propertyTypes.xsd">
@@ -713,7 +714,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>User Management</section>
   	  <required>0</required>
-	  <sectionLevelInTree>1</sectionLevelInTree>
+	    <sectionLevelInTree>1</sectionLevelInTree>
   	  <validationType>non-empty</validationType>
   	  <dataType>table</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -728,7 +729,7 @@
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>User Management</section>
 	  <sectionLevelInTree>1</sectionLevelInTree>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>string</dataType>
   	  <min>4</min>
@@ -742,10 +743,10 @@
   	  <displayName>Password</displayName>
   	  <description>Password</description>
   	  <issecure>1</issecure>
-	  <sectionLevelInTree>1</sectionLevelInTree>
+	    <sectionLevelInTree>1</sectionLevelInTree>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <section>User Management</section>
-  	  <required>1</required>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <min>6</min>
   	  <max>8</max>
@@ -760,8 +761,8 @@
   	  <description>Privilege Level</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>User Management</section>
-  	  <required>1</required>
+	    <section>User Management</section>
+  	  <required>0</required>
   	  <validationType>non-empty</validationType>
   	  <dataType>array</dataType>
   	  <deviceSpecific>1</deviceSpecific>
@@ -1468,7 +1469,7 @@
   	  <description>Enter IP of Netflow Collector</description>
   	  <exportAsTemplateKeys>1</exportAsTemplateKeys>
   	  <sectionLevelInTree>1</sectionLevelInTree>
-	  <section>Security>Netflow</section>
+	    <section>Security>Netflow</section>
   	  <required>0</required>
   	  <validationType>ipv4</validationType>
   	  <dataType>string</dataType>
