@@ -3,31 +3,31 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.w3schools.com propertyTypes.xsd">
   <propertyTypes kind="ir800,ir1100">
-    
+
     <propertyType>
       <name>organization</name>
       <displayName>Gateway Organization</displayName>
       <description>Organization to which gateway belongs.</description>
     </propertyType>
-    
+
     <propertyType>
       <name>fndRegistrationIp</name>
       <displayName>Field Network Director IP for gateway</displayName>
       <description>IP Address specified in gateway for SNMP Traps, Recovery profile and FND periodic profile</description>
     </propertyType>
-    
+
     <propertyType>
       <name>fndRegistrationPort</name>
       <displayName>Field Network Director Web Service Port for the gateway</displayName>
       <description>FND Service Port specified in gateway for Recovery Profile and FND periodic profile</description>
     </propertyType>
-    
+
     <propertyType>
       <name>fndSnmpPort</name>
       <displayName>Field Network Director SNMP Port for gateway</displayName>
       <description>FND Service SNMP Port specified in gateway for SNMP Traps</description>
     </propertyType>
-    
+
     <propertyType>
       <name>dhcpHelperAddress</name>
       <displayName>DHCP Helper IP Address</displayName>
@@ -40,7 +40,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'dhcpHelperAddress' per device", "value": "${far.dhcpHelperAddress}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>busId</name>
       <displayName>Bus ID</displayName>
@@ -53,7 +53,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'busId' per device", "value": "${far.busId}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>boolProperty1</name>
       <displayName>Boolean Property 1</displayName>
@@ -65,7 +65,7 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
     </propertyType>
-    
+
     <propertyType>
       <name>boolProperty2</name>
       <displayName>Boolean Property 2</displayName>
@@ -77,7 +77,7 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
     </propertyType>
-    
+
     <propertyType>
       <name>boolProperty3</name>
       <displayName>Boolean Property 3</displayName>
@@ -89,7 +89,7 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
     </propertyType>
-    
+
     <propertyType>
       <name>boolProperty4</name>
       <displayName>Boolean Property 4</displayName>
@@ -101,7 +101,7 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
     </propertyType>
-    
+
     <propertyType>
       <name>boolProperty5</name>
       <displayName>Boolean Property 5</displayName>
@@ -113,7 +113,7 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
     </propertyType>
-    
+
     <propertyType>
       <name>numProperty1</name>
       <displayName>Numeric Property 1</displayName>
@@ -126,7 +126,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'numProperty1' per device", "value": "${far.numProperty1}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>numProperty2</name>
       <displayName>Numeric Property 2</displayName>
@@ -139,7 +139,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'numProperty2' per device", "value": "${far.numProperty2}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>numProperty3</name>
       <displayName>Numeric Property 3</displayName>
@@ -152,7 +152,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'numProperty3' per device", "value": "${far.numProperty3}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>numProperty4</name>
       <displayName>Numeric Property 4</displayName>
@@ -165,7 +165,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'numProperty4' per device", "value": "${far.numProperty4}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>numProperty5</name>
       <displayName>Numeric Property 5</displayName>
@@ -178,7 +178,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'numProperty5' per device", "value": "${far.numProperty5}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>strProperty1</name>
       <displayName>String Property 1</displayName>
@@ -191,7 +191,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'strProperty1' per device", "value": "${far.strProperty1}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>strProperty2</name>
       <displayName>String Property 2</displayName>
@@ -204,7 +204,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'strProperty2' per device", "value": "${far.strProperty2}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>strProperty3</name>
       <displayName>String Property 3</displayName>
@@ -217,7 +217,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'strProperty3' per device", "value": "${far.strProperty3}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>strProperty4</name>
       <displayName>String Property 4</displayName>
@@ -230,7 +230,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'strProperty4' per device", "value": "${far.strProperty4}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>strProperty5</name>
       <displayName>String Property 5</displayName>
@@ -243,7 +243,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'strProperty5' per device", "value": "${far.strProperty5}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>secProperty1</name>
       <displayName>Secure Property 1</displayName>
@@ -257,7 +257,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'secProperty1' per device", "value": "${far.secProperty1}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>secProperty2</name>
       <displayName>Secure Property 2</displayName>
@@ -271,7 +271,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'secProperty2' per device", "value": "${far.secProperty2}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>secProperty3</name>
       <displayName>Secure Property 3</displayName>
@@ -285,7 +285,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'secProperty3' per device", "value": "${far.secProperty3}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>secProperty4</name>
       <displayName>Secure Property 4</displayName>
@@ -299,7 +299,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'secProperty4' per device", "value": "${far.secProperty4}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>secProperty5</name>
       <displayName>Secure Property 5</displayName>
@@ -313,7 +313,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'secProperty5' per device", "value": "${far.secProperty5}" }]</seedValues>
     </propertyType>
-    
+
 	<propertyType>
 	  <name>gigEthernet1</name>
 	  <displayName>Gigabit Ethernet1</displayName>
@@ -456,7 +456,7 @@
        <deviceSpecific>1</deviceSpecific>
        <seedValues>[{ "key": "Provide 'apn2' per device", "value": "${far.apn2}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
        <name>ethernetPriority</name>
        <displayName>Default WAN priority of Ethernet</displayName>
@@ -472,9 +472,9 @@
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
        				{ "key": "Fourth", "value": "4" }
-       ]</seedValues> 
+       ]</seedValues>
     </propertyType>
-    
+
 	<propertyType>
        <name>cell0Priority</name>
        <displayName>Default WAN interface</displayName>
@@ -491,9 +491,9 @@
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
        				{ "key": "Fourth", "value": "4" }
-       ]</seedValues>  
-   	</propertyType>	
-	
+       ]</seedValues>
+   	</propertyType>
+
 <propertyType>
        <name>cell1Priority</name>
        <displayName>Default WAN priority of Cellular Modem 1</displayName>
@@ -509,7 +509,7 @@
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
        				{ "key": "Fourth", "value": "4" }
-       ]</seedValues>    
+       ]</seedValues>
     </propertyType>
 
 <propertyType>
@@ -527,8 +527,8 @@
        				{ "key": "Second", "value": "2" },
        				{ "key": "Third", "value": "3" },
        				{ "key": "Fourth", "value": "4" }
-       ]</seedValues>   
-    </propertyType>    
+       ]</seedValues>
+    </propertyType>
 
     <propertyType>
       <name>lanNetwork</name>
@@ -542,7 +542,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'lanNetwork' per device", "value": "${far.lanNetwork}" }]</seedValues>
     </propertyType>
-   
+
     <propertyType>
       <name>lanWildcard</name>
       <displayName>LAN Wildcard</displayName>
@@ -555,7 +555,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'lanWildcard' per device", "value": "${far.lanWildcard}" }]</seedValues>
     </propertyType>
-   
+
     <propertyType>
       <name>lanIPAddress</name>
       <displayName>LAN IP DHCP Scope Address</displayName>
@@ -569,7 +569,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'lanIPAddress' per device", "value": "${far.lanIPAddress}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>lancommIPAddress1</name>
       <displayName>Primary LAN DNS IP Address</displayName>
@@ -583,7 +583,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'lanDNSIPAddress1' per device", "value": "${far.lanDNSIPAddress1}" }]</seedValues>
     </propertyType>
-   
+
      <propertyType>
       <name>lanDNSIPAddress2</name>
       <displayName>Secondary LAN DNS IP Address</displayName>
@@ -597,7 +597,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'lanDNSIPAddress2' per device", "value": "${far.lanDNSIPAddress2}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>lanNetmask</name>
       <displayName>LAN Subnet DHCP Scope Netmask</displayName>
@@ -610,8 +610,34 @@
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'lanNetmask' per device", "value": "${far.lanNetmask}" }]</seedValues>
-    </propertyType>	    
-    
+    </propertyType>
+
+    <propertyType>
+      <name>lanIPAddressDHCPexcludeRangeStart</name>
+      <displayName>LAN Subnet DHCP exclude range start IP</displayName>
+      <description>LAN Subnet DHCP exclude range start IP</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>0</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'lanIPAddressDHCPexcludeRangeStart' per device", "value": "${far.lanIPAddressDHCPexcludeRangeStart}" }]</seedValues>
+    </propertyType>
+
+    <propertyType>
+      <name>lanIPAddressDHCPexcludeRangeEnd</name>
+      <displayName>LAN Subnet DHCP exclude range end IP</displayName>
+      <description>LAN Subnet DHCP exclude range end IP</description>
+      <exportAsTemplateKeys>1</exportAsTemplateKeys>
+      <section>LAN</section>
+      <required>0</required>
+      <validationType>ipv4</validationType>
+      <dataType>string</dataType>
+      <deviceSpecific>1</deviceSpecific>
+      <seedValues>[{ "key": "Provide 'lanIPAddressDHCPexcludeRangeEnd' per device", "value": "${far.lanIPAddressDHCPexcludeRangeEnd}" }]</seedValues>
+    </propertyType>
+
     <propertyType>
        <name>ntpIP</name>
        <displayName>Network Time Server IP</displayName>
@@ -620,7 +646,7 @@
        <section>Device Settings>Time Settings</section>
        <sectionLevelInTree>1</sectionLevelInTree>
        <required>0</required>
-	<defaultValue>time.nist.gov</defaultValue>
+	     <defaultValue>time.nist.gov</defaultValue>
        <validationType>non-empty</validationType>
        <dataType>string</dataType>
        <deviceSpecific>1</deviceSpecific>
@@ -693,8 +719,8 @@
   	  <deviceSpecific>1</deviceSpecific>
    	  <tableColumns>[{ "colKey": "userName", "colLabel": "User Name" }, {"colKey": "userPassword", "colLabel": "User Password"}, {"colKey": "userPriv", "colLabel": "Privilege Level"}]</tableColumns>
    	  <tableNumRows>6</tableNumRows>
-   	</propertyType>  
-    
+   	</propertyType>
+
 	<propertyType>
   	  <name>userName</name>
   	  <displayName>User Name</displayName>
@@ -727,7 +753,7 @@
   	  <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'userPassword' per device", "value": "${far.userPassword}" }]</seedValues>
 	</propertyType>
-	
+
 	<propertyType>
   	  <name>userPriv</name>
   	  <displayName>Privilege Level</displayName>
@@ -744,7 +770,7 @@
 	        { "key": "User", "value":"5" }
 	]</seedValues>
    </propertyType>
-	
+
 	<propertyType>
   	  <name>dnsIP</name>
   	  <displayName>DNS IP address</displayName>
@@ -788,8 +814,8 @@
   	  <dataType>string</dataType>
   	  <deviceSpecific>1</deviceSpecific>
    	  <seedValues>[{ "key": "Provide 'localHostName' per device", "value": "${far.localHostName}"}]</seedValues>
-	</propertyType>	
-  
+	</propertyType>
+
    <propertyType>
      <name>isPortForwarding</name>
       <displayName>Enable Port Forwarding</displayName>
@@ -804,7 +830,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isPortForwarding' per device", "value": "${far.isPortForwarding}" }]</seedValues>
     </propertyType>
-  
+
    <propertyType>
      <name>portForwarding</name>
      <displayName>Port Forwarding</displayName>
@@ -818,7 +844,7 @@
      <tableColumns>[{ "colKey": "description", "colLabel": "Description" }, {"colKey": "protocol", "colLabel": "Protocol"}, {"colKey": "privateIP", "colLabel": "Private IP"}, {"colKey": "localPort", "colLabel": "Local Port"}, {"colKey": "publicPort", "colLabel": "Public Port"}]</tableColumns>
      <tableNumRows>8</tableNumRows>
    </propertyType>
- 
+
   <propertyType>
      <name>description</name>
      <displayName>Description</displayName>
@@ -831,7 +857,7 @@
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Provide 'Description' per device", "value": "${far.description}" }]</seedValues>
    </propertyType>
- 
+
   <propertyType>
      <name>protocol</name>
      <displayName>Protocol</displayName>
@@ -847,7 +873,7 @@
 	        { "key": "UDP", "value":"udp" }
 	]</seedValues>
    </propertyType>
- 
+
   <propertyType>
      <name>privateIP</name>
      <displayName>Private IP</displayName>
@@ -860,7 +886,7 @@
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Provide 'PrivateIP' per device", "value": "${far.privateIP}" }]</seedValues>
    </propertyType>
- 
+
    <propertyType>
      <name>localPort</name>
      <displayName>Local Port</displayName>
@@ -873,7 +899,7 @@
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Provide 'LocalPort' per device", "value": "${far.localPort}" }]</seedValues>
   </propertyType>
- 
+
    <propertyType>
      <name>publicIP</name>
      <displayName>Public IP</displayName>
@@ -886,7 +912,7 @@
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Provide 'PublicIP' per device", "value": "${far.publicIP}" }]</seedValues>
    </propertyType>
- 
+
    <propertyType>
      <name>publicPort</name>
      <displayName>Public Port</displayName>
@@ -899,7 +925,7 @@
      <deviceSpecific>1</deviceSpecific>
      <seedValues>[{ "key": "Provide 'PublicPort' per device", "value": "${far.publicPort}" }]</seedValues>
    </propertyType>
-	
+
    <propertyType>
       <name>ignition</name>
       <displayName>Enable Ignition Power Management</displayName>
@@ -914,7 +940,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'Ignition' per device", "value": "${far.ignition}" }]</seedValues>
     </propertyType>
-	
+
 <propertyType>
       <name>herIpAddress</name>
       <displayName>HeadEnd IP Address</displayName>
@@ -927,7 +953,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'herIpAddress' per device", "value": "${far.herIpAddress}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>backupHerIpAddress</name>
       <displayName>Backup HeadEnd IP Address</displayName>
@@ -940,7 +966,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'backupHerIpAddress' per device", "value": "${far.backupHerIpAddress}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>herPsk</name>
       <displayName>HeadEnd Pre-shared key</displayName>
@@ -954,7 +980,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'herPsk' per device", "value": "${far.herPsk}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>backupHerPsk</name>
       <displayName>Backup HeadEnd Pre-shared key</displayName>
@@ -969,7 +995,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'backupHerPsk' per device", "value": "${far.backupHerPsk}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>isBackupHer</name>
       <displayName>Enable Backup HeadEnd</displayName>
@@ -984,7 +1010,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isBackupHer' per device", "value": "${far.isBackupHer}" }]</seedValues>
    </propertyType>
-    
+
     <propertyType>
       <name>isSecondCell</name>
       <displayName>Enable Secondary Cellular Radio</displayName>
@@ -999,7 +1025,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isSecondCell' per device", "value": "${far.isSecondCell}" }]</seedValues>
     </propertyType>
-    
+
      <propertyType>
       <name>isSnmp</name>
       <displayName>Enable SNMP</displayName>
@@ -1014,7 +1040,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isSnmp' per device", "value": "${far.isSnmp}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
   	  <name>snmpVersion</name>
   	  <displayName>Select Version of SNMP</displayName>
@@ -1032,7 +1058,7 @@
 	        { "key": "V3", "value":"3" }
 	]</seedValues>
    </propertyType>
-   
+
     <propertyType>
   	  <name>snmpHost</name>
   	  <displayName>Enter IP address of SNMP Host</displayName>
@@ -1047,7 +1073,7 @@
    	   <seedValues>[{ "key": "Provide 'snmpHost' per device", "value": "${far.snmpHost}" }
    	   	]</seedValues>
    </propertyType>
-   
+
     <propertyType>
       <name>communityString</name>
       <displayName>SNMP Community String</displayName>
@@ -1061,7 +1087,7 @@
   	  <deviceSpecific>1</deviceSpecific>
    	  <tableColumns>[{ "colKey": "snmpCommunity", "colLabel": "SNMP Community String" }, {"colKey": "snmpType", "colLabel": "RO/RW"}]</tableColumns>
    	  <tableNumRows>6</tableNumRows>
-   	</propertyType>  
+   	</propertyType>
 
     <propertyType>
   	  <name>snmpCommunity</name>
@@ -1077,7 +1103,7 @@
    	   <seedValues>[{ "key": "Provide 'snmpCommunity' per device", "value": "${far.snmpCommunity}" }
    	   	]</seedValues>
    </propertyType>
-   
+
     <propertyType>
   	  <name>snmpType</name>
   	  <displayName>Select RW/RO</displayName>
@@ -1094,7 +1120,7 @@
 	        { "key": "RO", "value":"ro" }
 	]</seedValues>
    </propertyType>
-   
+
      <propertyType>
   	  <name>snmpV3User</name>
   	  <displayName>Enter SNMP V3 User</displayName>
@@ -1109,7 +1135,7 @@
    	   <seedValues>[{ "key": "Provide 'snmpV3User' per device", "value": "${far.snmpV3User}" }
    	   	]</seedValues>
    </propertyType>
-   
+
      <propertyType>
   	  <name>snmpV3Pass</name>
   	  <displayName>Enter SNMP V3 Password</displayName>
@@ -1125,7 +1151,7 @@
    	   <seedValues>[{ "key": "Provide 'snmpV3Pass' per device", "value": "${far.snmpV3Pass}" }
    	   	]</seedValues>
    </propertyType>
-   
+
    <propertyType>
       <name>isUmbrella</name>
       <displayName>Enable SNMP</displayName>
@@ -1139,8 +1165,8 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isUmbrella' per device", "value": "${far.isUmbrella}" }]</seedValues>
-    </propertyType> 
-   
+    </propertyType>
+
     <propertyType>
       <name>umbrellaToken</name>
       <displayName>Enter Umbrella Token Here</displayName>
@@ -1153,8 +1179,8 @@
       <dataType>string</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'umbrellaToken' per device", "value": "${far.umbrellaToken}" }]</seedValues>
-    </propertyType> 
-     
+    </propertyType>
+
     <propertyType>
       <name>firewallIp</name>
       <displayName>Enter Firewall Rules</displayName>
@@ -1168,7 +1194,7 @@
   	  <deviceSpecific>1</deviceSpecific>
    	  <tableColumns>[{ "colKey": "fwType", "colLabel": "Allow/Deny" }, {"colKey": "fwProtocol", "colLabel": "Protocol"}, {"colKey": "fwSrcIp", "colLabel": "Source IP"}, {"colKey": "fwSrcMask", "colLabel" : "Source IP Netmask"}, {"colKey": "fwPort", "colLabel": "Port"}]</tableColumns>
    	  <tableNumRows>6</tableNumRows>
-   	</propertyType>  
+   	</propertyType>
 
     <propertyType>
   	  <name>fwSrcIp</name>
@@ -1185,7 +1211,7 @@
    	   <seedValues>[{ "key": "Provide 'fwSrcIp' per device", "value": "${far.fwSrcIp}" }
    	   	]</seedValues>
    </propertyType>
-   
+
     <propertyType>
         <name>fwSrcMask</name>
         <displayName>Source IP NetMask</displayName>
@@ -1218,7 +1244,7 @@
 	        { "key": "Deny", "value":"deny" }
 	]</seedValues>
    </propertyType>
-   
+
     <propertyType>
   	  <name>fwProtocol</name>
   	  <displayName>IP Protocol</displayName>
@@ -1238,7 +1264,7 @@
             { "key": "ICMP", "value":"icmp"}
 	]</seedValues>
    </propertyType>
-   
+
    <propertyType>
   	  <name>fwPort</name>
   	  <displayName>IP Port</displayName>
@@ -1253,7 +1279,7 @@
    	   <seedValues>[{ "key": "Provide 'fwPort' per device", "value": "${far.fwPort}" }
    	   	]</seedValues>
    </propertyType>
-   
+
    <propertyType>
       <name>isWifi</name>
       <displayName>Enable Wifi</displayName>
@@ -1267,8 +1293,8 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isWifi' per device", "value": "${far.isWifi}" }]</seedValues>
-    </propertyType> 
-    
+    </propertyType>
+
     <propertyType>
       <name>isQos</name>
       <displayName>Enable QoS</displayName>
@@ -1282,8 +1308,8 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isQos' per device", "value": "${far.isQos}" }]</seedValues>
-    </propertyType> 
-   
+    </propertyType>
+
     <propertyType>
   	  <name>qosBandwidth</name>
   	  <displayName>Enter Typical Cellular Interface Bandwidth</displayName>
@@ -1298,7 +1324,7 @@
    	   <seedValues>[{ "key": "Provide 'qosBandwidth' per device", "value": "${far.qosBandwidth}" }
    	   	]</seedValues>
    </propertyType>
-   
+
     <propertyType>
       <name>qos</name>
       <displayName>Enable Network QoS rules</displayName>
@@ -1312,8 +1338,8 @@
   	  <deviceSpecific>1</deviceSpecific>
    	  <tableColumns>[{ "colKey": "qosType", "colLabel": "Select Traffic Type" }, {"colKey": "qosPriority", "colLabel": "Enter QoS Priority"}]</tableColumns>
    	  <tableNumRows>6</tableNumRows>
-   	</propertyType>    
-   
+   	</propertyType>
+
    <propertyType>
   	  <name>qosType</name>
   	  <displayName>Select Traffic Type</displayName>
@@ -1339,7 +1365,7 @@
             { "key": "VoIP telephony traffic", "value":"voip-telephony"}
       ]</seedValues>
    </propertyType>
-   
+
    <propertyType>
   	  <name>qosPriority</name>
   	  <displayName>Select QoS Priority</displayName>
@@ -1358,7 +1384,7 @@
             { "key": "Hi", "value":"hi"}
 	]</seedValues>
    </propertyType>
-   
+
    <propertyType>
       <name>staticRoute</name>
       <displayName>Add Static Routes</displayName>
@@ -1372,7 +1398,7 @@
   	  <deviceSpecific>1</deviceSpecific>
    	  <tableColumns>[{ "colKey": "destNetwork", "colLabel": "Destination Network" }, {"colKey": "destNetMask", "colLabel": "Destination Network Netmask"}, {"colKey": "nextInterface", "colLabel": "Destination Interface"}]</tableColumns>
    	  <tableNumRows>6</tableNumRows>
-   	</propertyType>     
+   	</propertyType>
 
    <propertyType>
   	  <name>nextInterface</name>
@@ -1391,10 +1417,10 @@
 	        { "key": "Cell1", "value":"cell_if" },
             { "key": "Cell2", "value":"cell_if2"},
             { "key": "VPN", "value":"Tunnel2" },
-            { "key": "WiFi Uplink", "value":"WGB" }    
+            { "key": "WiFi Uplink", "value":"WGB" }
    	]</seedValues>
    </propertyType>
-   
+
    <propertyType>
       <name>destNetwork</name>
       <displayName>Destination Network</displayName>
@@ -1407,7 +1433,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'destNetwork' per device", "value": "${far.destNetwork}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>destNetMask</name>
       <displayName>Destination Network Netmask</displayName>
@@ -1420,7 +1446,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'destNetMask' per device", "value": "${far.destNetMask}" }]</seedValues>
     </propertyType>
-    
+
     <propertyType>
       <name>isNetflow</name>
       <displayName>Enable Netflow</displayName>
@@ -1434,8 +1460,8 @@
       <dataType>boolean</dataType>
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'isNetflow' per device", "value": "${far.isNetflow}" }]</seedValues>
-    </propertyType> 
-   
+    </propertyType>
+
     <propertyType>
   	  <name>netflowCollectorIP</name>
   	  <displayName>Enter IP of Netflow Collector</displayName>
@@ -1449,8 +1475,8 @@
   	  <deviceSpecific>1</deviceSpecific>
    	   <seedValues>[{ "key": "Provide 'netflowCollectorIP' per device", "value": "${far.netflowCollectorIP}" }
    	   	]</seedValues>
-   </propertyType>   
-    
+   </propertyType>
+
    <propertyType>
      <name>isVirtualNetworks</name>
       <displayName>Enable Virtual Networks</displayName>
@@ -1588,7 +1614,7 @@
   	  <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'flexVPNloopbackLocalIP' per device", "value": "${far.flexVPNloopbackLocalIP}" }]</seedValues>
 	</propertyType>
-    
+
 	<propertyType>
   	  <name>flexVPNcert</name>
   	  <displayName>FlexVPN Certificate</displayName>
@@ -1615,7 +1641,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'successRedirectURL' per device", "value": "${far.successRedirectURL}" }]</seedValues>
   </propertyType>
-  
+
   <propertyType>
       <name>splashPageBanner</name>
       <displayName>Splash Page Banner Message</displayName>
@@ -1629,7 +1655,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'splashPageBanner' per device", "value": "${far.splashPageBanner}" }]</seedValues>
   </propertyType>
-  
+
   <propertyType>
       <name>wgbSSID</name>
       <displayName>WiFi Uplink (WGB) SSID</displayName>
@@ -1642,7 +1668,7 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'wgbSSID' per device", "value": "${far.wgbSSID}" }]</seedValues>
   </propertyType>
-  
+
   <propertyType>
       <name>wgbPSK</name>
       <displayName>WiFi Uplink (WGB) Pre-shared Key</displayName>
@@ -1655,6 +1681,6 @@
       <deviceSpecific>1</deviceSpecific>
       <seedValues>[{ "key": "Provide 'wgbPSK' per device", "value": "${far.wgbPSK}" }]</seedValues>
   </propertyType>
-    
+
   </propertyTypes>
 </cgms>
